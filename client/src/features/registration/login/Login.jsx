@@ -77,7 +77,7 @@ function Login() {
       </form>
 
       {/* Image Section */}
-      <div className="h-dvh p-4 md:p-20">
+      <div className="hidden md:block h-dvh p-4 md:p-20 cursor-grab">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -85,9 +85,7 @@ function Login() {
             delay: 2500,
             disableOnInteraction: false,
           }}
-          pagination={{
-            clickable: true,
-          }}
+          pagination={false}
           modules={[Autoplay, Pagination]} // Removed Navigation
           onAutoplayTimeLeft={onAutoplayTimeLeft}
           className="h-full"
