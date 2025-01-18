@@ -1,9 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function LoginForm() {
   const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`
 
   const loginButtonsClassName=`w-9 h-9 text-accent-500 bg-background-800 rounded-full hover:bg-background-700 focus:outline-none`
+
+const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    setIsVisible((prev) => !prev);
+  };
+
   return (
     <form className="flex flex-col justify-center items-center p-8 bg-background-950">
       {/* Header Section */}
@@ -20,11 +28,22 @@ function LoginForm() {
           placeholder="Email address"
           className={inputFieldClassname}
         />
-        <input
-          type="password"
-          placeholder="Password"
-          className={inputFieldClassname}
-        />
+        <div className="relative">
+      <input
+        type={isVisible ? "text" : "password"}
+        placeholder="Confirm Password"
+        className={inputFieldClassname}
+        
+      />
+      <button
+        type="button"
+        onClick={toggleVisibility}
+        className="absolute right-3 top-[1.3rem] -translate-y-1/2"
+        
+      >
+  {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
+      </button>
+    </div>
 
         {/* Submit Button */}
         <button
