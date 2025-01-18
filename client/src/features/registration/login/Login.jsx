@@ -1,4 +1,4 @@
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "../../ui/ImageCarousel";
 import LoginForm from "./LoginForm";
 
 function Login() {

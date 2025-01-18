@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ImageCarousel from "../login/ImageCarousel";
+import ImageCarousel from "../../ui/ImageCarousel";
 import { useState } from "react";
 
 function Signup() {
