@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+// redux
 import { useDispatch } from 'react-redux';
 import { setUsername, setEmail, setUserPassword, setUserConfirmPass, setUserRole } from "./signupSlice";
+// sweetAlert
+import Swal from 'sweetalert2'
+
 
 function SignupForm() {
   // Common classNames
@@ -27,7 +31,14 @@ function SignupForm() {
 
     // Basic validation
     if (passwordForm !== passConfirmForm) {
-      alert('Passwords do not match!');
+      Swal.fire({
+        title: 'Error!',
+        background: "#e7fdfd",
+        text: 'password dont match the confirm password',
+        icon: 'error',
+        confirmButtonText: 'try again😊',
+        confirmButtonColor: "#0a2629"
+      })
       return;
     }
 
