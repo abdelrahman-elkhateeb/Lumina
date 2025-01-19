@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  userName: null,
+  username: null,
   email: null,
   userPassword: null,
   userConfirmPass: null,
@@ -12,8 +12,8 @@ const signUpSlice = createSlice({
   name: 'signUp',
   initialState,
   reducers: {
-    setUserName(state, action) {
-      state.userName = action.payload;
+    setUsername(state, action) {
+      state.username = action.payload;
     },
     setEmail(state, action) {
       state.email = action.payload;
@@ -27,9 +27,15 @@ const signUpSlice = createSlice({
     setUserRole(state, action) {
       state.userRole = action.payload;
     },
-
+    resetSignUp(state) {
+      state.username = null;
+      state.email = null;
+      state.userPassword = null;
+      state.userConfirmPass = null;
+      state.userRole = null;
+    },
   }
 })
 
-export const { setUserName, setEmail, setUserPassword, setUserConfirmPass, setUserRole } = signUpSlice.actions
-export default signUpSlice.reducer
+export const { setUsername, setEmail, setUserPassword, setUserConfirmPass, setUserRole, resetSignUp } = signUpSlice.actions
+export default signUpSlice.reducer 

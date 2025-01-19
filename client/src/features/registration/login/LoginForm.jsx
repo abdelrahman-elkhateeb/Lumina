@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import login from "./loginSlice"
 
 function LoginForm() {
+  // common classNames
   const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`;
 
   const loginButtonsClassName = `w-9 h-9 text-accent-500 bg-background-800 rounded-full hover:bg-background-700 focus:outline-none`;
@@ -11,9 +14,24 @@ function LoginForm() {
   const toggleVisibility = () => {
     setIsVisible((prev) => !prev);
   };
+  // start redux
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Dispatch the login action with the form values
+    dispatch(login({ email, password }));
+
+    // Optional: Clear the form fields after submitting
+    setEmail('');
+    setPassword('');
+  };
 
   return (
-    <form className="flex flex-col justify-center items-center p-8 bg-background-950">
+    <form className="flex flex-col justify-center items-center p-8 bg-background-950" onSubmit={handleSubmit}>
       {/* Header Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-accent-200 font-poppins">Lumina</h1>
