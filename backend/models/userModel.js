@@ -34,6 +34,8 @@ const userSchema = new mongoose.Schema({
   userType: {
     type: String,
     required: true,
+    enum: ["student", "instructor"],
+    message: "Invalid user type",
   },
 });
 
