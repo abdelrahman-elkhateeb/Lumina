@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function LoginForm() {
-  const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`
+  const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`;
 
-  const loginButtonsClassName=`w-9 h-9 text-accent-500 bg-background-800 rounded-full hover:bg-background-700 focus:outline-none`
+  const loginButtonsClassName = `w-9 h-9 text-accent-500 bg-background-800 rounded-full hover:bg-background-700 focus:outline-none`;
 
-const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
     setIsVisible((prev) => !prev);
@@ -17,7 +17,7 @@ const [isVisible, setIsVisible] = useState(false);
       {/* Header Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-accent-200 font-poppins">Lumina</h1>
-        
+
         <h2 className="text-lg text-accent-300">Light the dark / Learn Brighter</h2>
       </div>
 
@@ -29,21 +29,21 @@ const [isVisible, setIsVisible] = useState(false);
           className={inputFieldClassname}
         />
         <div className="relative">
-      <input
-        type={isVisible ? "text" : "password"}
-        placeholder="Confirm Password"
-        className={inputFieldClassname}
-        
-      />
-      <button
-        type="button"
-        onClick={toggleVisibility}
-        className="absolute right-3 top-[1.3rem] -translate-y-1/2"
-        
-      >
-  {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
-      </button>
-    </div>
+          <input
+            type={isVisible ? "text" : "password"}
+            placeholder="Confirm Password"
+            className={inputFieldClassname}
+
+          />
+          <button
+            type="button"
+            onClick={toggleVisibility}
+            className="absolute right-3 top-[1.3rem] -translate-y-1/2"
+
+          >
+            {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
+          </button>
+        </div>
 
         {/* Submit Button */}
         <button

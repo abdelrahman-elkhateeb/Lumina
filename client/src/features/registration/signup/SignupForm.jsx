@@ -35,7 +35,7 @@ const [isVisible, setIsVisible] = useState(false);
         <div className="relative">
       <input
         type={isVisible ? "text" : "password"}
-        placeholder="Confirm Password"
+        placeholder="Password"
         className={inputFieldClassname}
         
       />
@@ -50,7 +50,7 @@ const [isVisible, setIsVisible] = useState(false);
     </div>
         <input
           type="password"
-          placeholder="comfirm password"
+          placeholder="Comfirm Password"
           className={inputFieldClassname}
         />
 
