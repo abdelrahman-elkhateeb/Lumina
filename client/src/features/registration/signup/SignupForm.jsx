@@ -1,16 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-// redux
-import { useDispatch } from 'react-redux';
-import { setUsername, setEmail, setUserPassword, setUserConfirmPass, setUserRole } from "./signupSlice";
 // sweetAlert
 import Swal from 'sweetalert2'
+import { useSignupUserMutation } from "../registrationApi";
 
+//google function
+import { signInWithGoogle } from "../auth";
 
 function SignupForm() {
   // Common classNames
   const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`;
   const loginButtonsClassName = `w-9 h-9 text-accent-500 bg-background-800 rounded-full hover:bg-background-700 focus:outline-none`;
+
+  const navigate = useNavigate();
 
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => {
@@ -23,10 +25,10 @@ function SignupForm() {
   const [passwordForm, setPasswordForm] = useState('');
   const [passConfirmForm, setPassConfirmForm] = useState('');
   const [roleForm, setRoleForm] = useState('student'); // Default role
+  const [signupUser, { isLoading, error }] = useSignupUserMutation();
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = (e) => {
+  // local signUp
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -34,32 +36,69 @@ function SignupForm() {
       Swal.fire({
         title: 'Error!',
         background: "#e7fdfd",
-        text: 'password dont match the confirm password',
+        text: 'Password does not match the confirm password',
         icon: 'error',
-        confirmButtonText: 'try again😊',
-        confirmButtonColor: "#0a2629"
-      })
+        confirmButtonText: 'Try again 😊',
+        confirmButtonColor: "#0a2629",
+      });
       return;
     }
 
-    // Log form data
-    console.log({ usernameForm, emailForm, passwordForm, passConfirmForm, roleForm });
+    try {
+      // Call the signupUser mutation
+      const userData = await signupUser({
+        name: usernameForm,
+        email: emailForm,
+        password: passwordForm,
+        passwordConfirm: passConfirmForm,
+        userType: roleForm,
+      }).unwrap();
 
-    // Dispatch Redux actions
-    dispatch(setUsername(usernameForm));
-    dispatch(setEmail(emailForm));
-    dispatch(setUserPassword(passwordForm));
-    dispatch(setUserConfirmPass(passConfirmForm));
-    dispatch(setUserRole(roleForm));
+      console.log("Signup successful:", userData);
 
-    // Clear the form after submission
-    setUsernameForm('');
-    setEmailForm('');
-    setPasswordForm('');
-    setPassConfirmForm('');
-    setRoleForm('student');
+      // Clear the form after successful submission
+      setUsernameForm('');
+      setEmailForm('');
+      setPasswordForm('');
+      setPassConfirmForm('');
+      setRoleForm('student');
+      navigate("/");
+
+    } catch (err) {
+      // console.error("Signup failed:", err);
+
+      // Show error message
+      Swal.fire({
+        title: 'Error!',
+        background: "#e7fdfd",
+        text: err.data?.message || 'Signup failed. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'Try again 😊',
+        confirmButtonColor: "#0a2629",
+      });
+    }
   };
 
+  // google SignUp
+  const googleSignUp = async () => {
+    try {
+      const user = await signInWithGoogle();
+      console.log("Google signup successful:", user);
+      navigate("/");
+    } catch (error) {
+      console.error("Google Sign-In failed:", error);
+      // Show error message using Swal
+      Swal.fire({
+        title: 'Error!',
+        background: "#e7fdfd",
+        text: error.message || 'Google Sign-In failed. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'Try again 😊',
+        confirmButtonColor: "#0a2629",
+      });
+    }
+  }
+  
   return (
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 bg-background-950">
       {/* Header Section */}
@@ -121,16 +160,16 @@ function SignupForm() {
         </select>
 
         {/* Submit Button */}
-        <button
+        {!isLoading ? <button
           type="submit"
           className="w-full px-4 py-2 mb-4 text-white bg-accent-500 rounded-lg hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 font-bold ease-in-out duration-300 capitalize"
         >
           Create Account
-        </button>
+        </button> : <p>loading....</p>}
 
         {/* Social Login Buttons */}
         <div className="flex justify-center my-4 space-x-4">
-          <button type="button" className={loginButtonsClassName}>
+          <button type="button" className={loginButtonsClassName} onClick={googleSignUp}>
             <i className="fa-brands fa-google"></i>
           </button>
           <button type="button" className={loginButtonsClassName}>

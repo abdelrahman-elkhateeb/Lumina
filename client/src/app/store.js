@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import loginReducer from "../features/registration/login/loginSlice"
-import signUpReducer from "../features/registration/signup/signupSlice"
+import { registrationSlice } from '../features/registration/registrationApi'
 
 export const store = configureStore({
   reducer: {
-    login: loginReducer,
-    signUp: signUpReducer,
+    [registrationSlice.reducerPath]: registrationSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(registrationSlice.middleware),
 })
