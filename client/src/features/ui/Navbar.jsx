@@ -3,16 +3,16 @@ import { Link} from "react-router-dom";
 function navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
+  function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
-  };
+  }
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white shadow-sm w-full">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className=" flex items-center">
             <Link to="/" className="text-2xl font-bold text-indigo-600">
               Lumina
             </Link>
@@ -53,35 +53,16 @@ function navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex md:items-center md:space-x-8">
-            <Link
-              to="/courses"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Courses
-            </Link>
-            <Link
-              to="/ide"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Live IDE
-            </Link>
-            <Link
-              to="/chatbot"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Chatbot
-            </Link>
+            <input
+              type="search"
+              placeholder="Search courses..."
+              className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
+            />
             <Link
               to="/dashboard"
               className="text-gray-700 hover:text-indigo-600 font-medium"
             >
-              Dashboard
-            </Link>
-            <Link
-              to="/login"
-              className="text-gray-700 hover:text-indigo-600 font-medium"
-            >
-              Login
+              your learning
             </Link>
             <Link
               to="/signup"
@@ -91,7 +72,7 @@ function navbar() {
             </Link>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Mobile Menu */}
       {isMenuOpen && (

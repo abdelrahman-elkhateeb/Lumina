@@ -5,7 +5,10 @@ function AppLayout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <section className="container mx-auto px-4 mt-5">
+        <Outlet />
+      </section>
+
     </>
   )
 }
