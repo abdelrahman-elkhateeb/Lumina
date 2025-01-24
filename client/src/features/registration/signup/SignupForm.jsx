@@ -25,6 +25,8 @@ function SignupForm() {
   const [passwordForm, setPasswordForm] = useState('');
   const [passConfirmForm, setPassConfirmForm] = useState('');
   const [roleForm, setRoleForm] = useState('student'); // Default role
+  const [genderForm, setGenderForm] = useState('male'); // Default gender
+
   const [signupUser, { isLoading, error }] = useSignupUserMutation();
 
   // local signUp
@@ -52,6 +54,7 @@ function SignupForm() {
         password: passwordForm,
         passwordConfirm: passConfirmForm,
         userType: roleForm,
+        gender: genderForm
       }).unwrap();
 
       // Save the token to localStorage
@@ -63,6 +66,7 @@ function SignupForm() {
       setPasswordForm('');
       setPassConfirmForm('');
       setRoleForm('student');
+      setGenderForm("male");
       navigate("/");
 
     } catch (err) {
@@ -81,29 +85,37 @@ function SignupForm() {
   };
 
   // google SignUp
-  const googleSignUp = async () => {
-    try {
-      const user = await signInWithGoogle();
-      
-      // Save the token to localStorage (if your Google auth returns a token)
-      if (user.token) {
-        localStorage.setItem("token", user.token); // Save token to localStorage
-      }
+  // const googleSignUp = async () => {
+  //   try {
+  //     const user = await signInWithGoogle();
+  //     console.log(user);
 
-      navigate("/");
-    } catch (error) {
-      console.error("Google Sign-In failed:", error);
-      // Show error message using Swal
-      Swal.fire({
-        title: 'Error!',
-        background: "#e7fdfd",
-        text: error.message || 'Google Sign-In failed. Please try again.',
-        icon: 'error',
-        confirmButtonText: 'Try again 😊',
-        confirmButtonColor: "#0a2629",
-      });
-    }
-  }
+  //     await signupUser({
+  //       name: user.displayName,
+  //       email: user.email,
+  //       userType: roleForm,
+  //       gender: genderForm
+  //     }).unwrap();
+
+  //     // Save the token to localStorage (if your Google auth returns a token)
+  //     if (user.token) {
+  //       localStorage.setItem("token", user.token); // Save token to localStorage
+  //     }
+
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error("Google Sign-In failed:", error);
+  //     // Show error message using Swal
+  //     Swal.fire({
+  //       title: 'Error!',
+  //       background: "#e7fdfd",
+  //       text: error.message || 'Google Sign-In failed. Please try again.',
+  //       icon: 'error',
+  //       confirmButtonText: 'Try again 😊',
+  //       confirmButtonColor: "#0a2629",
+  //     });
+  //   }
+  // }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 bg-background-950">
@@ -165,6 +177,15 @@ function SignupForm() {
           <option value="instructor">Instructor</option>
         </select>
 
+        <select
+          className={inputFieldClassname}
+          value={genderForm}
+          onChange={(e) => setGenderForm(e.target.value)}
+        >
+          <option value="male">male</option>
+          <option value="female">female</option>
+        </select>
+
         {/* Submit Button */}
         {!isLoading ? <button
           type="submit"
@@ -174,14 +195,14 @@ function SignupForm() {
         </button> : <p>loading....</p>}
 
         {/* Social Login Buttons */}
-        <div className="flex justify-center my-4 space-x-4">
+        {/* <div className="flex justify-center my-4 space-x-4">
           <button type="button" className={loginButtonsClassName} onClick={googleSignUp}>
             <i className="fa-brands fa-google"></i>
           </button>
           <button type="button" className={loginButtonsClassName}>
             <i className="fa-brands fa-github"></i>
           </button>
-        </div>
+        </div> */}
 
         {/* Sign Up Section */}
         <div className="text-center">

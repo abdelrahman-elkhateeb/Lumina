@@ -13,12 +13,9 @@ function AppLayout() {
   return (
     <>
       {shouldShowNavbar && <Navbar />}
-      <section>
-        <Outlet />
-      </section>
-
+      <Outlet />
     </>
   )
 }
 
-export default AppLayout
+export default AppLayout;

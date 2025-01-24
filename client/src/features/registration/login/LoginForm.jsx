@@ -56,31 +56,31 @@ function LoginForm() {
   };
 
   // Google login
-  const googleLogin = async () => {
-    try {
-      const user = await signInWithGoogle();
-      console.log("Signed in user:", user);
+  // const googleLogin = async () => {
+  //   try {
+  //     const user = await signInWithGoogle();
+  //     console.log("Signed in user:", user);
 
-      // Save the token to localStorage (if your Google auth returns a token)
-      if (user.token) {
-        localStorage.setItem("token", user.token); // Save token to localStorage
-      }
+  //     // Save the token to localStorage (if your Google auth returns a token)
+  //     if (user.token) {
+  //       localStorage.setItem("token", user.token); // Save token to localStorage
+  //     }
 
-      // Redirect or update UI after successful sign-in
-      navigate("/"); // Redirect to the home page or dashboard
-    } catch (error) {
-      console.error("Google Sign-In failed:", error);
-      // Show error message using Swal
-      Swal.fire({
-        title: "Error!",
-        background: "#e7fdfd",
-        text: error.message || "Google Sign-In failed. Please try again.",
-        icon: "error",
-        confirmButtonText: "Try again 😊",
-        confirmButtonColor: "#0a2629",
-      });
-    }
-  };
+  //     // Redirect or update UI after successful sign-in
+  //     navigate("/"); // Redirect to the home page or dashboard
+  //   } catch (error) {
+  //     console.error("Google Sign-In failed:", error);
+  //     // Show error message using Swal
+  //     Swal.fire({
+  //       title: "Error!",
+  //       background: "#e7fdfd",
+  //       text: error.message || "Google Sign-In failed. Please try again.",
+  //       icon: "error",
+  //       confirmButtonText: "Try again 😊",
+  //       confirmButtonColor: "#0a2629",
+  //     });
+  //   }
+  // };
 
   return (
     <form
@@ -136,7 +136,7 @@ function LoginForm() {
         )}
 
         {/* Social Login Buttons */}
-        <div className="flex justify-center my-4 space-x-4">
+        {/* <div className="flex justify-center my-4 space-x-4">
           <button
             type="button"
             className={loginButtonsClassName}
@@ -147,7 +147,7 @@ function LoginForm() {
           <button type="button" className={loginButtonsClassName}>
             <i className="fa-brands fa-github"></i>
           </button>
-        </div>
+        </div> */}
 
         {/* Sign Up Section */}
         <div className="text-center">

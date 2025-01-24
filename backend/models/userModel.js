@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: [true,"please provide a unique email"],
+    unique: [true, "please provide a unique email"],
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
@@ -36,6 +36,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     enum: ["student", "instructor"],
     message: "Invalid user type",
+  },
+  gender: {
+    type: String,
+    required: [true, "Please provide your gender"],
+    enum: ["male", "female"],
+    message: "Gender must be either 'male' or 'female'",
   },
 });
 
