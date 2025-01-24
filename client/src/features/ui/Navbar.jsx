@@ -6,6 +6,8 @@ import femaleSvg from "../../../public/assets/female.svg";
 function navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }

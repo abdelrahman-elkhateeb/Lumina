@@ -13,7 +13,11 @@ exports.signup = catchAsync(async (req, res, next) => {
     gender: req.body.gender,
   });
   const token = generateToken(newUser._id);
-  res.status(201).json({ status: "success", token })
+  res.status(201).json({
+    status: "success", token,
+    token: token,
+    userData: newUser
+  })
 })
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -32,7 +36,8 @@ exports.login = catchAsync(async (req, res, next) => {
   const token = generateToken(user._id);
   res.status(200).json({
     status: 'success',
-    token
+    token: token,
+    userData: user
   });
 });
 

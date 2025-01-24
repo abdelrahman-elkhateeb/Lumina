@@ -58,7 +58,8 @@ function SignupForm() {
       }).unwrap();
 
       // Save the token to localStorage
-      localStorage.setItem("token", userData.token);
+      localStorage.setItem("token", userData.token,);
+      localStorage.setItem("userData", JSON.stringify(userData.user));
 
       // Clear the form after successful submission
       setUsernameForm('');
@@ -189,7 +190,7 @@ function SignupForm() {
         {/* Submit Button */}
         {!isLoading ? <button
           type="submit"
-          className="w-full px-4 py-2 mb-4 text-white bg-accent-500 rounded-lg hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 font-bold ease-in-out duration-300 capitalize"
+          className="w-full px-4 py-2 mb-4 text-white bg-background-300 rounded-lg hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 font-bold ease-in-out duration-300 capitalize"
         >
           Create Account
         </button> : <p>loading....</p>}

@@ -1,14 +1,18 @@
+import RegistrationIllustration from "../../ui/RegistrationIllustration";
 import SignupForm from "./SignupForm";
-import SignupIllustration from "./SignupIllustration";
+import img from "../../../../public/assets/signup_page_img.svg";
 
 function Signup() {
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-dvh">
-      <SignupIllustration />
+      {/* illustration */}
+      <RegistrationIllustration>
+        <img src={img} alt="loginImage" />
+      </RegistrationIllustration>
+      {/* Signup form */}
       <SignupForm />
     </div>
   );
 }
 
-export default Signup
+export default Signup;

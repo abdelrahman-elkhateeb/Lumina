@@ -10,7 +10,7 @@ function LoginForm() {
   // Common classNames
   const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`;
 
-  const loginButtonsClassName = `w-9 h-9 text-accent-500 bg-background-800 rounded-full hover:bg-background-700 focus:outline-none`;
+  const loginButtonsClassName = "w-full capitalize px-4 py-2 mb-4 text-white bg-background-300 rounded-lg hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 font-bold ease-in-out duration-300";
 
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
@@ -127,12 +127,12 @@ function LoginForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className="w-full px-4 py-2 mb-4 text-white bg-accent-500 rounded-lg hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 font-bold ease-in-out duration-300"
+            className={loginButtonsClassName}
           >
-            Welcome back!
+            login
           </button>
         ) : (
-          <p>Loading....</p>
+          <button disabled className={loginButtonsClassName}>welcome back....</button>
         )}
 
         {/* Social Login Buttons */}

@@ -1,5 +1,6 @@
+import RegistrationIllustration from "../../ui/RegistrationIllustration";
 import LoginForm from "./LoginForm";
-import LoginIllustration from "./LoginIllustration";
+import img from "../../../../public/assets/login_page_image.svg";
 
 function Login() {
   return (
@@ -7,7 +8,9 @@ function Login() {
       {/* Login Form Section */}
       <LoginForm />
       {/* Image Section */}
-      <LoginIllustration />
+      <RegistrationIllustration>
+        <img src={img} alt="signUpImage" />
+      </RegistrationIllustration>
     </div>
   );
 }
