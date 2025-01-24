@@ -6,6 +6,10 @@ const router = express.Router();
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 
+//protected routes (authentication)
+// Apply protect middleware to all routes below
+router.use(authController.protect);
+
 router
   .route('/')
   .get(userController.getAllUsers);

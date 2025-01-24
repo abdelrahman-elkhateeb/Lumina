@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const { generateToken, verifyToken } = require('../utils/jwt');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -10,7 +11,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
     userType: req.body.userType
   });
-  res.status(201).json({ status: "success", data: newUser })
+  const token = generateToken(newUser._id);
+  res.status(201).json({ status: "success", token })
 })
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -25,8 +27,47 @@ exports.login = catchAsync(async (req, res, next) => {
 
   if (!(await user.correctPassword(password, user.password)) || !user)
     return next(new AppError('Incorrect email or password', 401));
-
+  // generate token
+  const token = generateToken(user._id);
   res.status(200).json({
     status: 'success',
+    token
   });
+});
+
+exports.protect = catchAsync(async (req, res, next) => {
+  // 1) Get the token and check if it exists
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return next(
+      new AppError('You are not logged in! Please log in to get access.', 401)
+    );
+  }
+
+  // 2) Verify the token
+  let decoded;
+  try {
+    decoded = verifyToken(token);
+  } catch (error) {
+    return next(new AppError('Invalid or expired token. Please log in again.', 401));
+  }
+
+  // 3) Check if the user still exists
+  const currentUser = await User.findById(decoded.userId);
+  if (!currentUser) {
+    return next(
+      new AppError('The user belonging to this token no longer exists.', 401)
+    );
+  }
+
+  // 4) Grant access to the protected route
+  req.user = currentUser; // Attach the user to the request object
+  next();
 });

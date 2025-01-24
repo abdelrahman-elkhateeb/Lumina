@@ -54,7 +54,8 @@ function SignupForm() {
         userType: roleForm,
       }).unwrap();
 
-      console.log("Signup successful:", userData);
+      // Save the token to localStorage
+      localStorage.setItem("token", userData.token);
 
       // Clear the form after successful submission
       setUsernameForm('');
@@ -83,7 +84,12 @@ function SignupForm() {
   const googleSignUp = async () => {
     try {
       const user = await signInWithGoogle();
-      console.log("Google signup successful:", user);
+      
+      // Save the token to localStorage (if your Google auth returns a token)
+      if (user.token) {
+        localStorage.setItem("token", user.token); // Save token to localStorage
+      }
+
       navigate("/");
     } catch (error) {
       console.error("Google Sign-In failed:", error);
@@ -98,7 +104,7 @@ function SignupForm() {
       });
     }
   }
-  
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 bg-background-950">
       {/* Header Section */}
