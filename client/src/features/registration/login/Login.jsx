@@ -1,5 +1,5 @@
-import ImageCarousel from "../../ui/ImageCarousel";
 import LoginForm from "./LoginForm";
+import LoginIllustration from "./LoginIllustration";
 
 function Login() {
   return (
@@ -7,7 +7,7 @@ function Login() {
       {/* Login Form Section */}
       <LoginForm />
       {/* Image Section */}
-      <ImageCarousel />
+      <LoginIllustration />
     </div>
   );
 }

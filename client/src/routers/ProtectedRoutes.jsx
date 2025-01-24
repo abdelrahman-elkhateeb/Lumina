@@ -1,12 +1,24 @@
+import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import Spinner from "../features/ui/Spinner";
 
 function ProtectedRoutes() {
-  const { token, loading } = useAuth();
+  // const { token, loading } = useAuth();
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true); // Add a loading state
+
+  // Check for token in localStorage on initial render
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+    setLoading(false); // Set loading to false after checking
+  }, []);
 
   // If still loading, show a loading indicator
   if (loading) {
-    return <div>Loading...</div>; // Replace with a spinner or skeleton screen
+    return <Spinner /> // Replace with a spinner or skeleton screen
   }
 
   // If not loading and no token, redirect to login
