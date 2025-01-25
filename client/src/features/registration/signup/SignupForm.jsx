@@ -58,8 +58,7 @@ function SignupForm() {
       }).unwrap();
 
       // Save the token to localStorage
-      localStorage.setItem("token", userData.token,);
-      localStorage.setItem("userData", JSON.stringify(userData.user));
+      localStorage.setItem("token", userData.token);
 
       // Clear the form after successful submission
       setUsernameForm('');

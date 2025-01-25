@@ -34,8 +34,6 @@ function LoginForm() {
 
       // Save the token to localStorage
       localStorage.setItem("token", userData.token);
-
-
       // Clear the form fields after successful submission
       setEmail("");
       setPassword("");
