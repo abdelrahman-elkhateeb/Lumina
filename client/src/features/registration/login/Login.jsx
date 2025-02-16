@@ -1,14 +1,38 @@
 import LoginForm from "./LoginForm";
+import { motion } from "framer-motion";
 
-function Login() {
+function Signup() {
   return (
-    <div
-      className="grid place-content-center h-dvh relative bg-background 
-      before:absolute before:bg-white before:w-96 before:h-96 before:rounded-full before:opacity-20 before:blur-3xl before:animate-move-across after:absolute after:bottom-0 after:right-0 after:w-96 after:h-96 after:bg-white after:rounded-full after:opacity-20 after:blur-3xl after:animate-move-across"
-    >
+    <div className="grid place-content-center h-dvh w-dvw relative bg-background overflow-hidden">
+      {/* Ball 1: Moves from top-left to center */}
+      <motion.div
+        className="absolute bg-white w-96 h-96 rounded-full opacity-20 blur-[190px]"
+        initial={{ x: "-100%", y: "-100%" }} // Start from top-left
+        animate={{ x: "0%", y: "0%" }} // Move to center
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Ball 2: Moves inversely (from bottom-right to center) */}
+      <motion.div
+        className="absolute bottom-0 right-0 bg-white w-96 h-96 rounded-full opacity-20 blur-[190px]"
+        initial={{ x: "100%", y: "100%" }} // Start from bottom-right
+        animate={{ x: "0%", y: "0%" }} // Move to center
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+        }}
+      />
+
       <LoginForm />
     </div>
   );
 }
 
-export default Login;
+export default Signup;
