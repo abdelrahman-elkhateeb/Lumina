@@ -10,6 +10,11 @@ export default {
         secondary: "#141416",
         accent: "#96e5c2",
       },
+      fontFamily: {
+        heading: ["Poppins", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+        accent: ["Space Mono", "monospace"],
+      },
     },
   },
   plugins: [],

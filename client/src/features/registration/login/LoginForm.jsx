@@ -85,8 +85,8 @@ function LoginForm() {
     >
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-6xl font-bold text-primary font-poppins">Lumina</h1>
-        <h2 className="text-lg text-primary">Light the dark / Learn Brighter</h2>
+        <h1 className="text-2xl text-primary font-heading md:text-4xl font-bold">Lumina</h1>
+        <h2 className="text-lg text-text font-body">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -137,7 +137,7 @@ function LoginForm() {
           <h4 className="text-text capitalize">Don't have an account?</h4>
           <Link
             to="/signup"
-            className="text-text font-bold hover:text-accent focus:outline-none"
+            className="text-text font-bold hover:text-accent focus:outline-none font-accent"
           >
             Sign up
           </Link>

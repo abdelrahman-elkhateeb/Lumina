@@ -120,8 +120,8 @@ function SignupForm() {
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px]">
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-6xl font-bold text-primary font-poppins">Lumina</h1>
-        <h2 className="text-lg text-text">Light the dark / Learn Brighter</h2>
+        <h1 className="text-2xl md:text-4xl font-bold text-primary font-poppins font-heading">Lumina</h1>
+        <h2 className="text-lg font-body text-text">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -202,7 +202,7 @@ function SignupForm() {
           <h4 className="text-text capitalize">Already a member?</h4>
           <Link
             to="/login"
-            className="text-text font-bold hover:text-accent focus:outline-none"
+            className="text-text font-bold hover:text-accent focus:outline-none font-accent"
           >
             Login
           </Link>
