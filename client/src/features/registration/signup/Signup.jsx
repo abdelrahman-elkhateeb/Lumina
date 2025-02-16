@@ -1,16 +1,13 @@
 import SignupForm from "./SignupForm";
-import backgroundImg from "../../../../public/assets/background.png"
 
 function Signup() {
   return (
-    <div className="grid h-dvh">
-      {/* illustration
-      <RegistrationIllustration>
-        <img src={img} alt="loginImage" />
-      </RegistrationIllustration> */}
-      {/* Signup form */}
+    <div
+      className="grid place-content-center h-dvh bg-gradient-to-br from-light-primary via-light-secondary to-light-accent animate-gradient-move bg-[length:200%_200%]"
+    >
       <SignupForm />
     </div>
+
   );
 }
 

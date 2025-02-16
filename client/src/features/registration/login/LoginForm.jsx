@@ -80,7 +80,7 @@ function LoginForm() {
 
   return (
     <form
-      className="flex flex-col justify-center items-center p-8 bg-light-background"
+      className="flex flex-col justify-center items-center p-8 rounded-xl md:w-[500px] bg-light-background shadow-md border border-gray-300"
       onSubmit={handleSubmit}
     >
       {/* Header Section */}

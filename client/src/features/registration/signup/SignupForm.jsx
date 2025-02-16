@@ -7,6 +7,8 @@ import { useSignupUserMutation } from "../registrationApi";
 //google function
 import { signInWithGoogle } from "../auth";
 
+import { FaUser, FaEnvelope, FaLock, FaVenusMars, FaGraduationCap } from "react-icons/fa";
+
 function SignupForm() {
   // Common classNames
   const inputFieldClassname = `w-full p-3 border border-light-secondary rounded-lg text-light-text bg-light-primary`;
@@ -117,7 +119,7 @@ function SignupForm() {
   // }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 bg-light-background">
+    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] bg-[#ffffff] shadow-md border border-gray-300">
       {/* Header Section */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-light-accent font-poppins">Lumina</h1>
