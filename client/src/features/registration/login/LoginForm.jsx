@@ -8,7 +8,7 @@ import { signInWithGoogle } from "../auth";
 
 function LoginForm() {
   // Common classNames
-  const inputFieldClassname = `w-full p-3 border border-light-secondary rounded-lg text-light-text bg-light-primary`;
+  const inputFieldClassname = `bg-secondary text-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`
 
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
@@ -80,13 +80,13 @@ function LoginForm() {
 
   return (
     <form
-      className="flex flex-col justify-center items-center p-8 rounded-xl md:w-[500px] bg-light-background shadow-md border border-gray-300"
+      className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px]"
       onSubmit={handleSubmit}
     >
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-light-text font-poppins">Lumina</h1>
-        <h2 className="text-lg text-light-accent">Light the dark / Learn Brighter</h2>
+        <h1 className="text-2xl md:text-6xl font-bold text-primary font-poppins">Lumina</h1>
+        <h2 className="text-lg text-primary">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -109,13 +109,9 @@ function LoginForm() {
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-light-accent"
+            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-accent"
           >
-            {isVisible ? (
-              <i className="fa-solid fa-eye"></i>
-            ) : (
-              <i className="fa-solid fa-eye-slash"></i>
-            )}
+            {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
           </button>
         </div>
 
@@ -123,14 +119,14 @@ function LoginForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className="w-full mt-4 p-3 rounded-lg bg-light-accent text-white font-bold hover:bg-light-secondary transition"
+            className="w-full mt-4 p-3 rounded-lg bg-primary text-secondary font-bold hover:bg-accent transition"
           >
             Login
           </button>
         ) : (
           <button
             disabled
-            className="w-full mt-4 p-3 rounded-lg bg-light-secondary text-white font-bold opacity-75"
+              className="w-full mt-4 p-3 rounded-lg bg-light-secondary bg-primary text-secondary font-bold opacity-75"
           >
             Welcome back...
           </button>
@@ -138,10 +134,10 @@ function LoginForm() {
 
         {/* Sign Up Section */}
         <div className="text-center mt-4">
-          <h4 className="text-light-text">Don't have an account?</h4>
+          <h4 className="text-text capitalize">Don't have an account?</h4>
           <Link
             to="/signup"
-            className="text-light-accent font-bold hover:text-light-secondary transition"
+            className="text-text font-bold hover:text-accent focus:outline-none"
           >
             Sign up
           </Link>

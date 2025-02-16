@@ -3,31 +3,12 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      animation: {
-        'gradient-move': 'gradientBG 6s ease infinite',
-      },
-      keyframes: {
-        gradientBG: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
-      },
       colors: {
-        light: {
-          text: "#2d6186",        // Light mode text color
-          background: "#ffffff", // Light mode background color
-          primary: "#c0e8f2",     // Light mode primary color
-          secondary: "#80bdd6",   // Light mode secondary color
-          accent: "#0f8db3",       // Light mode accent color
-        },
-        dark: {
-          text: "#79add2",         // Dark mode text color
-          background: "#000000",  // Dark mode background color
-          primary: "#0d353f",      // Dark mode primary color
-          secondary: "#29677f",    // Dark mode secondary color
-          accent: "#4ccaf0",       // Dark mode accent color
-        },
+        text: "#b0b0b3", // Dimmed text for readability
+        background: "#151515", // Deep black background
+        primary: "#f5f5f5", // Darker white for contrast
+        secondary: "#141416", // Darker secondary background
+        accent: "#ff5500", // Vibrant accent color (bold orange-red)
       },
     },
   },

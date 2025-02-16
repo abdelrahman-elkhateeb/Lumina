@@ -7,11 +7,9 @@ import { useSignupUserMutation } from "../registrationApi";
 //google function
 import { signInWithGoogle } from "../auth";
 
-import { FaUser, FaEnvelope, FaLock, FaVenusMars, FaGraduationCap } from "react-icons/fa";
-
 function SignupForm() {
   // Common classNames
-  const inputFieldClassname = `w-full p-3 border border-light-secondary rounded-lg text-light-text bg-light-primary`;
+  const inputFieldClassname = `bg-secondary text-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`;
 
   const navigate = useNavigate();
 
@@ -119,11 +117,11 @@ function SignupForm() {
   // }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] bg-[#ffffff] shadow-md border border-gray-300">
+    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px]">
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-light-accent font-poppins">Lumina</h1>
-        <h2 className="text-lg text-light-secondary">Light the dark / Learn Brighter</h2>
+        <h1 className="text-2xl md:text-6xl font-bold text-primary font-poppins">Lumina</h1>
+        <h2 className="text-lg text-text">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -155,7 +153,7 @@ function SignupForm() {
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-light-accent"
+            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-accent"
           >
             {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
           </button>
@@ -191,27 +189,26 @@ function SignupForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className="w-full px-4 py-2 mb-4 text-light-background bg-light-accent rounded-lg hover:bg-light-secondary focus:outline-none focus:ring-2 focus:ring-light-accent font-bold ease-in-out duration-300 capitalize"
+            className="w-full px-4 py-2 mb-4 text-background bg-primary rounded-lg hover:bg-accent focus:outline-none focus:ring-2 focus:ring-accent font-bold ease-in-out duration-300 capitalize"
           >
             Create Account
           </button>
         ) : (
-          <p className="text-light-text">Loading...</p>
+          <p className="text-text">Loading...</p>
         )}
 
         {/* Sign Up Section */}
         <div className="text-center">
-          <h4 className="text-light-secondary capitalize">Already a member?</h4>
+          <h4 className="text-text capitalize">Already a member?</h4>
           <Link
             to="/login"
-            className="text-light-accent font-bold hover:text-light-secondary focus:outline-none"
+            className="text-text font-bold hover:text-accent focus:outline-none"
           >
             Login
           </Link>
         </div>
       </div>
     </form>
-
   );
 }
 
