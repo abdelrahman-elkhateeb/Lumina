@@ -8,7 +8,7 @@ export default {
         background: "#151515",
         primary: "#f5f5f5",
         secondary: "#141416",
-        accent: "#ff5500",
+        accent: "#96e5c2",
       },
     },
   },
