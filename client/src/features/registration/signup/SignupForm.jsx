@@ -9,8 +9,7 @@ import { signInWithGoogle } from "../auth";
 
 function SignupForm() {
   // Common classNames
-  const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`;
-  const loginButtonsClassName = `w-9 h-9 text-accent-500 bg-background-800 rounded-full hover:bg-background-700 focus:outline-none`;
+  const inputFieldClassname = `w-full p-3 border border-light-secondary rounded-lg text-light-text bg-light-primary`;
 
   const navigate = useNavigate();
 
@@ -118,15 +117,15 @@ function SignupForm() {
   // }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 bg-background-950">
+    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 bg-light-background">
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-accent-200 font-poppins">Lumina</h1>
-        <h2 className="text-lg text-accent-300">Light the dark / Learn Brighter</h2>
+        <h1 className="text-4xl font-bold text-light-accent font-poppins">Lumina</h1>
+        <h2 className="text-lg text-light-secondary">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
-      <div className="w-full max-w-md">
+      <div className="w-full gap-4 flex flex-col max-w-md">
         <input
           type="text"
           placeholder="Username"
@@ -154,7 +153,7 @@ function SignupForm() {
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute right-3 top-[1.3rem] -translate-y-1/2"
+            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-light-accent"
           >
             {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
           </button>
@@ -182,40 +181,35 @@ function SignupForm() {
           value={genderForm}
           onChange={(e) => setGenderForm(e.target.value)}
         >
-          <option value="male">male</option>
-          <option value="female">female</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
         </select>
 
         {/* Submit Button */}
-        {!isLoading ? <button
-          type="submit"
-          className="w-full px-4 py-2 mb-4 text-white bg-background-300 rounded-lg hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 font-bold ease-in-out duration-300 capitalize"
-        >
-          Create Account
-        </button> : <p>loading....</p>}
-
-        {/* Social Login Buttons */}
-        {/* <div className="flex justify-center my-4 space-x-4">
-          <button type="button" className={loginButtonsClassName} onClick={googleSignUp}>
-            <i className="fa-brands fa-google"></i>
+        {!isLoading ? (
+          <button
+            type="submit"
+            className="w-full px-4 py-2 mb-4 text-light-background bg-light-accent rounded-lg hover:bg-light-secondary focus:outline-none focus:ring-2 focus:ring-light-accent font-bold ease-in-out duration-300 capitalize"
+          >
+            Create Account
           </button>
-          <button type="button" className={loginButtonsClassName}>
-            <i className="fa-brands fa-github"></i>
-          </button>
-        </div> */}
+        ) : (
+          <p className="text-light-text">Loading...</p>
+        )}
 
         {/* Sign Up Section */}
         <div className="text-center">
-          <h4 className="text-accent-300 capitalize">Already a member?</h4>
+          <h4 className="text-light-secondary capitalize">Already a member?</h4>
           <Link
             to="/login"
-            className="text-primary-200 font-bold hover:text-primary-600 focus:outline-none"
+            className="text-light-accent font-bold hover:text-light-secondary focus:outline-none"
           >
             Login
           </Link>
         </div>
       </div>
     </form>
+
   );
 }
 

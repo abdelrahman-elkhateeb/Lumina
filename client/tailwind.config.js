@@ -2,77 +2,24 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    colors: {
-        text: {
-          50: '#0d0d0d',
-          100: '#1a1a1a',
-          200: '#333333',
-          300: '#4d4d4d',
-          400: '#666666',
-          500: '#808080',
-          600: '#999999',
-          700: '#b3b3b3',
-          800: '#cccccc',
-          900: '#e6e6e6',
-          950: '#f2f2f2',
+    extend: {
+      colors: {
+        light: {
+          text: "#2d6186",        // Light mode text color
+          background: "#ffffff", // Light mode background color
+          primary: "#c0e8f2",     // Light mode primary color
+          secondary: "#80bdd6",   // Light mode secondary color
+          accent: "#0f8db3",       // Light mode accent color
         },
-        background: {
-          50: '#021818',
-          100: '#033030',
-          200: '#075f5f',
-          300: '#0a8f8f',
-          400: '#0dbfbf',
-          500: '#11eeee',
-          600: '#40f2f2',
-          700: '#70f5f5',
-          800: '#a0f8f8',
-          900: '#cffcfc',
-          950: '#e7fdfd',
+        dark: {
+          text: "#79add2",         // Dark mode text color
+          background: "#000000",  // Dark mode background color
+          primary: "#0d353f",      // Dark mode primary color
+          secondary: "#29677f",    // Dark mode secondary color
+          accent: "#4ccaf0",       // Dark mode accent color
         },
-        primary: {
-          50: '#071213',
-          100: '#0d2526',
-          200: '#1a494c',
-          300: '#276e72',
-          400: '#349398',
-          500: '#41b8be',
-          600: '#67c6cb',
-          700: '#8dd4d8',
-          800: '#b3e2e5',
-          900: '#d9f1f2',
-          950: '#ecf8f8',
-        },
-        secondary: {
-          50: '#041415',
-          100: '#08272b',
-          200: '#114e55',
-          300: '#197680',
-          400: '#229daa',
-          500: '#2ac4d5',
-          600: '#55d0dd',
-          700: '#7fdce6',
-          800: '#aae7ee',
-          900: '#d4f3f7',
-          950: '#eaf9fb',
-        },
-        accent: {
-          50: '#051315',
-          100: '#0a2629',
-          200: '#144d52',
-          300: '#1e737b',
-          400: '#289aa4',
-          500: '#32c0cd',
-          600: '#5bcdd7',
-          700: '#84d9e1',
-          800: '#ade6eb',
-          900: '#d6f2f5',
-          950: '#eaf9fa',
-        },
-      },
-      fontFamily: {
-        sans: ['Poppins', 'sans-serif'], // Set as the default sans-serif font
-        poppins: ['Poppins', 'sans-serif'], // Custom class for Poppins
       },
     },
+  },
   plugins: [],
 };

@@ -1,14 +1,13 @@
-import RegistrationIllustration from "../../ui/RegistrationIllustration";
 import SignupForm from "./SignupForm";
-import img from "../../../../public/assets/signup_page_img.svg";
+import backgroundImg from "../../../../public/assets/background.png"
 
 function Signup() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-dvh">
-      {/* illustration */}
+    <div className="grid h-dvh">
+      {/* illustration
       <RegistrationIllustration>
         <img src={img} alt="loginImage" />
-      </RegistrationIllustration>
+      </RegistrationIllustration> */}
       {/* Signup form */}
       <SignupForm />
     </div>

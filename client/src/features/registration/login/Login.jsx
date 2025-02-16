@@ -4,13 +4,13 @@ import img from "../../../../public/assets/login_page_image.svg";
 
 function Login() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-dvh">
+    <div className="grid h-dvh">
       {/* Login Form Section */}
       <LoginForm />
       {/* Image Section */}
-      <RegistrationIllustration>
+      {/* <RegistrationIllustration>
         <img src={img} alt="signUpImage" />
-      </RegistrationIllustration>
+      </RegistrationIllustration> */}
     </div>
   );
 }

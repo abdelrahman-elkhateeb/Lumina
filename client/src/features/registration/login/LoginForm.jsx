@@ -8,9 +8,7 @@ import { signInWithGoogle } from "../auth";
 
 function LoginForm() {
   // Common classNames
-  const inputFieldClassname = `w-full px-4 py-2 mb-4 border border-text-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 placeholder-accent-600 bg-background-900`;
-
-  const loginButtonsClassName = "w-full capitalize px-4 py-2 mb-4 text-white bg-background-300 rounded-lg hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 text-text-200 font-bold ease-in-out duration-300";
+  const inputFieldClassname = `w-full p-3 border border-light-secondary rounded-lg text-light-text bg-light-primary`;
 
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
@@ -82,13 +80,13 @@ function LoginForm() {
 
   return (
     <form
-      className="flex flex-col justify-center items-center p-8 bg-background-950"
+      className="flex flex-col justify-center items-center p-8 bg-light-background"
       onSubmit={handleSubmit}
     >
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-accent-200 font-poppins">Lumina</h1>
-        <h2 className="text-lg text-accent-300">Light the dark / Learn Brighter</h2>
+        <h1 className="text-4xl font-bold text-light-text font-poppins">Lumina</h1>
+        <h2 className="text-lg text-light-accent">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -100,7 +98,7 @@ function LoginForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <div className="relative">
+        <div className="relative mt-4">
           <input
             type={isVisible ? "text" : "password"}
             placeholder="Confirm Password"
@@ -111,7 +109,7 @@ function LoginForm() {
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute right-3 top-[1.3rem] -translate-y-1/2"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-light-accent"
           >
             {isVisible ? (
               <i className="fa-solid fa-eye"></i>
@@ -125,41 +123,32 @@ function LoginForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className={loginButtonsClassName}
+            className="w-full mt-4 p-3 rounded-lg bg-light-accent text-white font-bold hover:bg-light-secondary transition"
           >
-            login
+            Login
           </button>
         ) : (
-          <button disabled className={loginButtonsClassName}>welcome back....</button>
+          <button
+            disabled
+            className="w-full mt-4 p-3 rounded-lg bg-light-secondary text-white font-bold opacity-75"
+          >
+            Welcome back...
+          </button>
         )}
 
-        {/* Social Login Buttons */}
-        {/* <div className="flex justify-center my-4 space-x-4">
-          <button
-            type="button"
-            className={loginButtonsClassName}
-            onClick={googleLogin}
-          >
-            <i className="fa-brands fa-google"></i>
-          </button>
-          <button type="button" className={loginButtonsClassName}>
-            <i className="fa-brands fa-github"></i>
-          </button>
-        </div> */}
-
         {/* Sign Up Section */}
-        <div className="text-center">
-          <h4 className="text-accent-300">Don't have an account?</h4>
+        <div className="text-center mt-4">
+          <h4 className="text-light-text">Don't have an account?</h4>
           <Link
             to="/signup"
-            type="button"
-            className="text-primary-200 font-bold hover:text-primary-600 focus:outline-none"
+            className="text-light-accent font-bold hover:text-light-secondary transition"
           >
             Sign up
           </Link>
         </div>
       </div>
     </form>
+
   );
 }
 
