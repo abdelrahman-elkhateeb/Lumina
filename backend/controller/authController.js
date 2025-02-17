@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const { generateToken, verifyToken } = require('../utils/jwt');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const { promisify } = require('util');
 
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
@@ -44,36 +45,29 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) Get the token and check if it exists
   let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     token = req.headers.authorization.split(' ')[1];
   }
-
   if (!token) {
-    return next(
-      new AppError('You are not logged in! Please log in to get access.', 401)
-    );
+    return next(new AppError('You are not logged in! Please log in to get access.', 401));
   }
 
-  // 2) Verify the token
-  let decoded;
-  try {
-    decoded = verifyToken(token);
-  } catch (error) {
-    return next(new AppError('Invalid or expired token. Please log in again.', 401));
+  // 2) Verify the token - if it's valid, we can continue
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  // 3) Check if the user still exists - if not, there is nothing we can
+  const freshUser = await User.findById(decoded.id);
+  if (!freshUser) {
+    return next(new AppError('You are not logged in! Please log in to get access.', 401));
   }
 
-  // 3) Check if the user still exists
-  const currentUser = await User.findById(decoded.userId);
-  if (!currentUser) {
-    return next(
-      new AppError('The user belonging to this token no longer exists.', 401)
-    );
+  // 4) check if the password changed after the token was issued
+  if (freshUser.changedPasswordAt(decoded.iat)) {
+    return next(new AppError('You are not logged in! Please log in to get access.',
+      401));
   }
 
-  // 4) Grant access to the protected route
-  req.user = currentUser; // Attach the user to the request object
+  //GRANT ACCESS TO THE USER
+  req.user = freshUser;
   next();
 });
