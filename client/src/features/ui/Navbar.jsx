@@ -2,12 +2,13 @@ import { useState } from "react";
 import maleSvg from "../../../public/assets/male.svg";
 import femaleSvg from "../../../public/assets/female.svg";
 import { useFetchUserDataQuery } from "../registration/registrationApi";
-import getUserIdFromToken from "../../utils/decodeToken";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const userId = getUserIdFromToken();
+  const userId = Cookies.get("token");
+  console.log("Token from cookie:", userId);
 
   // Use the query hook to fetch user data
   const { data: userData, isLoading, error } = useFetchUserDataQuery(userId);

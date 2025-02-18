@@ -22,7 +22,7 @@ export const registrationSlice = createApi({
       })
     }),
     fetchUserData: builder.query({
-      query: (userId) => `/${userId}`, // Adjust endpoint as needed
+      query: () => `/user`, // Adjust endpoint as needed
     }),
     logoutUser: builder.mutation({
       query: () => ({
