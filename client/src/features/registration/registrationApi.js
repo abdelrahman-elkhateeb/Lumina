@@ -4,13 +4,7 @@ export const registrationSlice = createApi({
   reducerPath: 'registration',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5000/api/users',
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-      return headers;
-    }
+    credentials: "include",
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({
@@ -30,6 +24,12 @@ export const registrationSlice = createApi({
     fetchUserData: builder.query({
       query: (userId) => `/${userId}`, // Adjust endpoint as needed
     }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+    }),
   })
 })
 
@@ -37,4 +37,5 @@ export const {
   useLoginUserMutation,
   useSignupUserMutation,
   useFetchUserDataQuery,
+  useLogoutUserMutation,
 } = registrationSlice;
