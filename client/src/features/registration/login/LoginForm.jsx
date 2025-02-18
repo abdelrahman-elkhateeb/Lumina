@@ -28,18 +28,15 @@ function LoginForm() {
 
     try {
       // Call the loginUser mutation to authenticate the user
-      const userData = await loginUser({ email, password }).unwrap();
+      await loginUser({ email, password }).unwrap();
 
-      // Save the token to localStorage
-      localStorage.setItem("token", userData.token);
-      // Clear the form fields after successful submission
+      // No need to store token manually, it's handled via cookies
       setEmail("");
       setPassword("");
 
-      // Redirect to the home page
+      // Redirect to home page
       navigate("/");
     } catch (err) {
-      // Show error message
       Swal.fire({
         title: "Error!",
         background: "#e7fdfd",
@@ -50,6 +47,7 @@ function LoginForm() {
       });
     }
   };
+
 
   // Google login
   // const googleLogin = async () => {
@@ -126,7 +124,7 @@ function LoginForm() {
         ) : (
           <button
             disabled
-              className="w-full mt-4 p-3 rounded-lg bg-light-secondary bg-primary text-secondary font-bold opacity-75"
+            className="w-full mt-4 p-3 rounded-lg bg-light-secondary bg-primary text-secondary font-bold opacity-75"
           >
             Welcome back...
           </button>
