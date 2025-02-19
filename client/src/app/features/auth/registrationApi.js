@@ -8,21 +8,22 @@ export const registrationSlice = createApi({
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({
-      query: (data) => ({
+      query: (credentials) => ({
         url: "/login",
         method: "POST",
-        body: data
-      })
+        body: credentials,
+      }),
+      invalidatesTags: ['User'],
     }),
     signupUser: builder.mutation({
-      query: (data) => ({
+      query: (credentials) => ({
         url: "/signup",
         method: "POST",
-        body: data
-      })
+        body: credentials,
+      }),
     }),
     fetchUserData: builder.query({
-      query: () => `/user`, // Adjust endpoint as needed
+      query: () => '/user',
     }),
     logoutUser: builder.mutation({
       query: () => ({
@@ -30,8 +31,8 @@ export const registrationSlice = createApi({
         method: "POST",
       }),
     }),
-  })
-})
+  }),
+});
 
 export const {
   useLoginUserMutation,

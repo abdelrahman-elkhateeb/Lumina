@@ -16,10 +16,6 @@ const createSendToken = (user, statusCode, res) => {
   const cookieOptions = {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),// 1 day
     httpOnly: true,
-    domain: "localhost",
-    secure: true,
-    sameSite: none,
-    path: "/",
   }
 
   if (process.env.NODE_ENV == "production") cookieOptions.secure = true;
@@ -57,35 +53,38 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1) getting token and check if it's there
+  // 1️⃣ Get the token from Authorization header or Cookies
   let token;
+  const cookies = req.headers.cookie;
+  token = cookies.split("=")[1];
+
   if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
-    token = req.headers.authorization.split(" ")[1];
+    token = req.headers.authorization.split(" ")[1]; // Extract token from header
   }
 
   if (!token) {
-    return next(new AppError("You are not logged in! Please log in to get access", 401));
+    return next(new AppError("You are not logged in! Please log in to get access.", 401));
   }
 
-  // 2) verification token
+  // 2️⃣ Verify the token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  // 3) check if the user is still exist
+  // 3️⃣ Check if user still exists
   const freshUser = await User.findById(decoded.id);
   if (!freshUser) {
-    return next(new AppError('the user belong to the token is no longer exist.',
-      401));
+    return next(new AppError("The user belonging to this token no longer exists.", 401));
   }
 
-  // 4) check if the user changed password after the token was issued
-  if (await freshUser.changedPasswordAfter(decoded.iat)) {
-    return next(new AppError('User recently changed password! Please log in again.', 401));
+  // 4️⃣ Check if user changed password after token was issued
+  if (freshUser.changedPasswordAfter(decoded.iat)) {
+    return next(new AppError("User recently changed password! Please log in again.", 401));
   }
 
-  // if every thing is ok, store user in the request object
-  req.user = freshUser;
+  // 5️⃣ Grant Access
+  req.user = freshUser; // Attach user to request
   next();
 });
+
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {

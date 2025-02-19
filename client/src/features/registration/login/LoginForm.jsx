@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../registrationApi";
+import { useLoginUserMutation } from "../../../app/features/auth/registrationApi";
 import Swal from "sweetalert2";
 
 // Google function

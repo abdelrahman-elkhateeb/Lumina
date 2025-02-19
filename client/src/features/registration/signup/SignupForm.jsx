@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 // sweetAlert
 import Swal from 'sweetalert2'
-import { useSignupUserMutation } from "../registrationApi";
+import { useSignupUserMutation } from "../../../app/features/auth/registrationApi";
 
 //google function
 import { signInWithGoogle } from "../auth";

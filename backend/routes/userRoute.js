@@ -14,6 +14,6 @@ router
   .route('/')
   .get(userController.getAllUsers)
 
-router.route("/:id").get(userController.getUser);
+router.route("/user").get(userController.getUser);
 
 module.exports = router;
