@@ -29,7 +29,7 @@ function Navbar() {
               <div className="flex items-center gap-8 flex-grow">
                 {/* Logo */}
                 <Link to="/">
-                  <h1 className="font-poppins uppercase text-xl font-bold">lumina</h1>
+                  <h1 className="font-poppins text-text uppercase text-xl font-bold">lumina</h1>
                 </Link>
 
                 {/* Search Bar */}
@@ -42,13 +42,13 @@ function Navbar() {
 
               {/* Right Section: Links and Profile Icon */}
               <div className="capitalize flex items-center gap-6">
-                <Link to="" className="hover:text-accent-600 transition-colors">
+                <Link to="" className="text-text">
                   My Learning
                 </Link>
-                <Link to="" className="hover:text-accent-600 transition-colors">
+                <Link to="" className="text-text">
                   Instructor
                 </Link>
-                <Link to="" className="hover:text-accent-600 transition-colors">
+                <Link to="" className="text-text">
                   <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
                 {/* Profile Icon */}
