@@ -9,10 +9,9 @@ function Navbar() {
 
   // Use the query hook to fetch user data
   const { data: userData, isLoading, error } = useFetchUserDataQuery();
-  console.log(userData);
   
   // Safely access user data
-  const user = userData;
+  const user = userData?.data?.user;
   
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
