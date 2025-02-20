@@ -15,6 +15,17 @@ export const createCourse = catchAsync(async (req, res, next) => {
   });
 });
 
+export const getCourses = catchAsync(async (req, res, next) => {
+  const courses = await Course.find();
+
+  if (!courses) return next(new AppError('No courses found'));
+
+  res.status(200).json({
+    message: 'Courses retrieved successfully',
+    data: courses
+  })
+})
+
 export const getCourse = catchAsync(async (req, res, next) => {
   const course = await Course.findById(req.params.id);
 
