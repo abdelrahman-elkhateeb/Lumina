@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { registrationSlice } from './features/auth/registrationApi'
+import { configureStore } from '@reduxjs/toolkit';
+import { registrationSlice } from './features/auth/registrationApi';
 
 export const store = configureStore({
   reducer: {

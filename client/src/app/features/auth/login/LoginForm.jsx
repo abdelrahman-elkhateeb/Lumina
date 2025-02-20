@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../../../app/features/auth/registrationApi";
+import { useFetchUserDataQuery, useLoginUserMutation } from "../registrationApi";
 import Swal from "sweetalert2";
 
 // Google function
@@ -17,25 +17,24 @@ function LoginForm() {
     setIsVisible((prev) => !prev);
   };
 
-  // Redux
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
+  const { refetch } = useFetchUserDataQuery();
 
-  // Default login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Call the loginUser mutation to authenticate the user
       await loginUser({ email, password }).unwrap();
 
-      // No need to store token manually, it's handled via cookies
+      await refetch();
+
       setEmail("");
       setPassword("");
 
-      // Redirect to home page
       navigate("/");
+
     } catch (err) {
       Swal.fire({
         title: "Error!",
@@ -47,7 +46,6 @@ function LoginForm() {
       });
     }
   };
-
 
   // Google login
   // const googleLogin = async () => {

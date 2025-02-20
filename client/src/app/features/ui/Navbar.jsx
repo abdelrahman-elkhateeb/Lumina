@@ -1,7 +1,7 @@
 import { useState } from "react";
-import maleSvg from "../../../public/assets/male.svg";
-import femaleSvg from "../../../public/assets/female.svg";
-import { useFetchUserDataQuery } from "../../app/features/auth/registrationApi";
+import maleSvg from "../../../../public/assets/male.svg";
+import femaleSvg from "../../../../public/assets/female.svg";
+import { useFetchUserDataQuery } from "../auth/registrationApi";
 import { Link } from "react-router-dom";
 
 function Navbar() {

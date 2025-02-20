@@ -2,10 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 // sweetAlert
 import Swal from 'sweetalert2'
-import { useSignupUserMutation } from "../../../app/features/auth/registrationApi";
+import { useSignupUserMutation } from "../../auth/registrationApi";
 
 //google function
 import { signInWithGoogle } from "../auth";
+import { useFetchUserDataQuery } from "../registrationApi";
 
 function SignupForm() {
   // Common classNames
@@ -27,6 +28,7 @@ function SignupForm() {
   const [genderForm, setGenderForm] = useState('male'); // Default gender
 
   const [signupUser, { isLoading, error }] = useSignupUserMutation();
+  const { refetch } = useFetchUserDataQuery();
 
   // local signUp
   const handleSubmit = async (e) => {
@@ -47,7 +49,7 @@ function SignupForm() {
 
     try {
       // Call the signupUser mutation
-      const userData = await signupUser({
+      await signupUser({
         name: usernameForm,
         email: emailForm,
         password: passwordForm,
@@ -56,8 +58,7 @@ function SignupForm() {
         gender: genderForm
       }).unwrap();
 
-      // Save the token to localStorage
-      localStorage.setItem("token", userData.token);
+      await refetch();
 
       // Clear the form after successful submission
       setUsernameForm('');
@@ -69,8 +70,6 @@ function SignupForm() {
       navigate("/");
 
     } catch (err) {
-      // console.error("Signup failed:", err);
-
       // Show error message
       Swal.fire({
         title: 'Error!',

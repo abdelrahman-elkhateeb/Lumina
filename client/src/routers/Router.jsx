@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import AppLayout from "../features/ui/AppLayout";
-import ErrorPage from "../features/ui/ErrorPage";
+import AppLayout from "../app/features/ui/AppLayout";
+import ErrorPage from "../app/features/ui/ErrorPage";
 import { lazy } from "react";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 // Lazy-loaded components
-const Signup = lazy(() => import("../features/registration/signup/Signup"));
-const Login = lazy(() => import("../features/registration/login/Login"));
-const Home = lazy(() => import("../features/home/Home"));
+const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
+const Login = lazy(() => import("../app/features/auth/login/Login"));
+const Home = lazy(() => import("../app/features/home/Home"));
 
 const router = createBrowserRouter([
   {

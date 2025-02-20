@@ -1,5 +1,5 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../../firebase/firebase.config"; // Adjust the import path
+import { auth } from "../../../firebase/firebase.config"; // Adjust the import path
 
 const provider = new GoogleAuthProvider();
 
@@ -34,3 +34,4 @@ export const signInWithGoogle = async () => {
     throw new Error(errorMessage); // Throw a user-friendly error
   }
 };
+
