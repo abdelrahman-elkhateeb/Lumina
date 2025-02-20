@@ -5,7 +5,9 @@ const LessonSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: { type: String },
+  description: {
+    type: String
+  },
   videoUrl: {
     type: String,
     required: true
@@ -15,10 +17,6 @@ const LessonSchema = new mongoose.Schema({
     default: 0
   }, // Video duration in seconds
   resources: [{ type: String }], // Links to additional resources (PDFs, links, etc.)
-  quiz: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Quiz"
-  }, // Optional quiz
 });
 
 const SectionSchema = new mongoose.Schema({
