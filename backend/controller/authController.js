@@ -53,7 +53,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1️⃣ Get the token from Authorization header or Cookies
+  // 1️) Get the token from Authorization header or Cookies
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
@@ -62,21 +62,21 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.headers.cookie.split("=")[1];
   }
 
-  // 2️⃣ Verify the token
+  // 2️) Verify the token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  // 3️⃣ Check if user still exists
+  // 3️) Check if user still exists
   const freshUser = await User.findById(decoded.id);
   if (!freshUser) {
     return next(new AppError("The user belonging to this token no longer exists.", 401));
   }
 
-  // 4️⃣ Check if user changed password after token was issued
+  // 4️) Check if user changed password after token was issued
   if (freshUser.changedPasswordAfter(decoded.iat)) {
     return next(new AppError("User recently changed password! Please log in again.", 401));
   }
 
-  // 5️⃣ Grant Access
+  // 5️) Grant Access
   req.user = freshUser; // Attach user to request
   next();
 });
