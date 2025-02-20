@@ -48,4 +48,4 @@ export const deleteCourse = catchAsync(async (req, res, next) => {
   res.status(200).json({
     message: 'Course deleted successfully',
   })
-})
+});
