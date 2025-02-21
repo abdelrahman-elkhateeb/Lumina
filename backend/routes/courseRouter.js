@@ -14,4 +14,12 @@ router.patch("/updateCourse/:id", authController.protect, courseController.updat
 
 router.delete("/deleteCourse/:id", authController.protect, courseController.deleteCourse);
 
+router.post(
+  "/uploadVideo/:courseId",
+  authController.protect,
+  upload.single("video"),
+  courseController.uploadVideo
+);
+
+
 module.exports = router;

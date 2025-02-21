@@ -1,5 +1,6 @@
-import catchAsync from "../utils/catchAsync";
 import Course from "../models/courseModel";
+
+import catchAsync from "../utils/catchAsync";
 import AppError from "../utils/appError";
 
 export const createCourse = catchAsync(async (req, res, next) => {
@@ -58,5 +59,28 @@ export const deleteCourse = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     message: 'Course deleted successfully',
+  })
+});
+
+export const uploadVideo = catchAsync(async (req, res, next) => {
+  const { courseId } = req.params;
+  const { lessonId, sectionId } = req.body;
+  const videoUrl = req.file.path; // Cloudinary URL
+
+  const course = await Course.findById(courseId);
+  if (!course) return next(new AppError('Course not found', 404));
+
+  const section = await Course.sections.findById(sectionId);
+  if (!section) return next(new AppError('Section not found', 404));
+
+  const lesson = await section.lessons.findById(lessonId);
+  if (!lesson) return next(new AppError('Lesson not found', 404));
+
+  lesson.videoUrl = videoUrl;
+  await course.save();
+
+  res.status(200).json({
+    message: 'Video uploaded successfully',
+    videoUrl
   })
 });
