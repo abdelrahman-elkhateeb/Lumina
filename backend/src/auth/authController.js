@@ -1,6 +1,6 @@
-const User = require('../src/users/userModel');
-const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/appError');
+const User = require('../users/userModel');
+const catchAsync = require('../../utils/catchAsync');
+const AppError = require('../../utils/appError');
 const { promisify } = require('util');
 const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
