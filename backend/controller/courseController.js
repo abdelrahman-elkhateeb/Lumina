@@ -1,8 +1,8 @@
-import Course from "../models/course/courseModel";
-
-import catchAsync from "../utils/catchAsync";
-import AppError from "../utils/appError";
-import cloudinary from "../utils/cloudinaryConfig";
+import Course from "../models/course/courseModel.js";
+import catchAsync from "../utils/catchAsync.js";
+import AppError from "../utils/appError.js";
+import cloudinary from "../utils/cloudinaryConfig.js";
+import streamifier from "streamifier";
 
 const uploadToCloudinary = (buffer) => {
   return new Promise((resolve, reject) => {
