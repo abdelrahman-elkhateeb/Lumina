@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors"); // Import the CORS middleware
-const userRouter = require("./routes/userRoute");
-const courseRouter = require("./routes/courseRoute");
+const userRouter = require("./src/users/userRoute");
+const courseRouter = require("./src/course/courseRoute");
 const AppError = require("./utils/appError");
-const globalErrorHandler = require("./controller/errorController");
+const globalErrorHandler = require("./src/error/errorController");
 
 const app = express();
 

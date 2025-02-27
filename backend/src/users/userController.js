@@ -1,6 +1,6 @@
-const User = require("../models/userModel");
-const catchAsync = require("../utils/catchAsync");
-const AppError = require("../utils/appError");
+const User = require("./userModel");
+const catchAsync = require("../../utils/catchAsync");
+const AppError = require("../../utils/appError");
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.find();
@@ -16,7 +16,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 
 exports.getUser = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
-  
+
   const user = await User.findById(userId);
 
   if (!user) {
