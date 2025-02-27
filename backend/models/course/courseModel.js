@@ -1,31 +1,5 @@
 import mongoose from "mongoose";
-
-const LessonSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String
-  },
-  videoUrl: {
-    type: String,
-    required: true
-  }, // Cloud storage video URL
-  duration: {
-    type: Number,
-    default: 0
-  }, // Video duration in seconds
-  resources: [{ type: String }], // Links to additional resources (PDFs, links, etc.)
-});
-
-const SectionSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  lessons: [LessonSchema], // Array of lessons within the section
-});
+import SectionSchema from "./sectionModel.js";
 
 const CourseSchema = new mongoose.Schema(
   {

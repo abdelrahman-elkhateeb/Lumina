@@ -1,20 +1,42 @@
-import Course from "../models/courseModel";
+import Course from "../models/course/courseModel";
 
 import catchAsync from "../utils/catchAsync";
 import AppError from "../utils/appError";
+import cloudinary from "../utils/cloudinaryConfig";
+
+const uploadToCloudinary = (buffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { resource_type: 'video' },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      }
+    );
+    streamifier.createReadStream(buffer).pipe(stream);
+  });
+};
 
 export const createCourse = catchAsync(async (req, res, next) => {
-  const course = new Course(req.body);
+  if (!req.file) return next(new AppError('No video file uploaded', 400));
 
-  if (!course) return next(new AppError('Invalid course data'));
+  // Upload video to Cloudinary
+  const uploadResult = await uploadToCloudinary(req.file.buffer);
+
+  // Create new course with Cloudinary video URL
+  const course = new Course({
+    ...req.body, // Spread request body data
+    videoUrl: uploadResult.secure_url, // Add Cloudinary video URL
+  });
 
   await course.save();
 
   res.status(201).json({
     message: 'Course created successfully',
-    data: course
+    data: course,
   });
 });
+
 
 export const getCourses = catchAsync(async (req, res, next) => {
   const courses = await Course.find();
@@ -24,29 +46,5 @@ export const getCourses = catchAsync(async (req, res, next) => {
   res.status(200).json({
     message: 'Courses retrieved successfully',
     data: courses
-  })
-});
-
-
-export const uploadVideo = catchAsync(async (req, res, next) => {
-  const { courseId } = req.params;
-  const { lessonId, sectionId } = req.body;
-  const videoUrl = req.file.path; // Cloudinary URL
-
-  const course = await Course.findById(courseId);
-  if (!course) return next(new AppError('Course not found', 404));
-
-  const section = await course.sections.findById(sectionId);
-  if (!section) return next(new AppError('Section not found', 404));
-
-  const lesson = await section.lessons.findById(lessonId);
-  if (!lesson) return next(new AppError('Lesson not found', 404));
-
-  lesson.videoUrl = videoUrl;
-  await course.save();
-
-  res.status(200).json({
-    message: 'Video uploaded successfully',
-    videoUrl
   })
 });

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors"); // Import the CORS middleware
 const userRouter = require("./routes/userRoute");
+const courseRouter = require("./routes/courseRoute");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controller/errorController");
 
@@ -20,6 +21,8 @@ app.use(express.json());
 
 // Route Handlers
 app.use('/api/users', userRouter);
+
+app.use("/api/courses", courseRouter);
 
 // Handle undefined routes
 app.all("*", (req, res, next) => {
