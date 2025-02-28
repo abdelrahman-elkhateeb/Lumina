@@ -1,5 +1,31 @@
 import mongoose from "mongoose";
-import SectionSchema from "./sectionModel.js";
+
+const LessonSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String
+  },
+  videoUrl: {
+    type: String,
+    required: true
+  },
+  duration: {
+    type: Number,
+    default: 0
+  },
+  resources: [{ type: String }]
+});
+
+const SectionSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  lessons: [LessonSchema]
+});
 
 const CourseSchema = new mongoose.Schema(
   {
@@ -41,10 +67,12 @@ const CourseSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Quiz"
     },
-    enrolledStudents: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    }],
+    enrolledStudents: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      }
+    ],
     sections: [SectionSchema], // Course structure with sections & lessons
     studentsProgress: [
       {
@@ -57,17 +85,17 @@ const CourseSchema = new mongoose.Schema(
         progressPercentage: {
           type: Number,
           default: 0
-        },
-      },
+        }
+      }
     ],
     createdAt: {
       type: Date,
       default: Date.now
-    },
+    }
   },
   { timestamps: true }
 );
 
 const Course = mongoose.model("Course", CourseSchema);
 
-export default Course;
+module.exports = Course;
