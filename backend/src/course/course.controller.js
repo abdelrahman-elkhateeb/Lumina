@@ -18,7 +18,10 @@ const uploadToCloudinary = (buffer) => {
 };
 
 exports.createCourse = catchAsync(async (req, res, next) => {
-  const course = await Course.create(req.body);
+  const course = await Course.create({
+    ...req.body,
+    instructor: req.user._id
+  });
   if (!course) return next(new AppError("Course creation failed", 400));
 
   res.status(201).json({
@@ -34,7 +37,7 @@ exports.createSection = catchAsync(async (req, res, next) => {
   const course = await Course.findById(courseId);
   if (!course) return next(new AppError("Course not found", 404));
 
-  const section = { title, lessons: [] }; // Ensure `lessons` array exists
+  const section = { title, lessons: [] };
 
   if (!Array.isArray(course.sections)) course.sections = []; // Prevent undefined error
   course.sections.push(section);
