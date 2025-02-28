@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// import mongoose from "mongoose";
 
 const LessonSchema = new mongoose.Schema({
   title: {
@@ -43,11 +42,6 @@ const CourseSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: ["Web Development", "Data Science", "AI", "Cybersecurity", "Others"]
-    },
-    level: {
-      type: String,
-      required: true,
-      enum: ["Beginner", "Intermediate", "Advanced"]
     },
     instructor: {
       type: mongoose.Schema.Types.ObjectId,
@@ -100,4 +94,3 @@ const CourseSchema = new mongoose.Schema(
 const Course = mongoose.model("Course", CourseSchema);
 
 module.exports = Course;
-// export default Course;
