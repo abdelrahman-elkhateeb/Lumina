@@ -30,12 +30,28 @@ exports.createCourse = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getCourses = catchAsync(async (req, res, next) => {
+  const courses = await Course.find({}).populate("instructor");
+
+  if (!courses) return next(new AppError("No courses found", 404));
+
+  res.status(200).json({
+    message: "Courses retrieved successfully",
+    courses,
+  });
+})
+
 exports.createSection = catchAsync(async (req, res, next) => {
   const { courseId, title } = req.body;
   if (!courseId || !title) return next(new AppError("Missing courseId or title", 400));
 
   const course = await Course.findById(courseId);
   if (!course) return next(new AppError("Course not found", 404));
+
+  const titles = course.sections.map(section => section.title.toLowerCase());
+
+  if (titles.includes(title.toLowerCase())) return next(new AppError("Section title already exists", 400));
+
 
   const section = { title, lessons: [] };
 
@@ -47,6 +63,17 @@ exports.createSection = catchAsync(async (req, res, next) => {
     message: "Section created successfully",
     section,
   });
+});
+
+exports.getSections = catchAsync(async (req, res, next) => {
+  const sections = await Course.find().select("section");
+
+  if (!sections) return next(new AppError("No sections found", 404));
+  
+  res.status(201).json({
+    message: "Sections retrieved successfully",
+    sections
+  })
 });
 
 exports.createLesson = catchAsync(async (req, res, next) => {

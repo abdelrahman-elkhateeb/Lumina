@@ -4,9 +4,13 @@ const courseController = require("./course.controller");
 
 const router = express.Router();
 
-router.post("/createCourse", authController.protect, authController.restrictTo("instructor"), courseController.createCourse);
+router.get("/", authController.protect, courseController.getCourses);
 
-router.post("/createSection", authController.protect, authController.restrictTo("instructor"), courseController.createSection);
+router.get("/getSections", authController.protect, courseController.getSections);
+
+router.post("/createCourse", authController.protect, courseController.createCourse);
+
+router.post("/createSection", authController.protect, courseController.createSection);
 
 router.post("/createLesson", authController.protect, authController.restrictTo("instructor"), courseController.createLesson);
 
