@@ -18,7 +18,12 @@ router.get("/getSections", authController.protect, authController.restrictTo("in
 router.post("/createSection", authController.protect, authController.restrictTo("instructor"), courseController.createSection);
 
 router.route("section/:id")
-  .get(authController.protect, authController.restrictTo("instructor"), courseController.getSection)
+  .get(authController.protect, authController.restrictTo("instructor"), courseController.getSection);
+
+router
+  .route("/:courseId/sections/:sectionId")
+  .patch(authController.protect, authController.restrictTo("instructor"), courseController.updateSection)
+  .delete(authController.protect, authController.restrictTo("instructor"), courseController.deleteSection);
 
 // crud for lesson
 router.post("/createLesson", authController.protect, authController.restrictTo("instructor"), courseController.createLesson);

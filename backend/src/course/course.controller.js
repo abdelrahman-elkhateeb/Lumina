@@ -156,7 +156,7 @@ exports.deleteSection = catchAsync(async (req, res, next) => {
   if (!course) return next(new AppError("Section not found", 404));
 
   res.status(200).json({ message: "Section deleted successfully" });
-})
+});
 
 // crud for lessons
 exports.createLesson = [
