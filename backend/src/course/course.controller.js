@@ -131,16 +131,38 @@ exports.getSection = catchAsync(async (req, res, next) => {
   })
 });
 
+exports.updateSection = catchAsync(async (req, res, next) => {
+  const { courseId, sectionId } = req.params;
+
+  const course = await Course.findOneAndUpdate(
+    { _id: courseId, "sections._id": sectionId },
+    { $set: { "sections.$": req.body } }, // Update the specific section
+    { new: true } // Return the updated document
+  ).select("sections");
+
+  if (!course) return next(new AppError("Section not found", 404));
+
+  res.status(200).json({
+    message: "Section updated successfully",
+    section: course.sections.find(sec => sec._id.toString() === sectionId)
+  });
+});
+
+exports.deleteSection = catchAsync(async (req, res, next) => {
+  const { courseId, sectionId } = req.params;
+
+  const course = await Course.findOneAndUpdate({ _id: courseId }, { $pull: { sections: { _id: sectionId } } }, { new: true });
+
+  if (!course) return next(new AppError("Section not found", 404));
+
+  res.status(200).json({ message: "Section deleted successfully" });
+})
+
 // crud for lessons
 exports.createLesson = [
   upload.single("video"), // Use upload.single for a single file upload
   catchAsync(async (req, res, next) => {
     const { courseId, sectionId, title, description } = req.body;
-
-    // Debugging: Log the request
-    console.log("req.file:", req.file); // Check if the file is being received
-    console.log("req.body:", req.body); // Check if other fields are being received
-    console.log("----------------------------------------------------------");
 
     // Validate the request
     if (!req.file) return next(new AppError("No video file uploaded", 400));
