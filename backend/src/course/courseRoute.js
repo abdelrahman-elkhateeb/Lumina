@@ -17,11 +17,9 @@ router.route("/:id")
 router.get("/getSections", authController.protect, authController.restrictTo("instructor"), courseController.getSections);
 router.post("/createSection", authController.protect, authController.restrictTo("instructor"), courseController.createSection);
 
-router.route("section/:id")
-  .get(authController.protect, authController.restrictTo("instructor"), courseController.getSection);
-
 router
   .route("/:courseId/sections/:sectionId")
+  .get(authController.protect, authController.restrictTo("instructor"), courseController.getSection)
   .patch(authController.protect, authController.restrictTo("instructor"), courseController.updateSection)
   .delete(authController.protect, authController.restrictTo("instructor"), courseController.deleteSection);
 

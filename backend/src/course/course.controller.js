@@ -121,14 +121,20 @@ exports.getSections = catchAsync(async (req, res, next) => {
 });
 
 exports.getSection = catchAsync(async (req, res, next) => {
-  const section = await Course.findById(req.params.id).select("section");
+  const { courseId, sectionId } = req.params;
+
+  const course = await Course.findById(courseId).select("sections");
+
+  if (!course) return next(new AppError("Course not found", 404));
+
+  const section = course.sections.find(sec => sec._id.toString() === sectionId);
 
   if (!section) return next(new AppError("Section not found", 404));
 
-  res.status(201).json({
+  res.status(200).json({
     message: "Section retrieved successfully",
     section
-  })
+  });
 });
 
 exports.updateSection = catchAsync(async (req, res, next) => {
