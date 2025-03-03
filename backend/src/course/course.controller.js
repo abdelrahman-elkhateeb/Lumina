@@ -1,8 +1,14 @@
+require('dotenv').config();
 const Course = require("./courseModel");
 const catchAsync = require("../../utils/catchAsync");
 const AppError = require("../../utils/appError");
 const cloudinary = require("../../utils/cloudinaryConfig");
 const streamifier = require("streamifier");
+const multer = require("multer");
+// Store files in memory (useful for Cloudinary, AWS S3, etc.)
+const storage = multer.memoryStorage();
+// Allow all file types
+const upload = multer({ storage });
 
 const uploadToCloudinary = (buffer) => {
   return new Promise((resolve, reject) => {
@@ -37,9 +43,21 @@ exports.getCourses = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     message: "Courses retrieved successfully",
-    courses,
+    courses
   });
-})
+});
+
+exports.getCourse = catchAsync(async (req, res, next) => {
+  const course = await Course.findById(req.params.id).populate("instructor");
+
+  if (!course) return next(new AppError("Course not found", 404));
+
+  res.status(200).json({
+    message: "Course retrieved successfully",
+    course
+  }
+  )
+});
 
 exports.createSection = catchAsync(async (req, res, next) => {
   const { courseId, title } = req.body;
@@ -69,39 +87,56 @@ exports.getSections = catchAsync(async (req, res, next) => {
   const sections = await Course.find().select("section");
 
   if (!sections) return next(new AppError("No sections found", 404));
-  
+
   res.status(201).json({
     message: "Sections retrieved successfully",
     sections
   })
 });
 
-exports.createLesson = catchAsync(async (req, res, next) => {
-  const { courseId, sectionId, title, description } = req.body;
+exports.createLesson = [
+  upload.single("video"), // Use upload.single for a single file upload
+  catchAsync(async (req, res, next) => {
+    const { courseId, sectionId, title, description } = req.body;
 
-  if (!req.file) return next(new AppError("No video file uploaded", 400));
-  if (!courseId || !sectionId || !title) return next(new AppError("Missing required fields", 400));
+    // Debugging: Log the request
+    console.log("req.file:", req.file); // Check if the file is being received
+    console.log("req.body:", req.body); // Check if other fields are being received
+    console.log("----------------------------------------------------------");
 
-  const video = await uploadToCloudinary(req.file.buffer);
+    // Validate the request
+    if (!req.file) return next(new AppError("No video file uploaded", 400));
+    if (!courseId || !sectionId || !title) return next(new AppError("Missing required fields", 400));
 
-  const course = await Course.findById(courseId);
-  if (!course) return next(new AppError("Course not found", 404));
+    // Upload the video to Cloudinary
+    const video = await uploadToCloudinary(req.file.buffer);
+    if (!video) return next(new AppError("Failed to upload video to Cloudinary", 400));
 
-  const section = course.sections.id(sectionId);
-  if (!section) return next(new AppError("Section not found", 404));
+    // Find the course and section
+    const course = await Course.findById(courseId);
+    if (!course) return next(new AppError("Course not found", 404));
 
-  const lesson = {
-    title,
-    description,
-    videoUrl: video.secure_url, // Store Cloudinary URL
-  };
+    const section = course.sections.id(sectionId);
+    if (!section) return next(new AppError("Section not found", 404));
 
-  if (!Array.isArray(section.lessons)) section.lessons = []; // Ensure `lessons` exists
-  section.lessons.push(lesson);
-  await course.save();
+    // Create the lesson
+    const lesson = {
+      title,
+      description,
+      videoUrl: video.secure_url, // Store Cloudinary URL
+    };
 
-  res.status(201).json({
-    message: "Lesson created successfully",
-    lesson,
-  });
-});
+    // Ensure `lessons` array exists
+    if (!Array.isArray(section.lessons)) section.lessons = [];
+    section.lessons.push(lesson);
+
+    // Save the course
+    await course.save();
+
+    // Send the response
+    res.status(201).json({
+      message: "Lesson created successfully",
+      lesson,
+    });
+  }),
+];

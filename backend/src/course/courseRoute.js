@@ -12,6 +12,6 @@ router.post("/createCourse", authController.protect, courseController.createCour
 
 router.post("/createSection", authController.protect, courseController.createSection);
 
-router.post("/createLesson", authController.protect, authController.restrictTo("instructor"), courseController.createLesson);
+router.post("/createLesson", authController.protect, courseController.createLesson);
 
 module.exports = router;
