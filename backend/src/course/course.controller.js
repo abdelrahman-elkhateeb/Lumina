@@ -23,6 +23,7 @@ const uploadToCloudinary = (buffer) => {
   });
 };
 
+// crud for course
 exports.createCourse = catchAsync(async (req, res, next) => {
   const course = await Course.create({
     ...req.body,
@@ -66,7 +67,7 @@ exports.updateCourse = catchAsync(async (req, res, next) => {
   });
 
   if (!course) return next(new AppError("Course not found", 404));
-  
+
   res.status(200).json({
     message: "Course updated successfully",
     course
@@ -83,6 +84,7 @@ exports.deleteCourse = catchAsync(async (req, res, next) => {
   });
 });
 
+// crud for section
 exports.createSection = catchAsync(async (req, res, next) => {
   const { courseId, title } = req.body;
   if (!courseId || !title) return next(new AppError("Missing courseId or title", 400));
@@ -118,6 +120,18 @@ exports.getSections = catchAsync(async (req, res, next) => {
   })
 });
 
+exports.getSection = catchAsync(async (req, res, next) => {
+  const section = await Course.findById(req.params.id).select("section");
+
+  if (!section) return next(new AppError("Section not found", 404));
+
+  res.status(201).json({
+    message: "Section retrieved successfully",
+    section
+  })
+});
+
+// crud for lessons
 exports.createLesson = [
   upload.single("video"), // Use upload.single for a single file upload
   catchAsync(async (req, res, next) => {
