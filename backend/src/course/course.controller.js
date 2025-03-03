@@ -157,11 +157,16 @@ exports.updateSection = catchAsync(async (req, res, next) => {
 exports.deleteSection = catchAsync(async (req, res, next) => {
   const { courseId, sectionId } = req.params;
 
-  const course = await Course.findOneAndUpdate({ _id: courseId }, { $pull: { sections: { _id: sectionId } } }, { new: true });
+  const course = await Course.findOneAndUpdate(
+    { _id: courseId },
+    { $pull: { sections: { _id: sectionId } } },
+    { new: true } // Return the updated course after deletion
+  );
 
   if (!course) return next(new AppError("Section not found", 404));
 
   res.status(200).json({ message: "Section deleted successfully" });
+
 });
 
 // crud for lessons
