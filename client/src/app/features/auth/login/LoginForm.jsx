@@ -76,7 +76,7 @@ function LoginForm() {
 
   return (
     <form
-      className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px]"
+      className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] relative z-10"
       onSubmit={handleSubmit}
     >
       {/* Header Section */}

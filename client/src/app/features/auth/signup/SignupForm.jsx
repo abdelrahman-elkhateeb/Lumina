@@ -116,7 +116,7 @@ function SignupForm() {
   // }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px]">
+    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] relative z-10">
       {/* Header Section */}
       <div className="text-center mb-8">
         <h1 className="text-2xl md:text-4xl font-bold text-primary font-poppins font-heading">Lumina</h1>

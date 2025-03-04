@@ -15,6 +15,15 @@ export default {
         body: ["Inter", "sans-serif"],
         accent: ["Space Mono", "monospace"],
       },
+      keyframes: {
+        falling: {
+          "0%": { transform: "translateY(-10vh)", opacity: "0.8" },
+          "100%": { transform: "translateY(100vh)", opacity: "0.2" },
+        },
+      },
+      animation: {
+        falling: "falling 10s linear infinite",
+      },
     },
   },
   plugins: [],

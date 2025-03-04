@@ -1,14 +1,13 @@
-import AnimatedBalls from "../../ui/AnimatedBalls";
+import StarBackground from "../../ui/starBackground";
 import LoginForm from "./LoginForm";
 
-
-function Signup() {
+function Login() {
   return (
     <div className="grid place-content-center h-dvh w-dvw relative bg-background overflow-hidden">
-      <AnimatedBalls />
+      <StarBackground />
       <LoginForm />
     </div>
   );
 }
 
-export default Signup;
+export default Login;
