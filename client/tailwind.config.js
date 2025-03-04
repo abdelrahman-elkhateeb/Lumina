@@ -32,7 +32,7 @@ export default {
       animation: {
         falling: "falling 10s linear infinite",
         flicker: "flicker 0.2s ease-in-out 3",
-        fadeIn: "fadeIn 1.5s ease-in-out 3s forwards",
+        fadeIn: "fadeIn 0.4s ease-in-out 0s forwards",
       },
     },
   },

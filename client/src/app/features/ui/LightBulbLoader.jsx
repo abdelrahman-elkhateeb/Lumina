@@ -26,7 +26,7 @@ const LightBulbLoader = () => {
           cx="100"
           cy="100"
           r="50"
-          fill="yellow"
+          fill="grey"
           className="opacity-10"
         />
       </svg>
