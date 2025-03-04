@@ -20,9 +20,19 @@ export default {
           "0%": { transform: "translateY(-10vh)", opacity: "0.8" },
           "100%": { transform: "translateY(100vh)", opacity: "0.2" },
         },
+        flicker: {
+          "0%, 100%": { opacity: "0.2" },
+          "50%": { opacity: "1" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         falling: "falling 10s linear infinite",
+        flicker: "flicker 0.2s ease-in-out 3",
+        fadeIn: "fadeIn 1.5s ease-in-out 3s forwards",
       },
     },
   },

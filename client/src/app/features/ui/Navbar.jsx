@@ -3,25 +3,26 @@ import maleSvg from "../../../../public/assets/male.svg";
 import femaleSvg from "../../../../public/assets/female.svg";
 import { useFetchUserDataQuery } from "../auth/registrationApi";
 import { Link } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Use the query hook to fetch user data
   const { data: userData, isLoading, error } = useFetchUserDataQuery();
-  
+
   // Safely access user data
   const user = userData?.data?.user;
-  
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
 
+  if (isLoading) return null;
   return (
     <header className="sticky top-0 z-50 py-2">
       <nav>
-        {isLoading && <p>Loading user data...</p>}
-        {error && <p>Error loading user data: {error.message}</p>}
+        {error && <ErrorPage />}
         {user && (
           <>
             <section className="container mx-auto flex justify-between items-center gap-8 p-4">

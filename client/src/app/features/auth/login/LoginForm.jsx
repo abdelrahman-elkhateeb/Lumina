@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 // Google function
 import { signInWithGoogle } from "../auth";
+import LightBulbLoader from "../../ui/LightBulbLoader";
 
 function LoginForm() {
   // Common classNames
@@ -73,7 +74,7 @@ function LoginForm() {
   //     });
   //   }
   // };
-
+  if (isLoading) return <LightBulbLoader />
   return (
     <form
       className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] relative z-10"
