@@ -4,7 +4,6 @@ import LightBulbLoader from "../app/features/ui/LightBulbLoader";
 
 function ProtectedRoutes() {
   const { data: user, isLoading, error } = useFetchUserDataQuery();
-  console.log(user);
 
   if (isLoading) {
     return <LightBulbLoader />;
