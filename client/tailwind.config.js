@@ -4,14 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        text: "#b0b0b3",
-        background: "#151515",
+        text: "#f0f0f0",
+        background: "#111111",
         primary: "#f5f5f5",
         secondary: "#141416",
-        accent: "#96e5c2",
+        // accent: "#96e5c2",
+        accent: "#f5e905"
       },
       fontFamily: {
-        heading: ["Poppins", "sans-serif"],
+        heading: ["Bebas Neue", "sans-serif"],
         body: ["Inter", "sans-serif"],
         accent: ["Space Mono", "monospace"],
       },

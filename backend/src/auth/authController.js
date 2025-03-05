@@ -120,4 +120,16 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 4) log the user in, send JWT token
   createSendToken(user, 200, res);
-})
+});
+
+exports.logout = catchAsync(async (req, res, next) => {
+
+  const cookieOptions = {
+    httpOnly: true,
+  }
+  if (process.env.NODE_ENV == "production") cookieOptions.secure = true;
+
+  res.clearCookie("jwt", cookieOptions);
+
+  return res.status(200).json({ message: "Logout successful" });
+});
