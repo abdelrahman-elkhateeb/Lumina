@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFetchUserDataQuery, useLoginUserMutation } from "../registrationApi";
 import Swal from "sweetalert2";
@@ -9,7 +9,7 @@ import LightBulbLoader from "../../ui/LightBulbLoader";
 
 function LoginForm() {
   // Common classNames
-  const inputFieldClassname = `bg-secondary text-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`
+  const inputFieldClassname = `bg-auth-secondary text-auth-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`
 
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
@@ -82,8 +82,8 @@ function LoginForm() {
     >
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl text-primary font-heading md:text-4xl font-bold">Lumina</h1>
-        <h2 className="text-lg text-text font-body">Light the dark / Learn Brighter</h2>
+        <h1 className="text-2xl text-auth-primary font-heading md:text-4xl font-bold">Lumina</h1>
+        <h2 className="text-lg text-auth-text font-body">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -106,7 +106,7 @@ function LoginForm() {
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-accent"
+            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-auth-accent"
           >
             {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
           </button>
@@ -116,14 +116,14 @@ function LoginForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className="w-full mt-4 p-3 rounded-lg bg-primary text-secondary font-bold hover:bg-accent transition"
+            className="w-full mt-4 p-3 rounded-lg bg-auth-primary text-auth-secondary font-bold hover:bg-auth-accent transition"
           >
             Login
           </button>
         ) : (
           <button
             disabled
-            className="w-full mt-4 p-3 rounded-lg bg-light-secondary bg-primary text-secondary font-bold opacity-75"
+            className="w-full mt-4 p-3 rounded-lg bg-auth-secondary text-auth-secondary font-bold opacity-75"
           >
             Welcome back...
           </button>
@@ -131,10 +131,10 @@ function LoginForm() {
 
         {/* Sign Up Section */}
         <div className="text-center mt-4">
-          <h4 className="text-text capitalize">Don't have an account?</h4>
+          <h4 className="text-auth-text capitalize">Don't have an account?</h4>
           <Link
             to="/signup"
-            className="text-text font-bold hover:text-accent focus:outline-none font-accent"
+            className="text-auth-text font-bold hover:text-auth-accent focus:outline-none font-accent"
           >
             Sign up
           </Link>

@@ -6,10 +6,10 @@ import LightBulbLoader from "./app/features/ui/LightBulbLoader";
 
 function App() {
     return (
-        <div className="text-text">
+        <div className="text-site-text">
             <Suspense fallback={<LightBulbLoader />}>
-            <RouterProvider router={router} />
-        </Suspense>
+                <RouterProvider router={router} />
+            </Suspense>
         </div>
     );
 }

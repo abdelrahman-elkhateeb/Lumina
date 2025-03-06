@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import ideaImg from "../../../../public/assets/idea.svg";
 
 function heroSection() {
   return (
@@ -14,6 +15,14 @@ function heroSection() {
       </motion.h1>
 
       <div className="flex justify-center items-center flex-col">
+        <motion.div
+          className="w-1/2"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+        >
+          <img src={ideaImg} alt="img" />
+        </motion.div>
         <motion.h4
           className="text-2xl text-accent mt-4"
           initial={{ opacity: 0, y: 30 }}
