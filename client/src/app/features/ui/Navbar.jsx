@@ -21,7 +21,7 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await logoutUser().unwrap(); // Call the logout mutation
-      navigate("/login"); // Redirect to login page
+      navigate("/login", { replace: true }); // Redirect to login page
     } catch (err) {
       console.error("Error logging out:", err);
     }
