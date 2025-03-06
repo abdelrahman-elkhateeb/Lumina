@@ -2,7 +2,7 @@ import HeroSection from './HeroSection';
 
 function Home() {
   return (
-    <section className="container px-4">
+    <section className="container m-auto px-4">
       <HeroSection />
     </section>
   )
