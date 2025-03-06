@@ -33,12 +33,12 @@ function Navbar() {
   if (isLoading) return null;
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0 z-50 font-heading">
       <nav className="container mx-auto flex items-center justify-between px-6 py-4">
         {error && <ErrorPage />}
 
         {/* Left: Logo */}
-        <Link to="/" className="text-2xl font-bold tracking-wide">
+        <Link to="/" className="text-2xl tracking-wide">
           Lumina
         </Link>
 

@@ -13,7 +13,7 @@ export default {
       },
       fontFamily: {
         heading: ["Bebas Neue", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        body: ["Gabarito", "sans-serif"],
         accent: ["Space Mono", "monospace"],
       },
       keyframes: {
