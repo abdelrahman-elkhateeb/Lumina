@@ -57,12 +57,12 @@ function Navbar() {
         </div>
 
         {/* Right: Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6 font-medium  ">
+        <div className="hidden md:flex items-center gap-6 font-medium">
           {user ? (
             <>
-              <Link to="#" className="hover:text-accent transition">My Learning</Link>
-              <Link to="#" className="hover:text-accent transition">Instructor</Link>
-              <Link to="#" className="hover:text-accent transition">
+              <Link to="#" className="hover:text-site-accent transition">My Learning</Link>
+              <Link to="#" className="hover:text-site-accent transition">Instructor</Link>
+              <Link to="#" className="hover:text-site-accent transition">
                 <i className="fa-solid fa-cart-shopping text-lg"></i>
               </Link>
 
