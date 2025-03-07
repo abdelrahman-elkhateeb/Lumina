@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import spaceMan from "../../../../public/assets/spaceman.svg";
 
 function heroSection() {
   return (
     <div className="flex items-center flex-col justify-center h-[calc(100vh-78px)] text-center relative z-50">
+      {/* light bulb */}
       <svg
         width="150"
         height="150"
@@ -60,6 +62,11 @@ function heroSection() {
         >
           <Link to="/courses" className="bg-site-accent font-light p-4 rounded-lg">Get Started</Link>
         </motion.button>
+        
+      </div>
+      <div className="">
+        <img src={spaceMan} alt="Spaceman" style={{ display: "block", width: "200px", height: "auto" }} />
+
       </div>
     </div>
   )
