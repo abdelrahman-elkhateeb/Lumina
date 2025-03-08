@@ -56,9 +56,9 @@ function heroSection() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 1 }}
             className="mt-7"
           >
-            <Link to="/courses" className="bg-site-accent font-light p-4 rounded-lg">Get Started</Link>
+            <Link to="/courses" className="bg-site-primary hover:bg-site-secondary transition duration-150 font-light p-4 rounded-full">join us!</Link>
           </motion.button>
-
+          
         </div>
       </div>
     </section>
