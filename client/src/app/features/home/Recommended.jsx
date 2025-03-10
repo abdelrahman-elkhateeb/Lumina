@@ -4,15 +4,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import StarBackground from "../ui/StarBackground";
-
-const recommendedItems = [
-  { id: 1, title: "Course 1", img: "/assets/course1.jpg" },
-  { id: 2, title: "Course 2", img: "/assets/course2.jpg" },
-  { id: 3, title: "Course 3", img: "/assets/course3.jpg" },
-  { id: 4, title: "Course 4", img: "/assets/course4.jpg" },
-];
+import { useGetCourseQuery } from "../redux/courses/coursesApi";
 
 function Recommended() {
+  const { data, error, isLoading } = useGetCourseQuery();
+  console.log(data);
+  
   return (
     <section className="relative">
       <StarBackground />
@@ -34,11 +31,11 @@ function Recommended() {
           }}
           className="mySwiper"
         >
-          {recommendedItems.map((course) => (
+          {data?.courses.map((course) => (
             <SwiperSlide key={course.id} className="flex justify-center">
               <div className="w-72 bg-white shadow-lg rounded-lg overflow-hidden">
-                <img src={course.img} alt={course.title} className="w-full h-48 object-cover" />
-                <h3 className="text-lg font-semibold text-center py-3">{course.title}</h3>
+                <img src={course.courseImage} alt={course.title} className="w-full h-48 object-cover" />
+                <h3 className="text-lg text-site-background font-semibold text-center py-3">{course.title}</h3>
               </div>
             </SwiperSlide>
           ))}

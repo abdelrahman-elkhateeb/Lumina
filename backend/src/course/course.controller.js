@@ -76,7 +76,6 @@ exports.createCourse = [
   }),
 ];
 
-
 exports.getCourses = catchAsync(async (req, res, next) => {
   const courses = await Course.find({}).populate("instructor");
 
@@ -84,7 +83,7 @@ exports.getCourses = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     message: "Courses retrieved successfully",
-    courses
+    courses,
   });
 });
 
@@ -143,7 +142,6 @@ exports.updateCourse = [
     });
   }),
 ];
-
 
 exports.deleteCourse = catchAsync(async (req, res, next) => {
   const course = await Course.findByIdAndDelete(req.params.id);

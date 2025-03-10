@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useFetchUserDataQuery, useLogoutUserMutation } from "../auth/registrationApi";
+import { useFetchUserDataQuery, useLogoutUserMutation } from "../redux/auth/registrationApi";
 import maleSvg from "../../../../public/assets/male.svg";
 import femaleSvg from "../../../../public/assets/female.svg";
 import ErrorPage from "./ErrorPage";

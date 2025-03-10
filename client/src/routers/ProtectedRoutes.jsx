@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useFetchUserDataQuery } from "../app/features/auth/registrationApi";
+import { useFetchUserDataQuery } from "../app/features/redux/auth/registrationApi";
 import LightBulbLoader from "../app/features/ui/LightBulbLoader";
 
 function ProtectedRoutes() {
