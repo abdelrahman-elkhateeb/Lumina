@@ -35,7 +35,7 @@ function Recommended() {
           className="mySwiper"
         >
           {data?.courses.map((course) => (
-            <SwiperSlide key={course.id} className="flex justify-center">
+            <SwiperSlide key={course._id} className="flex justify-center">
               <div className="w-max bg-white shadow-lg rounded-lg overflow-hidden">
                 <img src={course.courseImage} alt={course.title} className="w-full h-48 object-cover" />
                 <h3 className="text-lg text-site-background font-semibold text-center py-3">{course.title}</h3>
