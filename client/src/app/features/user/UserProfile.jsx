@@ -1,8 +1,11 @@
+import EditProfileForm from "./EditProfileForm";
+
 function UserProfile() {
   return (
-    <div>
-      <h1 className="text-text">profile</h1>
-    </div>
+    <section className="h-dvh container m-auto px-4">
+      <h1 className="text-text my-4 capitalize md:text-2xl">profile & settings</h1>
+      <EditProfileForm />
+    </section>
   )
 }
 
