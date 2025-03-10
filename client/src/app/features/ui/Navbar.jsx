@@ -33,7 +33,7 @@ function Navbar() {
   if (isLoading) return null;
 
   return (
-    <header className="sticky top-0 z-50 font-heading">
+    <header className="sticky top-0 z-[1000] font-heading bg-site-background">
       <nav className="flex items-center justify-between px-6 py-4">
         {error && <ErrorPage />}
 

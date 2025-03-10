@@ -8,6 +8,7 @@ function heroSection() {
 
     <section className="grid grid-cols-1 place-content-center md:grid-cols-2 h-[calc(100vh-78px)] relative">
       <StarBackground />
+
       <div>
         <motion.div
           className="w-full"
