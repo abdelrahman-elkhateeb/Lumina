@@ -35,8 +35,8 @@ function Recommended() {
             <SwiperSlide key={course._id} className="flex justify-center">
               <div className="w-max shadow-lg rounded-lg overflow-hidden">
                 <img src={course.courseImage} alt={course.title} className="w-full h-48 object-cover" />
-                <h3 className="capitalize">{course.title}</h3>
-                <h4 className="capitalize">{course.instructor.name}</h4>
+                <h3 className="capitalize text-sm my-1">{course.title}</h3>
+                <h4 className="capitalize text-xs">{course.instructor.name}</h4>
                 <p className="capitalize">{course.enrollmentType}</p>
               </div>
             </SwiperSlide>
