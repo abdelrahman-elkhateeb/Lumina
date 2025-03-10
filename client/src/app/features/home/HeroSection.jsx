@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import spaceMan from "../../../../public/assets/spaceman(5).svg";
+import StarBackground from "../ui/StarBackground";
 
 function heroSection() {
   return (
-    <section className="grid grid-cols-1 place-content-center md:grid-cols-2 h-[calc(100vh-78px)]">
+
+    <section className="grid grid-cols-1 place-content-center md:grid-cols-2 h-[calc(100vh-78px)] relative">
+      <StarBackground />
       <div>
         <motion.div
           className="w-full"
@@ -58,7 +61,7 @@ function heroSection() {
           >
             <Link to="/courses" className="bg-site-primary hover:bg-site-secondary transition duration-150 font-light p-4 rounded-full">join us!</Link>
           </motion.button>
-          
+
         </div>
       </div>
     </section>
