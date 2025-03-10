@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useFetchUserDataQuery, useLoginUserMutation } from "../registrationApi";
+import { useFetchUserDataQuery, useLoginUserMutation } from "../../redux/auth/registrationApi";
 import Swal from "sweetalert2";
 
 // Google function
