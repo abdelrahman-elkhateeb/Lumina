@@ -29,7 +29,7 @@ function Recommended() {
             1024: { slidesPerView: 2, spaceBetween: 50 },
             1280: { slidesPerView: 3, spaceBetween: 50 },
           }}
-          className="mySwiper"
+          className="mySwiper custom-swiper"
         >
           {data?.courses.map((course) => (
             <SwiperSlide key={course._id} className="flex justify-center">

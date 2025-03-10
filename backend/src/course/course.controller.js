@@ -253,42 +253,45 @@ exports.deleteSection = catchAsync(async (req, res, next) => {
 
 // crud for lessons
 exports.createLesson = [
-  upload.fields([
-    { name: "video", maxCount: 1 },
-  ]),
+  upload.single("video"),
   catchAsync(async (req, res, next) => {
     const { courseId, sectionId, title, description } = req.body;
 
-    // Validate the request
-    if (!req.files?.video) return next(new AppError("No video file uploaded", 400));
-    if (!courseId || !sectionId || !title) return next(new AppError("Missing required fields", 400));
+    if (!req.file) {
+      return next(new AppError("No video file uploaded", 400));
+    }
 
-    // Upload the video to Cloudinary
-    const video = await uploadToCloudinary(req.files.video[0].buffer, req.files.video[0].mimetype);
+    if (!courseId || !sectionId || !title) {
+      return next(new AppError("Missing required fields", 400));
+    }
+
+    const folder = courseId;
+
+    const video = await uploadToCloudinary(
+      req.file.buffer,
+      req.file.mimetype,
+      folder
+    );
+
     if (!video) return next(new AppError("Failed to upload video to Cloudinary", 400));
 
-    // Find the course and section
     const course = await Course.findById(courseId);
     if (!course) return next(new AppError("Course not found", 404));
 
     const section = course.sections.id(sectionId);
     if (!section) return next(new AppError("Section not found", 404));
 
-    // Create the lesson
     const lesson = {
       title,
       description,
-      videoUrl: video.secure_url, // Store Cloudinary URL
+      videoUrl: video.secure_url,
     };
 
-    // Ensure `lessons` array exists
     if (!Array.isArray(section.lessons)) section.lessons = [];
     section.lessons.push(lesson);
 
-    // Save the course
     await course.save();
 
-    // Send the response
     res.status(201).json({
       message: "Lesson created successfully",
       lesson,

@@ -5,3 +5,20 @@
 body{
   font-family: "Gabarito", sans-serif;
 }
+
+@layer components {
+  /* Custom Navigation Arrows */
+  .custom-swiper .swiper-button-next,
+  .custom-swiper .swiper-button-prev {
+    @apply text-site-primary;
+  }
+
+  /* Custom Pagination Bullets */
+  .custom-swiper .swiper-pagination-bullet {
+    @apply bg-gray-300 opacity-100;
+  }
+
+  .custom-swiper .swiper-pagination-bullet-active {
+    @apply bg-site-primary;
+  }
+}
