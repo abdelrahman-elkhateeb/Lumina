@@ -10,32 +10,72 @@ const storage = multer.memoryStorage();
 // Allow all file types
 const upload = multer({ storage });
 
-const uploadToCloudinary = (buffer) => {
+const uploadToCloudinary = (buffer, fileType) => {
   return new Promise((resolve, reject) => {
+    const resourceType = fileType.startsWith("video") ? "video" : "image";
+    const folderName = resourceType === "video" ? "courses_videos" : "courses_images";
+
     const stream = cloudinary.uploader.upload_stream(
-      { resource_type: "video", folder: "courses_videos" }, // Organize uploads
+      { resource_type: resourceType, folder: folderName },
       (error, result) => {
         if (error) reject(error);
         else resolve(result);
       }
     );
+
     streamifier.createReadStream(buffer).pipe(stream);
   });
 };
 
 // crud for course
-exports.createCourse = catchAsync(async (req, res, next) => {
-  const course = await Course.create({
-    ...req.body,
-    instructor: req.user._id
-  });
-  if (!course) return next(new AppError("Course creation failed", 400));
+exports.createCourse = [
+  upload.fields([
+    { name: "courseImage", maxCount: 1 },
+    { name: "courseVideo", maxCount: 1 },
+  ]),
+  catchAsync(async (req, res, next) => {
+    // Check if files were uploaded
+    if (!req.files || (!req.files.courseImage && !req.files.courseVideo)) {
+      return next(new AppError("Please upload at least an image or a video", 400));
+    }
 
-  res.status(201).json({
-    message: "Course created successfully",
-    course,
-  });
-});
+    let imageUrl, videoUrl;
+
+    // Upload image to Cloudinary if it exists
+    if (req.files.courseImage) {
+      const imageResult = await uploadToCloudinary(
+        req.files.courseImage[0].buffer,
+        req.files.courseImage[0].mimetype
+      );
+      imageUrl = imageResult.secure_url;
+    }
+
+    // Upload video to Cloudinary if it exists
+    if (req.files.courseVideo) {
+      const videoResult = await uploadToCloudinary(
+        req.files.courseVideo[0].buffer,
+        req.files.courseVideo[0].mimetype
+      );
+      videoUrl = videoResult.secure_url;
+    }
+
+    // Create the course with the uploaded file URLs
+    const course = await Course.create({
+      ...req.body,
+      instructor: req.user._id,
+      courseImage: imageUrl, // match with schema field name
+      courseVideo: videoUrl, // optional if you store video URLs
+    });
+
+    if (!course) return next(new AppError("Course creation failed", 400));
+
+    res.status(201).json({
+      message: "Course created successfully",
+      course,
+    });
+  }),
+];
+
 
 exports.getCourses = catchAsync(async (req, res, next) => {
   const courses = await Course.find({}).populate("instructor");
@@ -60,19 +100,50 @@ exports.getCourse = catchAsync(async (req, res, next) => {
   )
 });
 
-exports.updateCourse = catchAsync(async (req, res, next) => {
-  const course = await Course.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+exports.updateCourse = [
+  upload.fields([
+    { name: "courseImage", maxCount: 1 },
+    { name: "courseVideo", maxCount: 1 },
+  ]),
+  catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const updateData = { ...req.body }; // Avoid direct mutation
 
-  if (!course) return next(new AppError("Course not found", 404));
+    // Upload image to Cloudinary if provided
+    if (req.files?.courseImage && req.files.courseImage.length > 0) {
+      const imageResult = await uploadToCloudinary(
+        req.files.courseImage[0].buffer,
+        req.files.courseImage[0].mimetype
+      );
+      updateData.courseImage = imageResult.secure_url;
+    }
 
-  res.status(200).json({
-    message: "Course updated successfully",
-    course
-  });
-});
+    // Upload video to Cloudinary if provided
+    if (req.files?.courseVideo && req.files.courseVideo.length > 0) {
+      const videoResult = await uploadToCloudinary(
+        req.files.courseVideo[0].buffer,
+        req.files.courseVideo[0].mimetype
+      );
+      updateData.courseVideo = videoResult.secure_url;
+    }
+
+    // Update the course
+    const course = await Course.findByIdAndUpdate(id, updateData, {
+      new: true, // Return updated document
+      runValidators: true, // Enforce schema validation
+    });
+
+    if (!course) {
+      return next(new AppError("Course not found", 404));
+    }
+
+    res.status(200).json({
+      message: "Course updated successfully",
+      course,
+    });
+  }),
+];
+
 
 exports.deleteCourse = catchAsync(async (req, res, next) => {
   const course = await Course.findByIdAndDelete(req.params.id);
