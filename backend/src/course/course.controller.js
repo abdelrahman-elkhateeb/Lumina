@@ -240,16 +240,18 @@ exports.deleteSection = catchAsync(async (req, res, next) => {
 
 // crud for lessons
 exports.createLesson = [
-  upload.single("video"), // Use upload.single for a single file upload
+  upload.fields([
+    { name: "video", maxCount: 1 },
+  ]),
   catchAsync(async (req, res, next) => {
     const { courseId, sectionId, title, description } = req.body;
 
     // Validate the request
-    if (!req.file) return next(new AppError("No video file uploaded", 400));
+    if (!req.files?.video) return next(new AppError("No video file uploaded", 400));
     if (!courseId || !sectionId || !title) return next(new AppError("Missing required fields", 400));
 
     // Upload the video to Cloudinary
-    const video = await uploadToCloudinary(req.file.buffer);
+    const video = await uploadToCloudinary(req.files.video[0].buffer, req.files.video[0].mimetype);
     if (!video) return next(new AppError("Failed to upload video to Cloudinary", 400));
 
     // Find the course and section

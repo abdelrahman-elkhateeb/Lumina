@@ -5,13 +5,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import StarBackground from "../ui/StarBackground";
 import { useGetCourseQuery } from "../redux/courses/coursesApi";
-import ErrorPage from '../ui/ErrorPage';
 
 function Recommended() {
   const { data, error, isLoading } = useGetCourseQuery();
   console.log(data);
-
-  if (error) return <ErrorPage />
 
   return (
     <section className="relative">
@@ -36,9 +33,11 @@ function Recommended() {
         >
           {data?.courses.map((course) => (
             <SwiperSlide key={course._id} className="flex justify-center">
-              <div className="w-max bg-white shadow-lg rounded-lg overflow-hidden">
+              <div className="w-max shadow-lg rounded-lg overflow-hidden">
                 <img src={course.courseImage} alt={course.title} className="w-full h-48 object-cover" />
-                <h3 className="text-lg text-site-background font-semibold text-center py-3">{course.title}</h3>
+                <h3 className="capitalize">{course.title}</h3>
+                <h4 className="capitalize">{course.instructor.name}</h4>
+                <p className="capitalize">{course.enrollmentType}</p>
               </div>
             </SwiperSlide>
           ))}
