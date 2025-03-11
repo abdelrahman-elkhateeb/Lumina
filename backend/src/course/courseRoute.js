@@ -5,10 +5,10 @@ const courseController = require("./course.controller");
 const router = express.Router();
 
 // crud for course
-router.get("/", authController.protect, authController.restrictTo("instructor"), courseController.getCourses);
+router.get("/", courseController.getCourses);
 router.post("/createCourse", authController.protect, authController.restrictTo("instructor"), courseController.createCourse);
 router.route("/:id")
-  .get(authController.protect, authController.restrictTo("instructor"), courseController.getCourse)
+  .get(courseController.getCourse)
   .patch(authController.protect, authController.restrictTo("instructor"), courseController.updateCourse)
   .delete(authController.protect, authController.restrictTo("instructor"), courseController.deleteCourse);
 
