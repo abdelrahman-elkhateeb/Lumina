@@ -16,6 +16,7 @@ function UserProfile() {
 
         <h1 className="text-text my-4 capitalize md:text-2xl mt-5">profile & settings</h1>
       </div>
+      <h4 className="capitalize mt-5">hello, {user?.name}</h4>
       <EditProfileForm user={user} />
     </section>
   )

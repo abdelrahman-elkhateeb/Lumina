@@ -4,11 +4,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import StarBackground from "../ui/StarBackground";
-import { useGetCourseQuery } from "../redux/courses/coursesApi";
+import { useGetCoursesQuery } from "../redux/courses/coursesApi";
 import CourseCard from "./CourseCard";
+import { Link } from "react-router-dom";
 
 function Recommended() {
-  const { data, error, isLoading } = useGetCourseQuery();
+  const { data, error, isLoading } = useGetCoursesQuery();
   console.log(data);
 
   return (
@@ -34,7 +35,9 @@ function Recommended() {
         >
           {data?.courses.map((course) => (
             <SwiperSlide key={course._id} className="flex justify-center">
-              <CourseCard course={course} />
+              <Link to={`/courses/${course._id}`}>
+                <CourseCard course={course} />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

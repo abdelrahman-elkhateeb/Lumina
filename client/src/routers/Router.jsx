@@ -4,6 +4,7 @@ import ErrorPage from "../app/features/ui/ErrorPage";
 import { lazy } from "react";
 import ProtectedRoutes from "./ProtectedRoutes";
 import UserProfile from "../app/features/user/UserProfile";
+import CoursePreview from "../app/features/course/CoursePreview";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           { path: "/", element: <Home /> },
-          { path: "/profile", element: <UserProfile /> }
+          { path: "/profile", element: <UserProfile /> },
+          { path: "/courses/:id", element: <CoursePreview /> }
         ],
       },
       { path: "/login", element: <Login /> },

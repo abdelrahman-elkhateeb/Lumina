@@ -7,10 +7,13 @@ export const courseSlice = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({
-    getCourse: builder.query({
+    getCourses: builder.query({
       query: () => `/courses`,
+    }),
+    getCourse: builder.query({
+      query: (id) => `/courses/${id}`,
     }),
   })
 });
 
-export const { useGetCourseQuery } = courseSlice;
+export const { useGetCoursesQuery, useGetCourseQuery } = courseSlice;
