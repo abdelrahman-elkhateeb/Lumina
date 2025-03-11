@@ -8,13 +8,10 @@ router.post('/login', authController.login);
 router.post("/logout", authController.logout);
 
 //protected routes (authentication)
-// Apply protect middleware to all routes below
-router.use(authController.protect);
+router.get('/', authController.protect, userController.getAllUsers);
 
-router
-  .route('/')
-  .get(userController.getAllUsers)
+router.get('/user', authController.protect, userController.getUser);
 
-router.route("/user").get(userController.getUser);
+router.patch('/updateUser', authController.protect, userController.updateUserProfile);
 
 module.exports = router;

@@ -5,7 +5,6 @@ import StarBackground from "../ui/StarBackground";
 
 function heroSection() {
   return (
-
     <section className="grid grid-cols-1 place-content-center md:grid-cols-2 h-[calc(100vh-78px)] relative">
       <StarBackground />
 
@@ -65,6 +64,9 @@ function heroSection() {
 
         </div>
       </div>
+      <button className='bg-site-accent w-[50px] text-center h-[50px] rounded-[50%] flex justify-center items-center animate-bounce absolute bottom-11 right-1/2'>
+        <i className="fa-solid fa-arrow-down"></i>
+      </button>
     </section>
   )
 }

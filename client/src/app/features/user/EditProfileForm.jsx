@@ -2,13 +2,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
+import { useUpdateUserMutation } from "../redux/user/userApi"; // Adjust the path as needed
 
 const schema = yup.object().shape({
-  name: yup.string().required("name is required field").min(2, "name is too short 😒"),
-  email: yup.string().email("email is invalid form").required("email is required field"),
-})
+  name: yup.string().required("Name is a required field").min(2, "Name is too short 😒"),
+  email: yup.string().email("Email is invalid").required("Email is a required field"),
+});
 
-function EditProfileForm() {
+function EditProfileForm({ user }) {
+  const [updateUser, { isLoading, isSuccess, isError, error }] = useUpdateUserMutation();
+
   const {
     register,
     handleSubmit,
@@ -22,53 +25,69 @@ function EditProfileForm() {
     },
   });
 
-  // useEffect(() => {
-  //   if (user) {
-  //     reset({
-  //       name: user.name,
-  //       email: user.email,
-  //     });
-  //   }
-  // })
+  // Pre-fill form with existing user data
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user.name,
+        email: user.email,
+      });
+    }
+  }, [user, reset]);
 
-  const onSubmit = (data) => {
-
+  const onSubmit = async (data) => {
+    try {
+      await updateUser(data).unwrap();
+    } catch (err) {
+      console.error("Update failed:", err);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6 shadow-md rounded-lg">
-      <div>
-        <label htmlFor="name" className="block text-sm">
-          Name
-        </label>
-        <input
-          id="name"
-          {...register("name")}
-          className="mt-1 block w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-site-primary"
-        />
-        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
-      </div>
-
-      <div>
-        <label htmlFor="email" className="block text-sm">
-          Email
-        </label>
-        <input
-          id="email"
-          {...register("email")}
-          className="mt-1 block w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-site-primary"
-        />
-        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-      </div>
-
-      <button
-        type="submit"
-        className="w-full bg-site-primary text-white py-2 rounded-lg hover:bg-site-secondary transition"
+    <div className="flex justify-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-md space-y-4 p-6 shadow-md rounded-lg"
       >
-        Update Profile
-      </button>
-    </form>
-  )
+        <div>
+          <label htmlFor="name" className="block text-sm">
+            Name
+          </label>
+          <input
+            id="name"
+            {...register("name")}
+            className="bg-auth-secondary text-auth-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-site-accent w-full"
+            placeholder="Enter your name"
+          />
+          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="email" className="block text-sm">
+            Email
+          </label>
+          <input
+            id="email"
+            {...register("email")}
+            className="bg-auth-secondary text-auth-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-site-accent w-full"
+            placeholder="Enter your email"
+          />
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+        </div>
+
+        {isError && <p className="text-red-500 text-sm">Update failed. {error?.data?.message}</p>}
+        {isSuccess && <p className="text-green-500 text-sm">Profile updated successfully!</p>}
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-site-primary text-white py-2 rounded-lg hover:bg-site-secondary transition disabled:opacity-50"
+        >
+          {isLoading ? "Updating..." : "Update Profile"}
+        </button>
+      </form>
+    </div>
+  );
 }
 
-export default EditProfileForm
+export default EditProfileForm;

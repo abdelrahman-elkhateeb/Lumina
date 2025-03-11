@@ -30,3 +30,35 @@ exports.getUser = catchAsync(async (req, res, next) => {
     }
   })
 });
+
+exports.updateUserProfile = catchAsync(async (req, res, next) => {
+  const { name, email } = req.body;
+  const userId = req.user._id;
+
+  //1) check if name or email is provided
+  if (!name && !email) {
+    return next(new AppError('Please provide either name or email', 400));
+  }
+
+  //2) filter allowd fileds only
+  const updateData = {};
+
+  if (name) updateData.name = name;
+  if (email) updateData.email = email;
+
+  //3) update user data
+  const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+    new: true,
+  });
+
+  if (!updatedUser) {
+    return next(new AppError('User not found.', 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      updatedUser
+    }
+  })
+});
