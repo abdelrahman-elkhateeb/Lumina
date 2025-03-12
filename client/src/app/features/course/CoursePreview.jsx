@@ -11,6 +11,7 @@ function CoursePreview() {
   const course = data?.course;
 
   if (isLoading) return <LightBulbLoader />;
+
   if (error) return <ErrorPage />;
 
   return (
@@ -44,10 +45,9 @@ function CoursePreview() {
         {/* What You Will Learn */}
         <div className="ml-8 mt-8">
           <h2 className="text-2xl font-bold capitalize text-primary mb-4">What You Will Learn :</h2>
-          <ul className="space-y-3">
+          <ul className="space-y-3 ml-10">
             {course.whatYouWillLearn?.map((item, index) => (
-              <li key={index} className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed flex items-start gap-2">
-                <span className="w-2 h-2 mt-2 bg-site-primary rounded-full"></span>
+              <li key={index} className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed flex items-start gap-2 relative before:absolute before:w-2 before:h-2 before:bg-site-accent before:rounded before:-left-6 before:top-2">
                 {item}
               </li>
             ))}
