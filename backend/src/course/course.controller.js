@@ -115,10 +115,13 @@ exports.updateCourse = [
   upload.fields([
     { name: "courseImage", maxCount: 1 },
     { name: "courseVideo", maxCount: 1 },
+    { name: "previewVideo", maxCount: 1 },
   ]),
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const updateData = { ...req.body }; // Avoid direct mutation
+    console.log(req);
+
 
     // Upload image to Cloudinary if provided
     if (req.files?.courseImage && req.files.courseImage.length > 0) {
@@ -127,6 +130,7 @@ exports.updateCourse = [
         req.files.courseImage[0].mimetype
       );
       updateData.courseImage = imageResult.secure_url;
+
     }
 
     // Upload video to Cloudinary if provided
@@ -136,6 +140,14 @@ exports.updateCourse = [
         req.files.courseVideo[0].mimetype
       );
       updateData.courseVideo = videoResult.secure_url;
+    }
+
+    if (req.files?.previewVideo && req.files.previewVideo.length > 0) {
+      const videoResult = await uploadToCloudinary(
+        req.files.previewVideo[0].buffer,
+        req.files.previewVideo[0].mimetype
+      );
+      updateData.previewVideo = videoResult.secure_url;
     }
 
     // Update the course

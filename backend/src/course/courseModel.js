@@ -44,6 +44,14 @@ const CourseSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    previewVideo: {
+      type: String,
+      required: true
+    },
+    whatYouWillLearn: {
+      required: true,
+      type: [String]
+    },
     category: {
       type: String,
       required: true,

@@ -13,19 +13,51 @@ function CoursePreview() {
   if (error) return <ErrorPage />;
 
   return (
-    <section className="h-dvh container mx-auto px-4">
-      <h1 className="text-3xl mt-8 capitalize">{course.title}</h1>
-      <h3 className="text-xl mt-5">Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps</h3>
-      <h4 className="mt-5">created by <strong>Dr. Angela Yu</strong></h4>
+    <section className="min-h-dvh container mx-auto p-6 flex flex-col-reverse lg:flex-row gap-8">
+      {/* Course Info */}
+      <div className="flex-1 space-y-5">
+        <h1 className="text-4xl font-bold capitalize text-primary">{course.title}</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400 uppercase">{course.category}</p>
 
-      <div>
-        <p>what you'll learn</p>
-        <ul>
-          <li>Build 16 web development projects for your portfolio, ready to apply for junior developer jobs.</li>
-          <li>Build 10 web development projects with React, Node, and PostgreSQL.</li>
-          <li>Build fully-fledged websites and web apps for your startup or business.</li>
-          <li>Work as a freelance web developer.</li>
-        </ul>
+        <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          {course.description}
+        </p>
+
+        <div className="flex items-center gap-3 mt-4">
+          <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+            <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+              {course.instructor.name[0]}
+            </span>
+          </div>
+          <h4 className="text-md text-gray-800 dark:text-gray-200">
+            Created by <span className="font-semibold">{course.instructor.name}</span>
+          </h4>
+        </div>
+
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold capitalize text-primary mb-4">What You Will Learn</h2>
+          <ul className="space-y-3">
+            {course.whatYouWillLearn?.map((item, index) => (
+              <li key={index} className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed flex items-start gap-2">
+                <span className="w-2 h-2 mt-2 bg-site-primary rounded-full"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <button className="mt-6 px-6 py-3 bg-site-primary text-site-text rounded-xl shadow-lg hover:bg-site-primary/80 transition">
+          Start Course
+        </button>
+      </div>
+
+      {/* Course Image */}
+      <div className="flex-1 max-w-md shadow-lg rounded-2xl overflow-hidden">
+        <img
+          src={course.courseImage}
+          alt={course.title}
+          className="w-full h-auto object-cover"
+        />
       </div>
     </section>
   )
