@@ -5,6 +5,8 @@ import { lazy } from "react";
 import ProtectedRoutes from "./ProtectedRoutes";
 import UserProfile from "../app/features/user/UserProfile";
 import CoursePreview from "../app/features/course/coursePreview/CoursePreview";
+import Course from "../app/features/course/courseView/Course";
+
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -22,9 +24,10 @@ const router = createBrowserRouter([
         children: [
           { path: "/", element: <Home /> },
           { path: "/profile", element: <UserProfile /> },
-          { path: "/courses/:id", element: <CoursePreview /> }
+          { path: "/courses/:id/learn", element: <Course /> },
         ],
       },
+      { path: "/courses/:id/preview", element: <CoursePreview /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
     ],

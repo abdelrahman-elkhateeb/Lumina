@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGetCourseQuery } from "../../redux/courses/coursesApi";
+import { useGetCoursePreviewQuery } from "../../redux/courses/coursesApi";
 import LightBulbLoader from "../../ui/LightBulbLoader";
 import ErrorPage from "../../ui/ErrorPage";
 import spaceMan from "../../../../../public/assets/spaceMan.svg";
@@ -14,7 +14,7 @@ import Category from "./Category";
 
 function CoursePreview() {
   const { id } = useParams();
-  const { data, error, isLoading } = useGetCourseQuery(id);
+  const { data, error, isLoading } = useGetCoursePreviewQuery(id);
 
   const course = data?.course;
 

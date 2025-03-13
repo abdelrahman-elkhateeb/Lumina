@@ -10,10 +10,17 @@ export const courseSlice = createApi({
     getCourses: builder.query({
       query: () => `/courses`,
     }),
-    getCourse: builder.query({
-      query: (id) => `/courses/${id}`,
+    getCoursePreview: builder.query({
+      query: (id) => `/courses/${id}/preview`,
     }),
-  })
+    getCourseLearn: builder.query({
+      query: (id) => `/courses/${id}/learn`,
+    }),
+  }),
 });
 
-export const { useGetCoursesQuery, useGetCourseQuery } = courseSlice;
+export const {
+  useGetCoursesQuery,
+  useGetCoursePreviewQuery,
+  useGetCourseLearnQuery,
+} = courseSlice;
