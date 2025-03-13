@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useGetCourseQuery } from "../redux/courses/coursesApi";
-import LightBulbLoader from "../ui/LightBulbLoader";
-import ErrorPage from "../ui/ErrorPage";
-import spaceMan from "../../../../public/assets/spaceMan.svg";
+import { useGetCourseQuery } from "../../redux/courses/coursesApi";
+import LightBulbLoader from "../../ui/LightBulbLoader";
+import ErrorPage from "../../ui/ErrorPage";
+import spaceMan from "../../../../../public/assets/spaceMan.svg";
 import PreviewVideo from "./PreviewVideo";
 import WhatYouWillLearn from "./WhatYouWillLearn";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 import Instructor from "./Instructor";
-import Heading from "../ui/Heading";
+import Heading from "../../ui/Heading";
 import Description from "./Description";
 import Category from "./Category";
 
@@ -23,7 +23,7 @@ function CoursePreview() {
   if (error) return <ErrorPage />;
 
   return (
-    <section className="container h-dvh mx-auto grid grid-cols-2 gap-20">
+    <section className="container px-4 mx-auto min-h-dvh h-full grid grid-cols-1 md:grid-cols-2 gap-20">
       <div>
         <PreviewVideo previewVideo={course.previewVideo} />
 

@@ -4,7 +4,7 @@ import ErrorPage from "../app/features/ui/ErrorPage";
 import { lazy } from "react";
 import ProtectedRoutes from "./ProtectedRoutes";
 import UserProfile from "../app/features/user/UserProfile";
-import CoursePreview from "../app/features/CoursePreview/CoursePreview";
+import CoursePreview from "../app/features/course/coursePreview/CoursePreview";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
