@@ -120,8 +120,6 @@ exports.updateCourse = [
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const updateData = { ...req.body }; // Avoid direct mutation
-    console.log(req);
-
 
     // Upload image to Cloudinary if provided
     if (req.files?.courseImage && req.files.courseImage.length > 0) {
