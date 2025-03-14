@@ -16,7 +16,7 @@ function Course() {
 
 
   return (
-    <section className="h-dvh container mx-auto px-4">
+    <section className="min-h-dvh container mx-auto px-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Left Content (Video & Overview) */}
@@ -26,7 +26,7 @@ function Course() {
         </div>
 
         {/* Right Sidebar (Sections) */}
-        <aside className=" bg-site-accent p-6 rounded-xl">
+        <aside className=" bg-site-accent p-6 rounded-xl h-96 overflow-y-auto">
           <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
         </aside>
 

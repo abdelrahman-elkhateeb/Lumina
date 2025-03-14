@@ -1,7 +1,7 @@
 function VideoPlayer({ videoUrl }) {
   return (
     <section>
-      <video src={videoUrl} controlsList="nodownload noplaybackrate"
+      <video src={videoUrl} className="w-full" controlsList="nodownload noplaybackrate"
         controls></video>
     </section>
   )
