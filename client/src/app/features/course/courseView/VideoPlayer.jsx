@@ -1,7 +1,8 @@
-function VideoPlayer() {
+function VideoPlayer({ videoUrl }) {
   return (
     <section>
-      <video src=""></video>
+      <video src={videoUrl} controlsList="nodownload noplaybackrate"
+        controls></video>
     </section>
   )
 }
