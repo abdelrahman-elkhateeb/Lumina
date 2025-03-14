@@ -10,10 +10,12 @@ function Sections({ sections, setSelectedVideoUrl }) {
       [sectionId]: !prev[sectionId],
     }));
   };
+  console.log(activeSections);
+  
 
   return (
     <nav aria-label="Course Content">
-      <h2 className="text-lg font-bold mb-4">Course Content</h2>
+      <h2 className="text-lg capitalize font-bold mb-4">Course Content:</h2>
       {sections.map((section, i) => {
         const isActive = activeSections[section._id];
         return (
