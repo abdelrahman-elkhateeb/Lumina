@@ -38,16 +38,17 @@ const uploadToCloudinary = (buffer, fileType, folder) => {
 exports.createCourse = [
   upload.fields([
     { name: "courseImage", maxCount: 1 },
-    { name: "courseVideo", maxCount: 1 },
+    { name: "previewVideo", maxCount: 1 },
   ]),
   catchAsync(async (req, res, next) => {
     // Validate file uploads
-    if (!req.files || (!req.files.courseImage && !req.files.courseVideo)) {
+    if (!req.files || (!req.files.courseImage && !req.files.previewVideo)) {
       return next(new AppError("Please upload at least an image or a video", 400));
     }
 
     // Sanitize course title for folder usage
     const folder = sanitizeFolderName(req.body.title || "default_course");
+    console.log("this is the request", req.body.title);
 
     let imageUrl, videoUrl;
 
@@ -62,10 +63,10 @@ exports.createCourse = [
     }
 
     // Upload course video
-    if (req.files.courseVideo) {
+    if (req.files.previewVideo) {
       const videoResult = await uploadToCloudinary(
-        req.files.courseVideo[0].buffer,
-        req.files.courseVideo[0].mimetype,
+        req.files.previewVideo[0].buffer,
+        req.files.previewVideo[0].mimetype,
         folder
       );
       videoUrl = videoResult.secure_url;
@@ -76,7 +77,7 @@ exports.createCourse = [
       ...req.body,
       instructor: req.user._id,
       courseImage: imageUrl,
-      courseVideo: videoUrl,
+      previewVideo: videoUrl,
     });
 
     if (!course) return next(new AppError("Course creation failed", 400));
