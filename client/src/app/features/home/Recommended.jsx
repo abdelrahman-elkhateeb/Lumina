@@ -34,7 +34,7 @@ function Recommended() {
         >
           {data?.courses.map((course) => (
             <SwiperSlide key={course._id} className="flex justify-center">
-              <Link to={`/courses/${course._id}/preview`}>
+              <Link to={`/courses/preview/${course._id}`}>
                 <CourseCard course={course} />
               </Link>
             </SwiperSlide>

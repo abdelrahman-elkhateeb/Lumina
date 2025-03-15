@@ -5,7 +5,7 @@ const courseController = require("./course.controller");
 const router = express.Router();
 
 // crud without protection
-router.get("/:id/preview", courseController.previewCourse);
+router.get("/preview/:id", courseController.previewCourse);
 router.get("/preview", courseController.featuredCourses);
 
 // crud for course with protection
