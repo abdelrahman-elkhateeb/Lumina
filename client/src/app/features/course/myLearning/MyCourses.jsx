@@ -1,9 +1,10 @@
 import { useGetMyCoursesQuery } from "../../redux/courses/coursesApi";
+import LightBulbLoader from "../../ui/LightBulbLoader";
 
 function MyCourses() {
   const { data, isLoading, error } = useGetMyCoursesQuery();
 
-  if (isLoading) return <p>Loading courses...</p>;
+  if (isLoading) return <LightBulbLoader />;
   if (error) return <p>Error loading courses.</p>;
 
   return (
