@@ -11,6 +11,7 @@ router.get("/preview", courseController.featuredCourses);
 // crud for course with protection
 router.use(authController.protect);
 router.get("/myCourses", courseController.getMyCourses);
+router.post("/pruchaseCourse", courseController.purchaseCourse);
 
 router.post("/createCourse", authController.restrictTo("instructor"), courseController.createCourse);
 

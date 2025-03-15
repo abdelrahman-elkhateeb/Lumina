@@ -1,4 +1,5 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 const Course = require("./courseModel");
 const catchAsync = require("../../utils/catchAsync");
 const AppError = require("../../utils/appError");
@@ -207,9 +208,13 @@ exports.featuredCourses = catchAsync(async (req, res, next) => {
 });
 
 exports.getMyCourses = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.user.id).populate({
-    path: "purchasedCourses",
-  });
+  const user = await User.findById(req.user.id)
+    .populate({
+      path: "purchasedCourses", select: "-sections -description -previewVideo -whatYouWillLearn -enrolledStudents -createdAt -updatedAt", populate: {
+        path: "instructor",
+        select: "name -_id",
+      }
+    }).lean();
 
   if (!user) return next(new AppError("User not found", 404));
 
@@ -246,7 +251,7 @@ exports.purchaseCourse = catchAsync(async (req, res, next) => {
 
   // Add the course to the user's purchased list
   user.purchasedCourses.push(courseId);
-  await user.save();
+  (await user.save({ validateBeforeSave: false }));
 
   res.status(200).json({
     status: "success",
