@@ -43,6 +43,12 @@ const userSchema = new mongoose.Schema({
     enum: ["male", "female"],
     message: "Gender must be either 'male' or 'female'",
   },
+  purchasedCourses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Course'
+    }
+  ],
   changedPasswordAt: Date
 });
 

@@ -6,6 +6,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import UserProfile from "../app/features/user/UserProfile";
 import CoursePreview from "../app/features/course/coursePreview/CoursePreview";
 import Course from "../app/features/course/courseView/Course";
+import MyCourses from "../app/features/course/myLearning/MyCourses";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
           { path: "/", element: <Home /> },
           { path: "/profile", element: <UserProfile /> },
           { path: "/courses/:id", element: <Course /> },
+          { path: "/courses/myCourses", element: <MyCourses /> },
         ],
       },
       { path: "/courses/preview/:id", element: <CoursePreview /> },

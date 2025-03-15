@@ -5,6 +5,7 @@ const AppError = require("../../utils/appError");
 const cloudinary = require("../../utils/cloudinaryConfig");
 const streamifier = require("streamifier");
 const multer = require("multer");
+const User = require('../users/userModel');
 // Store files in memory (useful for Cloudinary, AWS S3, etc.)
 const storage = multer.memoryStorage();
 // Allow all file types
@@ -204,6 +205,21 @@ exports.featuredCourses = catchAsync(async (req, res, next) => {
     courses,
   });
 });
+
+exports.getMyCourses = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).populate({
+    path: "purchasedCourses",
+  });
+
+  if (!user) return next(new AppError("User not found", 404));
+
+  res.status(200).json({
+    message: "Purchased courses retrieved successfully",
+    courses: user.purchasedCourses,
+  });
+});
+
+
 
 // crud for section
 exports.createSection = catchAsync(async (req, res, next) => {
