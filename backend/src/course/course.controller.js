@@ -219,7 +219,35 @@ exports.getMyCourses = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.purchaseCourse = catchAsync(async (req, res, next) => {
+  const { id: courseId } = req.body;
 
+  // Check if the course exists
+  const course = await Course.findById(courseId);
+  if (!course) {
+    return next(new AppError("Course not found", 404));
+  }
+
+  // Check if the user exists
+  const user = await User.findById(courseId);
+  if (!user) {
+    return next(new AppError("User not found", 404));
+  }
+
+  // check if the user already purchased the course
+  if (user.purchasedCourses.includes(courseId)) {
+    return next(new AppError("Course already purchased", 400));
+  }
+
+  // add the course to the user's purchased list
+  user.purchasedCourses.push(courseId);
+  await user.save();
+
+  res.status(200).json({
+    message: "Course purchased successfully",
+    purchasedCourses: user.purchasedCourses,
+  });
+});
 
 // crud for section
 exports.createSection = catchAsync(async (req, res, next) => {

@@ -105,7 +105,7 @@ function Navbar() {
           <div className="container mx-auto flex flex-col items-center gap-4 font-medium">
             {user ? (
               <>
-                <Link to="#" className="hover:text-accent transition">My Learning</Link>
+                <Link to="/courses/myCourses" className="hover:text-accent transition">My Learning</Link>
                 <Link to="#" className="hover:text-accent transition">Instructor</Link>
                 <Link to="#" className="hover:text-accent transition">
                   <i className="fa-solid fa-cart-shopping text-lg"></i>
