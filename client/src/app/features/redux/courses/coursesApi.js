@@ -7,12 +7,12 @@ export const courseSlice = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({
+    getcoursesPreview: builder.query({
+      query: () => `/courses/preview`,
+    }),
     getCoursePreview: builder.query({
       query: (id) => `/courses/${id}/preview`,
     }),
-    getcoursesPreview: builder.query({
-      query: () => `/courses/preview`,
-    })
   }),
 });
 

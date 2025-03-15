@@ -34,7 +34,7 @@ const uploadToCloudinary = (buffer, fileType, folder) => {
   });
 };
 
-// crud for course
+// main crud for course
 exports.createCourse = [
   upload.fields([
     { name: "courseImage", maxCount: 1 },
@@ -176,6 +176,7 @@ exports.deleteCourse = catchAsync(async (req, res, next) => {
   });
 });
 
+// additional features
 exports.previewCourse = catchAsync(async (req, res, next) => {
   const course = await Course.findById(req.params.id)
     .populate({ path: "instructor", select: "name" })

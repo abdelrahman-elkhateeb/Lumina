@@ -7,7 +7,6 @@ import UserProfile from "../app/features/user/UserProfile";
 import CoursePreview from "../app/features/course/coursePreview/CoursePreview";
 import Course from "../app/features/course/courseView/Course";
 
-
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
 const Login = lazy(() => import("../app/features/auth/login/Login"));
@@ -16,9 +15,9 @@ const Home = lazy(() => import("../app/features/home/Home"));
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
-    errorElement: <ErrorPage />, // Custom error page
+    errorElement: <ErrorPage />,
     children: [
-      { path: "*", element: <ErrorPage /> }, // Catch-all route
+      { path: "*", element: <ErrorPage /> },
       {
         element: <ProtectedRoutes />,
         children: [
@@ -31,7 +30,8 @@ const router = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
     ],
   },
-])
+]);
+
 
 
 export default router;
