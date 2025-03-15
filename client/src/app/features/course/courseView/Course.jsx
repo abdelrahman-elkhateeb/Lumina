@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-// import { useGetCourseLearnQuery } from "../../redux/courses/coursesApi";
+import { useGetCourseQuery } from "../../redux/courses/coursesApi";
 import VideoPlayer from "./VideoPlayer";
 import Sections from "./Sections";
 import CourseOverview from "./CourseOverview";
@@ -7,7 +7,7 @@ import { useState } from "react";
 
 function Course() {
   const { id } = useParams();
-  // const { data, error, isLoading } = useGetCourseLearnQuery(id);
+  const { data, error, isLoading } = useGetCourseQuery(id);
 
   const course = data?.course || {};
   const sections = data?.course.sections || [];

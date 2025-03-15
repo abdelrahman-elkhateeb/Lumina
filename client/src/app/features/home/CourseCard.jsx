@@ -5,7 +5,7 @@ function CourseCard({ course }) {
   const [showPreview, setShowPreview] = useState(false);
 
   return (
-    <div className="w-80 bg-site-background shadow-lg rounded-2xl overflow-hidden transition-transform hover:scale-105 hover:shadow-xl">
+    <div className="w-80 bg-site-background shadow-lg rounded-xl overflow-hidden transition-transform hover:scale-105 hover:shadow-xl">
       <div className="relative">
         <img
           src={course.courseImage}
@@ -37,24 +37,6 @@ function CourseCard({ course }) {
           </span>
         </div>
       </div>
-
-      {/* Preview Video Modal */}
-      {showPreview && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg max-w-lg w-full">
-            <video controls autoPlay className="w-full h-auto">
-              <source src={course.previewVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <button
-              onClick={() => setShowPreview(false)}
-              className="w-full text-center py-2 bg-red-500 text-white hover:bg-red-600 transition"
-            >
-              Close Preview
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   )
 };

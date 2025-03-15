@@ -5,9 +5,6 @@ const LessonSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  lessonImage: {
-    type: String
-  },
   description: {
     type: String
   },

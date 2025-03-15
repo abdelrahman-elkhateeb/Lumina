@@ -12,6 +12,7 @@ router.get("/preview", courseController.featuredCourses);
 router.use(authController.protect);
 
 router.post("/createCourse", authController.restrictTo("instructor"), courseController.createCourse);
+
 router.route("/:id")
   .get(courseController.getCourse)
   .patch(authController.restrictTo("instructor"), courseController.updateCourse)
