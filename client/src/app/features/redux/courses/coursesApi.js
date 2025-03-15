@@ -1,26 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const courseSlice = createApi({
-  reducerPath: "course",
+  reducerPath: "courseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/api/",
     credentials: "include",
   }),
   endpoints: (builder) => ({
-    getCourses: builder.query({
-      query: () => `/courses`,
-    }),
     getCoursePreview: builder.query({
       query: (id) => `/courses/${id}/preview`,
     }),
-    getCourseLearn: builder.query({
-      query: (id) => `/courses/${id}/learn`,
-    }),
+    getcoursesPreview: builder.query({
+      query: () => `/courses/preview`,
+    })
   }),
 });
 
 export const {
-  useGetCoursesQuery,
   useGetCoursePreviewQuery,
-  useGetCourseLearnQuery,
+  useGetcoursesPreviewQuery
 } = courseSlice;

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 // Google function
 import { signInWithGoogle } from "../auth";
 import LightBulbLoader from "../../ui/LightBulbLoader";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 function LoginForm() {
   // Common classNames
@@ -121,12 +122,7 @@ function LoginForm() {
             Login
           </button>
         ) : (
-          <button
-            disabled
-            className="w-full mt-4 p-3 rounded-lg bg-auth-secondary text-auth-secondary font-bold opacity-75"
-          >
-            Welcome back...
-          </button>
+          < LoadingSpinner />
         )}
 
         {/* Sign Up Section */}

@@ -4,13 +4,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import StarBackground from "../ui/StarBackground";
-import { useGetCoursesQuery } from "../redux/courses/coursesApi";
+import { useGetcoursesPreviewQuery } from "../redux/courses/coursesApi";
 import CourseCard from "./CourseCard";
 import { Link } from "react-router-dom";
 
 function Recommended() {
-  const { data, error, isLoading } = useGetCoursesQuery();
-  console.log(data);
+  const { data, error, isLoading } = useGetcoursesPreviewQuery();
 
   return (
     <section className="relative mt-20">

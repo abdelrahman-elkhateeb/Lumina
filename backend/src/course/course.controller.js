@@ -34,7 +34,7 @@ const uploadToCloudinary = (buffer, fileType, folder) => {
   });
 };
 
-// Create Course
+// crud for course
 exports.createCourse = [
   upload.fields([
     { name: "courseImage", maxCount: 1 },
@@ -176,6 +176,34 @@ exports.deleteCourse = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.previewCourse = catchAsync(async (req, res, next) => {
+  const course = await Course.findById(req.params.id)
+    .populate({ path: "instructor", select: "name" })
+    .select("-enrolledStudents -studentsProgress -createdAt -updatedAt -sections")
+    .lean();
+
+  if (!course) return next(new AppError("Course not found", 404));
+
+  res.status(200).json({
+    message: "Course preview retrieved successfully",
+    course,
+  });
+});
+
+exports.featuredCourses = catchAsync(async (req, res, next) => {
+  const courses = await Course.find({})
+    .select("-description -previewVideo -whatYouWillLearn -enrolledStudents -studentsProgress -createdAt -updatedAt -sections")
+    .populate({ path: "instructor", select: "name" })
+    .lean();
+
+  if (!courses) return next(new AppError("Course not found", 404));
+
+  res.status(200).json({
+    message: "Course preview retrieved successfully",
+    courses,
+  });
+});
+
 // crud for section
 exports.createSection = catchAsync(async (req, res, next) => {
   const { courseId, title } = req.body;
@@ -308,3 +336,31 @@ exports.createLesson = [
     });
   }),
 ];
+
+exports.updateLesson = [
+  upload.fields([
+    { name: "courseVideo", maxCount: 1 },
+  ]),
+  catchAsync(async (req, res, next) => {
+    const { courseId, lessonId } = req.params;
+    const updatedData = { ...req.body };
+    if (req.files?.courseVideo) {
+      const updateVideo = await uploadToCloudinary(
+        req.files.courseVideo[0].buffer,
+        req.files.courseVideo[0].mimetype,
+      );
+      updatedData.courseVideo = updateVideo.secure_url;
+    }
+    const course = await Course.findOneAndUpdate(
+      { _id: courseId, "sections.lessons._id": lessonId },
+      { $set: { "sections.$[].lessons.$[lesson]": updatedData } },
+      {
+        arrayFilters: [{ "lesson._id": lessonId }],
+        new: true,
+      }
+    );
+
+    if (!course) return next(new AppError("Course not found", 404));
+    res.status(200).json({ message: "Lesson updated successfully", course });
+  })
+]
