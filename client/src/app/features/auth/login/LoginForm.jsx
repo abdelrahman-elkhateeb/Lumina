@@ -10,7 +10,7 @@ import LoadingSpinner from "../../ui/LoadingSpinner";
 
 function LoginForm() {
   // Common classNames
-  const inputFieldClassname = `bg-auth-secondary text-auth-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`
+  const inputFieldClassname = `text-primary-700 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`
 
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
@@ -83,8 +83,8 @@ function LoginForm() {
     >
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl text-auth-primary font-heading md:text-4xl font-bold">Lumina</h1>
-        <h2 className="text-lg text-auth-text font-body">Light the dark / Learn Brighter</h2>
+        <h1 className="text-2xl text-primary-500 font-heading md:text-4xl font-bold">Lumina</h1>
+        <h2 className="text-lg text-text font-body">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -117,7 +117,7 @@ function LoginForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className="w-full mt-4 p-3 rounded-lg bg-auth-primary text-auth-secondary font-bold hover:bg-auth-accent transition"
+            className="w-full mt-4 p-3 rounded-lg bg-primary-500 text-text font-bold hover:bg-primary-700 transition"
           >
             Login
           </button>
@@ -130,7 +130,7 @@ function LoginForm() {
           <h4 className="text-auth-text capitalize">Don't have an account?</h4>
           <Link
             to="/signup"
-            className="text-auth-text font-bold hover:text-auth-accent focus:outline-none font-accent"
+            className="text-auth-text font-bold hover:text-accent focus:outline-none font-accent"
           >
             Sign up
           </Link>

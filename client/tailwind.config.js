@@ -1,23 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        auth: {
-          text: "#f0f0f0",
-          background: "#040b0b",
-          primary: "#f5f5f5",
-          secondary: "#141416",
-          accent: "#70c9d7"
+        text: "#FFFFFF",
+        background: {
+          500: "#0A0A24", // Deep Night Sky
+          700: "#1C1678", // Dark Indigo
         },
-        site: {
-          'text': '#edf7f8',
-          'background': '#040b0b',
-          'primary': '#3da7b8',
-          'secondary': '#246a75',
-          'accent': '#28818f',
-        }
+        primary: {
+          500: "#857EE7", // Soft Starry Purple
+          700: "#3328D7", // Deep Cosmic Blue
+        },
+        secondary: {
+          500: "#7866FF", // Vibrant Night Glow
+          700: "#4B33FF", // Intense Nebula Blue
+        },
+        accent: {
+          500: "#7BC9FF", // Glowing Sky Blue
+          700: "#A3FFD6", // Soft Nebula Green
+        },
       },
       // colors: {
       //   'text': {
