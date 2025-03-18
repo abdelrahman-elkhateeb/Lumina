@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import spaceMan from "../../../../public/assets/spaceman(5).svg";
 import StarBackground from "../ui/StarBackground";
+import { Button } from "@/components/ui/button";
 
 function heroSection() {
   return (
@@ -59,7 +60,11 @@ function heroSection() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 1 }}
             className="mt-7"
           >
-            <Link to="/courses" className="bg-site-primary hover:bg-site-secondary transition duration-150 font-light p-4 rounded-full">join us!</Link>
+            <Link to="/courses">
+              <Button>
+                join us
+              </Button>
+            </Link>
           </motion.button>
 
         </div>
