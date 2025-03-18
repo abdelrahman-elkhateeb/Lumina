@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import spaceMan from "../../../../public/assets/spaceman(5).svg";
 import StarBackground from "../ui/StarBackground";
+import Button from "../ui/Button"
 
 function heroSection() {
   return (
@@ -45,7 +45,7 @@ function heroSection() {
 
         <div className="">
           <motion.h4
-            className="text-xl md:text-2xl text-accent mt-4"
+            className="text-xl md:text-2xl text-accent-500 mt-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 1 }}
@@ -59,12 +59,13 @@ function heroSection() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 1 }}
             className="mt-7"
           >
-            <Link to="/courses" className="bg-site-primary hover:bg-site-secondary transition duration-150 font-light p-4 rounded-full">join us!</Link>
+            <Button type="primary">
+              join us!
+            </Button>
           </motion.button>
-
         </div>
       </div>
-      <button className='bg-site-accent w-[50px] text-center h-[50px] rounded-[50%] flex justify-center items-center animate-bounce absolute bottom-11 right-1/2'>
+      <button className='bg-accent-500 w-[50px] text-center h-[50px] rounded-[50%] flex justify-center items-center animate-bounce absolute bottom-11 right-1/2'>
         <i className="fa-solid fa-arrow-down"></i>
       </button>
     </section>

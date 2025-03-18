@@ -23,7 +23,6 @@ export default {
           700: "#A3FFD6", // Soft Nebula Green
         },
       },
-      // colors: {
       //   'text': {
       //     50: '#071112',
       //     100: '#0e2325',
