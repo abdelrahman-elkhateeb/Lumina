@@ -26,7 +26,7 @@ function Course() {
         </div>
 
         {/* Right Sidebar (Sections) */}
-        <aside className=" bg-site-accent p-6 rounded-xl h-96 overflow-y-auto">
+        <aside className=" bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
           <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
         </aside>
 

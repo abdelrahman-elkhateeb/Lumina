@@ -11,7 +11,7 @@ function Sections({ sections, setSelectedVideoUrl }) {
     }));
   };
   console.log(activeSections);
-  
+
 
   return (
     <nav aria-label="Course Content">
@@ -19,7 +19,7 @@ function Sections({ sections, setSelectedVideoUrl }) {
       {sections.map((section, i) => {
         const isActive = activeSections[section._id];
         return (
-          <section key={section._id} className="mb-4 border-b">
+          <section key={section._id} className="mb-4 border-b p-4">
             <button
               onClick={() => toggleSection(section._id)}
               aria-expanded={isActive}

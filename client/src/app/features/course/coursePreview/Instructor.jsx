@@ -1,7 +1,7 @@
 function Instructor({ instructor }) {
   return (
     <div className="flex items-center gap-3 mt-4">
-      <div className="w-10 h-10 rounded-full bg-site-accent capitalize flex items-center justify-center">
+      <div className="w-10 h-10 rounded-full bg-accent-500 capitalize flex items-center justify-center">
         <span className="text-lg font-semibold">
           {instructor.name[0]}
         </span>
