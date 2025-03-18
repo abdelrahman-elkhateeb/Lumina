@@ -19,7 +19,7 @@ function Heading({ img, title }) {
 
       {/* Heading with Gradient and Hover Effect */}
       <motion.h1
-        className="text-4xl font-extrabold bg-gradient-to-r from-site-primary to-site-accent bg-clip-text text-transparent capitalize cursor-pointer hover:scale-105 transition-transform duration-300"
+        className="text-4xl font-extrabold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent capitalize transition-transform duration-300"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
@@ -28,7 +28,7 @@ function Heading({ img, title }) {
       </motion.h1>
 
       {/* Stylish Divider */}
-      <div className="absolute bottom-0 left-0 w-1/4 h-1 bg-gradient-to-r from-site-primary to-site-accent rounded-full shadow-md" />
+      <div className="absolute bottom-0 left-0 w-1/4 h-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full shadow-md" />
     </div>
   );
 }

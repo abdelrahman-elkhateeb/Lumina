@@ -56,7 +56,7 @@ function EditProfileForm({ user }) {
           <input
             id="name"
             {...register("name")}
-            className="bg-auth-secondary text-auth-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-site-accent w-full"
+            className="text-primary-500 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-accent-500 w-full"
             placeholder="Enter your name"
           />
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
@@ -69,7 +69,7 @@ function EditProfileForm({ user }) {
           <input
             id="email"
             {...register("email")}
-            className="bg-auth-secondary text-auth-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-site-accent w-full"
+            className="text-primary-500 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-site-accent w-full"
             placeholder="Enter your email"
           />
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
@@ -81,7 +81,7 @@ function EditProfileForm({ user }) {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-site-primary text-white py-2 rounded-lg hover:bg-site-secondary transition disabled:opacity-50"
+          className="w-full bg-primary-500 text-white py-2 rounded-lg hover:bg-primary-700 transition disabled:opacity-50"
         >
           {isLoading ? "Updating..." : "Update Profile"}
         </button>
