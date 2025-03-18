@@ -10,7 +10,7 @@ import LoadingSpinner from "../../ui/LoadingSpinner";
 
 function LoginForm() {
   // Common classNames
-  const inputFieldClassname = `text-primary-700 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`
+  const inputFieldClassname = `text-primary-700 rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent-500 w-full`
 
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
@@ -84,7 +84,7 @@ function LoginForm() {
       {/* Header Section */}
       <div className="text-center mb-8">
         <h1 className="text-2xl text-primary-500 font-heading md:text-4xl font-bold">Lumina</h1>
-        <h2 className="text-lg text-text font-body">Light the dark / Learn Brighter</h2>
+        <h2 className="text-lg text-accent-500 font-body">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -107,7 +107,7 @@ function LoginForm() {
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-auth-accent"
+            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-accent-500"
           >
             {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
           </button>
@@ -117,7 +117,7 @@ function LoginForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className="w-full mt-4 p-3 rounded-lg bg-primary-500 text-text font-bold hover:bg-primary-700 transition"
+            className="w-full mt-4 p-3 rounded-lg bg-primary-500 text-text hover:bg-primary-700 transition"
           >
             Login
           </button>
@@ -127,10 +127,10 @@ function LoginForm() {
 
         {/* Sign Up Section */}
         <div className="text-center mt-4">
-          <h4 className="text-auth-text capitalize">Don't have an account?</h4>
+          <h4 className="text-text capitalize">Don't have an account?</h4>
           <Link
             to="/signup"
-            className="text-auth-text font-bold hover:text-accent focus:outline-none font-accent"
+            className="text-accent-500 font-bold hover:text-accent-700"
           >
             Sign up
           </Link>

@@ -10,7 +10,7 @@ import { useFetchUserDataQuery } from "../../redux/auth/registrationApi";
 
 function SignupForm() {
   // Common classNames
-  const inputFieldClassname = `bg-auth-secondary text-auth-primary border border-[#252525] rounded-2xl p-3 focus:outline-none focus:ring-2 focus:ring-accent w-full`;
+  const inputFieldClassname = `text-primary-500 rounded-xl placeholder:text-primary-500 p-3 focus:outline-none focus:ring-2 focus:ring-accent-500 w-full`;
 
   const navigate = useNavigate();
 
@@ -119,8 +119,8 @@ function SignupForm() {
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] relative z-10">
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-4xl font-bold text-auth-primary font-poppins font-heading">Lumina</h1>
-        <h2 className="text-lg font-body text-text">Light the dark / Learn Brighter</h2>
+        <h1 className="text-2xl md:text-4xl font-bold text-primary-500 font-poppins font-heading">Lumina</h1>
+        <h2 className="text-lg font-body text-accent-500">Light the dark / Learn Brighter</h2>
       </div>
 
       {/* Input Fields */}
@@ -152,7 +152,7 @@ function SignupForm() {
           <button
             type="button"
             onClick={toggleVisibility}
-            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-auth-accent"
+            className="absolute right-3 top-[1.3rem] -translate-y-1/4 text-accent-500"
           >
             {isVisible ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
           </button>
@@ -188,7 +188,7 @@ function SignupForm() {
         {!isLoading ? (
           <button
             type="submit"
-            className="w-full px-4 py-2 mb-4 text-auth-background bg-auth-primary rounded-lg hover:bg-auth-accent focus:outline-none focus:ring-2 focus:ring-accent font-bold ease-in-out duration-300 capitalize"
+            className="w-full px-4 py-2 mb-4 bg-primary-500 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-accent-500 ease-in-out duration-300 capitalize"
           >
             Create Account
           </button>
@@ -201,7 +201,7 @@ function SignupForm() {
           <h4 className="text-text capitalize">Already a member?</h4>
           <Link
             to="/login"
-            className="text-text font-bold hover:text-accent focus:outline-none font-accent"
+            className="text-accent-500 font-bold hover:text-accent-700 focus:outline-none font-accent"
           >
             Login
           </Link>
