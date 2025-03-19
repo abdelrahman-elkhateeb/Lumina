@@ -63,10 +63,9 @@ function MobileMenu() {
             <Link to="/profile" className={menuButtonClassName}>
               profile
             </Link>
-
           </nav>
 
-          {/* Logout Button (Optional) */}
+          {/* Logout Button */}
           <div className="mt-auto p-6">
             <button className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600"
               onClick={handleLogout}
