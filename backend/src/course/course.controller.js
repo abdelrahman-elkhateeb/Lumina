@@ -103,7 +103,7 @@ exports.getCourses = catchAsync(async (req, res, next) => {
 });
 
 exports.getCourse = catchAsync(async (req, res, next) => {
-  const course = await Course.findById(req.params.id).populate({ path: "instructor", select: "name email" });
+  const course = await Course.findById(req.params.id).populate({ path: "instructor", select: "name" });
 
   if (!course) return next(new AppError("Course not found", 404));
 
