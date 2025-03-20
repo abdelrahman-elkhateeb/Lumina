@@ -59,8 +59,8 @@ function heroSection() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 1 }}
             className="mt-7"
           >
-            <Button type="primary">
-              join us!
+            <Button type="primary" to='/courses/explore-courses'>
+              explore courses
             </Button>
           </motion.button>
         </div>
