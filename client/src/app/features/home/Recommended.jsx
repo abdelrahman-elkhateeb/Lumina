@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import StarBackground from "../ui/StarBackground";
 import { useGetcoursesPreviewQuery } from "../redux/courses/coursesApi";
-import CourseCard from "./CourseCard";
+import CourseCard from "../ui/CourseCard";
 import { Link } from "react-router-dom";
 
 function Recommended() {
