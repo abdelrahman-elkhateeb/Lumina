@@ -7,6 +7,7 @@ import UserProfile from "../app/features/user/UserProfile";
 import CoursePreview from "../app/features/course/coursePreview/CoursePreview";
 import Course from "../app/features/course/courseView/Course";
 import MyCourses from "../app/features/course/myLearning/MyCourses";
+import ExploreCourses from "../app/features/course/exploreCourses/ExploreCourses";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
           { path: "/courses/myCourses", element: <MyCourses /> },
         ],
       },
+      { path: "/courses/explore-courses", element: <ExploreCourses /> },
       { path: "/courses/preview/:id", element: <CoursePreview /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },

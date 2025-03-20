@@ -9,7 +9,7 @@ function DesktopNav() {
         </Link>
       </li>
       <li>
-        <Link to="">
+        <Link to="/courses/explore-courses">
           explore our courses
         </Link>
       </li>

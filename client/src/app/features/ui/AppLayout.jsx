@@ -11,7 +11,7 @@ function AppLayout() {
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
 
   return (
-    <div className="">
+    <div className="bg-background-500">
       {shouldShowNavbar && <Navbar />}
       <Outlet />
     </div>

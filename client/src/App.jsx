@@ -5,7 +5,7 @@ import LightBulbLoader from "./app/features/ui/LightBulbLoader";
 
 function App() {
     return (
-        <div className="text-text bg-background-500">
+        <div className="text-text">
             <Suspense fallback={<LightBulbLoader />}>
                 <RouterProvider router={router} />
             </Suspense>
