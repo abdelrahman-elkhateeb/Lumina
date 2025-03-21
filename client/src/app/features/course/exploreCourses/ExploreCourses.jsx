@@ -5,11 +5,7 @@ import CourseCard from "../../ui/CourseCard";
 
 function exploreCourses() {
   const { data, error, isLoading } = useGetcoursesPreviewQuery();
-  console.log(data);
-
   const courses = data?.courses;
-  console.log(courses);
-
 
   return (
     <section className="bg-background-500 min-h-dvh container mx-auto px-4">
