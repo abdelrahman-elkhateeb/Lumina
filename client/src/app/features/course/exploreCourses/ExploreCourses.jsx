@@ -8,7 +8,7 @@ function exploreCourses() {
   const courses = data?.courses;
 
   return (
-    <section className="bg-background-500 min-h-dvh container mx-auto px-4">
+    <section className="bg-background-500 container mx-auto px-4">
       <Heading img={spaceMan} title="explore the magic of our courses" />
 
       <CourseCard courses={courses} />

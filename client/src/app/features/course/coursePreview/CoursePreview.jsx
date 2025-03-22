@@ -23,7 +23,7 @@ function CoursePreview() {
   if (error) return <ErrorPage />;
 
   return (
-    <section className="container px-4 mx-auto min-h-dvh h-full grid grid-cols-1 md:grid-cols-2 gap-20">
+    <section className="container px-4 mx-auto h-full grid grid-cols-1 md:grid-cols-2 gap-20">
       <div>
         <PreviewVideo previewVideo={course.previewVideo} />
 

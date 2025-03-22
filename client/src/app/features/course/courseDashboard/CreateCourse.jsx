@@ -4,9 +4,9 @@ function CreateCourse() {
   const [createCourse, { isLoading, error }] = useCreateCourseMutation();
 
   return (
-    <div>
+    <section className="container mx-auto px-4">
       hi
-    </div>
+    </section>
   )
 }
 

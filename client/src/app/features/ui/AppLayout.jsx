@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
+import StarBackground from "./starBackground";
 
 function AppLayout() {
   const location = useLocation(); // Get the current route
@@ -11,7 +12,7 @@ function AppLayout() {
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
 
   return (
-    <div className="bg-background-500">
+    <div className="bg-background-500 min-h-dvh">
       {shouldShowNavbar && <Navbar />}
       <Outlet />
     </div>
