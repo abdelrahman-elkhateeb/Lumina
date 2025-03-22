@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
+import { useFetchUserDataQuery } from "../../redux/auth/registrationApi"
 
 function DesktopNav() {
+  const { data, isLoading, error } = useFetchUserDataQuery();
+  const userType = data?.data.user.userType == "instructor";
+
   return (
     <ul className="hidden md:flex items-center justify-between gap-6">
       <li>
@@ -13,11 +17,13 @@ function DesktopNav() {
           explore our courses
         </Link>
       </li>
-      <li>
-        <Link to="/createCourse">
-          create course
-        </Link>
-      </li>
+      {userType &&
+        <li>
+          <Link to="/createCourse">
+            create course
+          </Link>
+        </li>
+      }
     </ul>
   )
 }

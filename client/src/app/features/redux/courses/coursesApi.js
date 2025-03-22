@@ -21,7 +21,7 @@ export const courseSlice = createApi({
     }),
     createCourse: builder.mutation({
       query: (courseData) => ({
-        url: "/createCourse",
+        url: "/courses/createCourse",
         method: "POST",
         body: courseData
       }),

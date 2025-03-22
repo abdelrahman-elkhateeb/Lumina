@@ -52,7 +52,7 @@ const CourseSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      enum: ["Web Development", "Data Science", "AI", "Cybersecurity", "Others"]
+      enum: ["Web Development", "Data Science", "AI", "CyberSecurity", "Others"]
     },
     instructor: {
       type: mongoose.Schema.Types.ObjectId,
