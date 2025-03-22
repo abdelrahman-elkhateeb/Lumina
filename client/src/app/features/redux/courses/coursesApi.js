@@ -18,7 +18,14 @@ export const courseSlice = createApi({
     }),
     getMyCourses: builder.query({
       query: () => `/courses/mycourses`,
-    })
+    }),
+    createCourse: builder.mutation({
+      query: (courseData) => ({
+        url: "/createCourse",
+        method: "POST",
+        body: courseData
+      }),
+    }),
   }),
 });
 
@@ -26,5 +33,6 @@ export const {
   useGetCoursePreviewQuery,
   useGetcoursesPreviewQuery,
   useGetCourseQuery,
-  useGetMyCoursesQuery
+  useGetMyCoursesQuery,
+  useCreateCourseMutation,
 } = courseSlice;

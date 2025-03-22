@@ -13,6 +13,11 @@ function DesktopNav() {
           explore our courses
         </Link>
       </li>
+      <li>
+        <Link to="/createCourse">
+          create course
+        </Link>
+      </li>
     </ul>
   )
 }
