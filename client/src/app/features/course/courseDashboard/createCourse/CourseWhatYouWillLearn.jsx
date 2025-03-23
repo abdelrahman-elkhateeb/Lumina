@@ -5,13 +5,11 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    if (newOutcome.trim()) {
-      setFormData({
-        ...formData,
-        whatYouWillLearn: [...formData.whatYouWillLearn, newOutcome.trim()],
-      });
-      setNewOutcome(""); // Clear input after adding
-    }
+    setFormData({
+      ...formData,
+      whatYouWillLearn: [...formData.whatYouWillLearn, newOutcome],
+    });
+    setNewOutcome(""); // Clear input after adding
   };
 
   const handleDelete = (e, index) => {
