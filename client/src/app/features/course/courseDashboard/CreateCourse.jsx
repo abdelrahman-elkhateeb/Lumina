@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCreateCourseMutation } from "../../redux/courses/coursesApi";
+import Button from "../../ui/Button";
 
 function CreateCourse() {
   const [formData, setFormData] = useState({
@@ -7,199 +8,158 @@ function CreateCourse() {
     description: "",
     courseImage: null, // File upload
     previewVideo: null, // File upload
-    whatYouWillLearn: [""], // Multiple learning outcomes
+    whatYouWillLearn: [], // Multiple learning outcomes
     category: "Web Development",
     price: 0,
     enrollmentType: "Free",
   });
+  const [editingValue, setEditingValue] = useState("");
+  const [editingIndex, setEditingIndex] = useState(null);
 
   const [createCourse, { isLoading, error }] = useCreateCourseMutation();
 
-  // Handle text input changes
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Handle file input changes
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({ ...formData, [e.target.name]: file });
-  };
-
-  // Handle dynamic inputs for "What You Will Learn"
-  const handleWhatYouWillLearnChange = (index, value) => {
-    const updatedLearnings = [...formData.whatYouWillLearn];
-    updatedLearnings[index] = value;
-    setFormData({ ...formData, whatYouWillLearn: updatedLearnings });
-  };
-
-  const addLearningPoint = () => {
-    setFormData({ ...formData, whatYouWillLearn: [...formData.whatYouWillLearn, ""] });
-  };
-
-  const removeLearningPoint = (index) => {
-    const updatedLearnings = formData.whatYouWillLearn.filter((_, i) => i !== index);
-    setFormData({ ...formData, whatYouWillLearn: updatedLearnings });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleChange = e => {
     e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData.price);
+  };
 
-    // Convert form data to FormData for file uploads
-    const formDataToSend = new FormData();
-    formDataToSend.append("title", formData.title);
-    formDataToSend.append("description", formData.description);
-    formDataToSend.append("category", formData.category);
-    formDataToSend.append("price", formData.price);
-    formDataToSend.append("enrollmentType", formData.enrollmentType);
+  const handleFileChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+  };
 
-    // Append each "whatYouWillLearn" point separately
-    formData.whatYouWillLearn.forEach((point, index) => {
-      formDataToSend.append(`whatYouWillLearn[${index}]`, point);
-    });
+  const handleEdit = (index) => {
+    setEditingIndex(index);
+    setEditingValue(formData.whatYouWillLearn[index]);
+  };
 
-    // Append files if they exist
-    if (formData.courseImage) {
-      formDataToSend.append("courseImage", formData.courseImage);
-    }
-    if (formData.previewVideo) {
-      formDataToSend.append("previewVideo", formData.previewVideo);
-    }
+  const handleSaveEdit = () => {
+    const updateOutComes = [...formData.whatYouWillLearn];
+    updateOutComes[editingIndex] = editingValue;
+    setFormData({ ...formData, whatYouWillLearn: updateOutComes });
+    setEditingIndex(null);
+    setEditingValue("");
+  }
 
-    try {
-      await createCourse(formDataToSend).unwrap();
-      alert("Course created successfully!");
-      setFormData({
-        title: "",
-        description: "",
-        courseImage: null,
-        previewVideo: null,
-        whatYouWillLearn: [""],
-        category: "Web Development",
-        price: 0,
-        enrollmentType: "Free",
-      });
-    } catch (error) {
-      console.error("Error creating course:", error);
-    }
+  const handleCancelEdit = () => {
+    setEditingIndex(null);
+    setEditingValue("");
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 text-black bg-white shadow-md rounded-md">
+    <section className="max-w-2xl mx-auto p-6 shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-4">Create a New Course</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="title"
-          placeholder="Course Title"
-          value={formData.title}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
+      <form action="">
+        {/* title */}
+        <div className="flex flex-col">
+          <label htmlFor="">title</label>
+          <input type="text" name="title" placeholder="title" className="p-2 rounded-lg text-black" onChange={handleChange} value={formData.title} />
+        </div>
+        {/* description */}
+        <div className="flex flex-col">
+          <label htmlFor="">description</label>
+          <textarea type="text" name="description" placeholder="description" className="p-2 rounded-lg text-black" onChange={handleChange} value={formData.description} />
+        </div>
+        {/* category */}
+        <div className="flex flex-col">
+          <label htmlFor="">category</label>
+          <select name="category" id="" className="p-2 rounded-lg text-black" value={formData.category}
+            onChange={handleChange}>
+            <option value="Web Development">Web Development</option>
+            <option value="Data Science">Data Science</option>
+            <option value="AI">AI</option>
+            <option value="CyberSecurity">CyberSecurity</option>
+          </select>
+        </div>
+        {/* price */}
+        <div className="flex flex-col">
+          <label htmlFor="">price</label>
+          <input type="number" name="price" placeholder="price" className="p-2 rounded-lg text-black" onChange={handleChange} value={formData.price} min="0" />
+        </div>
+        {/* previewVideo */}
+        <div className="flex flex-col">
+          <label htmlFor="">previewVideo</label>
+          <input type="file" name="previewVideo" onChange={handleFileChange} />
+        </div>
+        {/* courseImage */}
+        <div className="flex flex-col">
+          <label htmlFor="">courseImage</label>
+          <input type="file" name="courseImage" onChange={handleFileChange} />
+        </div>
+        {/* whatYouWillLearn */}
+        <div className="flex flex-col">
+          <label htmlFor="">What You Will Learn</label>
+          <ul>
+            {formData.whatYouWillLearn.map((outcome, index) => (
+              <li key={index} className="flex justify-between items-center gap-2 mt-2">
+                {editingIndex === index ? (
+                  // Edit Mode: Show Input
+                  <input
+                    type="text"
+                    value={editingValue}
+                    onChange={(e) => setEditingValue(e.target.value)}
+                    className="p-1 border rounded text-black"
+                  />
+                ) : (
+                  // Normal Mode: Click to Edit
+                  <span onClick={() => handleEdit(index)}>{outcome}</span>
+                )}
 
-        <input
-          type="file"
-          name="courseImage"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
+                {/* Edit Mode: Show Save/Cancel Buttons */}
+                {editingIndex === index ? (
+                  <div>
+                    <button onClick={handleSaveEdit} className="px-2 py-1 bg-green-500 text-white rounded">Save</button>
+                    <button onClick={handleCancelEdit} className="px-2 py-1 bg-gray-500 text-white rounded ml-2">Cancel</button>
+                  </div>
+                ) : (
+                  // Normal Mode: Show Delete Button
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const updatedOutcomes = formData.whatYouWillLearn.filter((_, i) => i !== index);
+                      setFormData({ ...formData, whatYouWillLearn: updatedOutcomes });
+                    }}
+                    className="px-2 py-1 bg-red-500 text-white rounded"
+                  >
+                    Remove
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
 
-        <textarea
-          name="description"
-          placeholder="Course Description"
-          value={formData.description}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
-
-        <input
-          type="file"
-          name="previewVideo"
-          accept="video/*"
-          onChange={handleFileChange}
-          className="w-full p-2 border border-gray-300 rounded"
-          required
-        />
-
-        {/* What You Will Learn - Dynamic Input Fields */}
-        <div>
-          <label className="font-semibold">What You Will Learn:</label>
-          {formData.whatYouWillLearn.map((point, index) => (
-            <div key={index} className="flex items-center space-x-2 mt-2">
-              <input
-                type="text"
-                value={point}
-                onChange={(e) => handleWhatYouWillLearnChange(index, e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder={`Learning outcome ${index + 1}`}
-              />
-              {index > 0 && (
-                <button
-                  type="button"
-                  onClick={() => removeLearningPoint(index)}
-                  className="bg-red-500 text-white px-2 py-1 rounded"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={addLearningPoint}
-            className="mt-2 bg-green-500 text-white px-3 py-1 rounded"
-          >
-            + Add More
-          </button>
+          {/* Add New Learning Outcome */}
+          <div className="mt-3 flex gap-2">
+            <input
+              type="text"
+              placeholder="Add a new learning outcome"
+              value={editingValue}
+              onChange={(e) => setEditingValue(e.target.value)}
+              className="p-1 border rounded text-black flex-grow"
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (editingValue.trim()) {
+                  setFormData({
+                    ...formData,
+                    whatYouWillLearn: [...formData.whatYouWillLearn, editingValue.trim()],
+                  });
+                  setEditingValue(""); // Clear input after adding
+                }
+              }}
+              className="px-2 py-1 bg-blue-500 text-white rounded"
+            >
+              Add
+            </button>
+          </div>
         </div>
 
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option>Web Development</option>
-          <option>Data Science</option>
-          <option>AI</option>
-          <option>Cybersecurity</option>
-          <option>Others</option>
-        </select>
-
-        <input
-          type="number"
-          name="price"
-          placeholder="Course Price"
-          value={formData.price}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-
-        <select
-          name="enrollmentType"
-          value={formData.enrollmentType}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option>Free</option>
-          <option>Paid</option>
-        </select>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-          disabled={isLoading}
-        >
-          {isLoading ? "Creating..." : "Create Course"}
+        <button type="submit" className="bg-accent-500 px-2 py-1 mt-3 rounded-lg">
+          submit
         </button>
-
-        {error && <p className="text-red-500">{error.message}</p>}
       </form>
-    </div>
+    </section>
   );
 }
 
