@@ -9,7 +9,7 @@ import Course from "../app/features/course/courseView/Course";
 import MyCourses from "../app/features/course/myLearning/MyCourses";
 import ExploreCourses from "../app/features/course/exploreCourses/ExploreCourses";
 import InstructorOnlyRouter from "./InstructorOnlyRouter";
-import CreateCourse from "../app/features/course/courseDashboard/CreateCourse";
+import CreateCourse from "../app/features/course/courseDashboard/createCourse/CreateCourse";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
