@@ -92,8 +92,8 @@ function CreateCourse() {
         {/* whatYouWillLearn */}
         <CourseWhatYouWillLearn formData={formData} setFormData={setFormData} />
 
-        <button type="submit" className="bg-accent-500 px-2 py-1 mt-3 rounded-lg">
-          submit
+        <button type="submit" disabled={isLoading ? true : false} className="bg-accent-500 px-2 py-1 mt-3 rounded-lg">
+          {!isLoading ? "submit" : "loading"}
         </button>
       </form>
     </section>
