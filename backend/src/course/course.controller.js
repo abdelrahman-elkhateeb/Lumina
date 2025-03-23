@@ -50,7 +50,6 @@ exports.createCourse = [
 
     // Sanitize course title for folder usage
     const folder = sanitizeFolderName(req.body.title || "default_course");
-    console.log("this is the request", req.body.title);
 
     let imageUrl, videoUrl;
 
