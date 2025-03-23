@@ -74,7 +74,7 @@ function CreateCourse() {
   }
 
   return (
-    <section className="max-w-2xl mx-auto p-6 shadow-md rounded-md">
+    <section className="max-w-2xl mx-auto p-6 bg-accent-500 rounded-md">
       <h2 className="text-2xl font-bold mb-4">Create a New Course</h2>
       <form action="" onSubmit={handleSubmit}>
         {/* title */}
