@@ -21,17 +21,6 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
   return (
     <div className="flex flex-col">
       <label>What You Will Learn</label>
-      <ul>
-        {formData.whatYouWillLearn.map((outcome, index) => (
-          <li key={index} className="flex justify-between items-center gap-2 mt-2">
-            <span>{outcome}</span>
-            <button onClick={(e) => handleDelete(e, index)} className="px-2 py-1 bg-red-500 text-white rounded">
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
-
       {/* Add New Learning Outcome */}
       <div className="mt-3 flex gap-2">
         <input
@@ -45,6 +34,17 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
           Add
         </button>
       </div>
+
+      <ul>
+        {formData.whatYouWillLearn.map((outcome, index) => (
+          <li key={index} className="flex justify-between items-center gap-2 mt-2">
+            <span>{outcome}</span>
+            <button onClick={(e) => handleDelete(e, index)} className="px-2 py-1 bg-red-500 text-white rounded">
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -19,7 +19,7 @@ function CreateCourse() {
     price: 0,
     enrollmentType: "Free",
   });
-  
+
   const [createCourse, { isLoading, error }] = useCreateCourseMutation();
 
   const handleChange = e => {
@@ -32,10 +32,51 @@ function CreateCourse() {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    // Validate Required Fields
+    if (!formData.title || !formData.description || !formData.courseImage || !formData.previewVideo) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    // Prepare FormData for File Uploads
+    const data = new FormData();
+    data.append("title", formData.title);
+    data.append("description", formData.description);
+    data.append("category", formData.category);
+    data.append("price", formData.price);
+    data.append("enrollmentType", formData.enrollmentType);
+    data.append("courseImage", formData.courseImage);
+    data.append("previewVideo", formData.previewVideo);
+
+    // Append learning outcomes as JSON string
+    data.append("whatYouWillLearn", JSON.stringify(formData.whatYouWillLearn));
+
+    try {
+      const response = await createCourse(data).unwrap();
+      console.log(response);
+
+      // Reset form after successful submission
+      setFormData({
+        title: "",
+        description: "",
+        courseImage: null,
+        previewVideo: null,
+        whatYouWillLearn: [],
+        category: "Web Development",
+        price: 0,
+        enrollmentType: "Free",
+      });
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  }
+
   return (
     <section className="max-w-2xl mx-auto p-6 shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-4">Create a New Course</h2>
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         {/* title */}
         <CourseTitle handleChange={handleChange} title={formData.title} />
         {/* description */}
