@@ -19,7 +19,7 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative z-50">
       <label>What You Will Learn</label>
       {/* Add New Learning Outcome */}
       <div className="mt-3 flex gap-2">

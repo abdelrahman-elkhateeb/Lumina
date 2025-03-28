@@ -67,7 +67,7 @@ function CreateCourse() {
 
   return (
     <section className="container mx-auto px-4">
-      {/* <StarBackground /> */}
+      <StarBackground />
       <Heading title="create course" img={img} />
       <form onSubmit={handleSubmit}>
         {step === 1 && <CourseTitle handleChange={handleChange} title={formData.title} />}
@@ -78,7 +78,7 @@ function CreateCourse() {
         {step === 6 && <CourseCourseImage handleFileChange={handleFileChange} />}
         {step === 7 && <CourseWhatYouWillLearn formData={formData} setFormData={setFormData} />}
 
-        <div className="flex justify-between mt-4 relative z-50">
+        <div className="flex items-center gap-5 mt-4 relative z-50">
           {step > 1 && (
             <Button onClick={() => setStep(step - 1)} type="secondary">Previous</Button>
           )}

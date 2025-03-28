@@ -1,6 +1,6 @@
 function CoursePreviewVideo({ handleFileChange }) {
   return (
-    <label className="flex flex-col items-center gap-5 cursor-pointer border-2 border-dashed border-gray-300 bg-primary-500 p-6 rounded-lg shadow-md h-96 justify-center" htmlFor="previewVideo">
+    <label className="flex flex-col items-center gap-5 cursor-pointer border-2 border-dashed border-gray-300 bg-primary-500 p-6 rounded-lg shadow-md h-96 justify-center relative z-50" htmlFor="previewVideo">
       <div className="flex items-center justify-center">
         <div className="bg-secondary-500/70 rounded-full w-36 h-36 grid place-content-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-20 h-20 fill-gray-300">
