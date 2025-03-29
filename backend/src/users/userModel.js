@@ -65,6 +65,16 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.pre("save", function (next) {
+  if (this.userType === "instructor") {
+    this.purchasedCourses = undefined;
+    this.createdCourses = this.createdCourses || [];
+  } else {
+    this.createdCourses = undefined;
+    this.purchasedCourses = this.purchasedCourses || [];
+  }
+  next();
+})
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword,

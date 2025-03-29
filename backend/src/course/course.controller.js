@@ -264,7 +264,16 @@ exports.purchaseCourse = catchAsync(async (req, res, next) => {
 });
 
 exports.displayInstructorCourses = catchAsync(async (req, res, next) => {
-  const
+  const instructor = await User.findById(req.user._id).populate("createdCourses");
+
+  if (!instructor) {
+    return next(new AppError("Instructor not found", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    courses: instructor.createdCourses,
+  });
 });
 
 // crud for section
