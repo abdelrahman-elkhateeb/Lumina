@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../../ui/Button";
 
 function CourseWhatYouWillLearn({ formData, setFormData }) {
   const [newOutcome, setNewOutcome] = useState("");
@@ -19,7 +20,7 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
   };
 
   return (
-    <div className="flex flex-col relative z-50">
+    <div className="w-full p-5 bg-secondary-500/40 rounded-lg font-mono">
       <label>What You Will Learn</label>
       {/* Add New Learning Outcome */}
       <div className="mt-3 flex gap-2">
@@ -30,18 +31,18 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
           onChange={(e) => setNewOutcome(e.target.value)}
           className="p-1 border rounded text-black flex-grow"
         />
-        <button onClick={handleAdd} className="px-2 py-1 bg-blue-500 text-white rounded">
+        <Button type="secondary" onClick={handleAdd}>
           Add
-        </button>
+        </Button>
       </div>
 
       <ul>
         {formData.whatYouWillLearn.map((outcome, index) => (
           <li key={index} className="flex justify-between items-center gap-2 mt-2">
             <span>{outcome}</span>
-            <button onClick={(e) => handleDelete(e, index)} className="px-2 py-1 bg-red-500 text-white rounded">
+            <Button type="round" onClick={(e) => handleDelete(e, index)} c>
               Remove
-            </button>
+            </Button>
           </li>
         ))}
       </ul>
