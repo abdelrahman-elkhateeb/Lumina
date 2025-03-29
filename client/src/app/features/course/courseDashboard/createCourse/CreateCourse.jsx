@@ -9,7 +9,6 @@ import CourseCourseImage from "./CourseCourseImage";
 import CourseWhatYouWillLearn from "./CourseWhatYouWillLearn";
 import Heading from "../../../ui/Heading";
 import img from "../../../../../../public/assets/spaceMan(8).svg";
-import StarBackground from "../../../ui/StarBackground";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 
 function CreateCourse() {
