@@ -64,11 +64,6 @@ const CourseSchema = new mongoose.Schema(
       required: true,
       default: 0
     },
-    enrollmentType: {
-      type: String,
-      enum: ["Free", "Paid"],
-      default: "Free"
-    },
     placementTest: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Quiz"
