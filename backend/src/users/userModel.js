@@ -49,6 +49,7 @@ const userSchema = new mongoose.Schema({
       ref: 'Course'
     }
   ],
+  createdCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
   changedPasswordAt: Date
 });
 
