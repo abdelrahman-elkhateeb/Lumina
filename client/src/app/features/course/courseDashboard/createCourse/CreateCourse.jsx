@@ -20,7 +20,6 @@ function CreateCourse() {
     whatYouWillLearn: [],
     category: "Web Development",
     price: 0,
-    enrollmentType: "Free",
   });
 
   const [createCourse, { isLoading, error }] = useCreateCourseMutation();
@@ -45,8 +44,8 @@ function CreateCourse() {
     });
 
     try {
-      const response = await createCourse(data).unwrap();
-      console.log(response);
+      await createCourse(data).unwrap();
+
       setFormData({
         title: "",
         description: "",
@@ -55,7 +54,6 @@ function CreateCourse() {
         whatYouWillLearn: [],
         category: "Web Development",
         price: 0,
-        enrollmentType: "Free",
       });
     } catch (err) {
       console.error("Error:", err);

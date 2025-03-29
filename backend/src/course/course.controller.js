@@ -73,7 +73,6 @@ exports.createCourse = [
       videoUrl = videoResult.secure_url;
     }
 
-    if (!course) return next(new AppError("Course creation failed", 400));
 
     // Create the course in the database
     const course = await Course.create({
@@ -82,10 +81,13 @@ exports.createCourse = [
       courseImage: imageUrl,
       previewVideo: videoUrl,
     });
+    
+    if (!course) return next(new AppError("Course creation failed", 400));
 
     await User.findByIdAndUpdate(req.user._id, {
       $push: { createdCourses: course._id },
     });
+
 
     res.status(201).json({
       message: "Course created successfully",
