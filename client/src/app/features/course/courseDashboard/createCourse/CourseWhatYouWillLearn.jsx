@@ -39,7 +39,7 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
 
       <ul>
         {formData.whatYouWillLearn.map((outcome, index) => (
-          <li key={index} className="flex justify-between items-center gap-2 mt-2">
+          <li key={index} className="flex justify-between items-center gap-2 mt-7">
             <span>{outcome}</span>
             <Button type="round" onClick={(e) => handleDelete(e, index)}>
               Remove

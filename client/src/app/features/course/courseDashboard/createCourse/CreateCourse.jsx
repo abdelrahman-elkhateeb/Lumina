@@ -63,21 +63,22 @@ function CreateCourse() {
   };
 
   return (
-    <section className="container mx-auto px-4">
+    <section className="container mx-auto px-4 pb-8">
       <Heading title="Create Course" img={img} />
 
       {isLoading ? (
         <LightBulbLoader />
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 items-end">
-          <CourseTitle handleChange={handleChange} title={formData.title} />
-          <CourseDescription handleChange={handleChange} description={formData.description} />
-          <CourseCategory handleChange={handleChange} category={formData.category} />
-          <CoursePrice handleChange={handleChange} price={formData.price} />
-          <CoursePreviewVideo handleFileChange={handleFileChange} />
+          <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-5">
+            <CourseTitle handleChange={handleChange} title={formData.title} />
+            <CourseDescription handleChange={handleChange} description={formData.description} />
+            <CourseCategory handleChange={handleChange} category={formData.category} />
+            <CoursePrice handleChange={handleChange} price={formData.price} />
+            <CoursePreviewVideo handleFileChange={handleFileChange} />
+            <CourseCourseImage handleFileChange={handleFileChange} />
+          </div>
           <CourseWhatYouWillLearn formData={formData} setFormData={setFormData} />
-          <CourseCourseImage handleFileChange={handleFileChange} />
-
           <button
             type="submit"
             disabled={isLoading}
