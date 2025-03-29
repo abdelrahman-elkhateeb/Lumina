@@ -65,7 +65,6 @@ function CreateCourse() {
 
   return (
     <section className="container mx-auto px-4">
-      <StarBackground />
       <Heading title="Create Course" img={img} />
 
       {isLoading ? (
