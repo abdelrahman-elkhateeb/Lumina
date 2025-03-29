@@ -6,6 +6,7 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
 
   const handleAdd = (e) => {
     e.preventDefault();
+    if (newOutcome.trim().length < 4) return;
     setFormData({
       ...formData,
       whatYouWillLearn: [...formData.whatYouWillLearn, newOutcome],
@@ -40,7 +41,7 @@ function CourseWhatYouWillLearn({ formData, setFormData }) {
         {formData.whatYouWillLearn.map((outcome, index) => (
           <li key={index} className="flex justify-between items-center gap-2 mt-2">
             <span>{outcome}</span>
-            <Button type="round" onClick={(e) => handleDelete(e, index)} c>
+            <Button type="round" onClick={(e) => handleDelete(e, index)}>
               Remove
             </Button>
           </li>
