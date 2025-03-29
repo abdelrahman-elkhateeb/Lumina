@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMenu, IoClose } from "react-icons/io5";
-import { useLogoutUserMutation } from "../../redux/auth/registrationApi";
+import { useFetchUserDataQuery, useLogoutUserMutation } from "../../redux/auth/registrationApi";
 
 function MobileMenu() {
 
   const menuButtonClassName = "hover:bg-secondary-700/70 p-3 transition";
 
   const [isOpen, setIsOpen] = useState(false);
+  const { data, isLoading, error } = useFetchUserDataQuery();
+  const userType = data?.data.user.userType == "instructor";
+  console.log(userType);
+
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -66,6 +70,9 @@ function MobileMenu() {
             <Link to="/courses/explore-courses" className={menuButtonClassName} onClick={closeMenu}>
               explore courses
             </Link>
+            {userType ? <Link to="/createCourse" onClick={closeMenu} className={menuButtonClassName}>
+              create course
+            </Link> : null}
           </nav>
 
           {/* Logout Button */}
