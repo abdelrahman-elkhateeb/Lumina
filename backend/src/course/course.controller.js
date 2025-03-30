@@ -180,9 +180,15 @@ exports.updateCourse = [
 ];
 
 exports.deleteCourse = catchAsync(async (req, res, next) => {
-  const course = await Course.findByIdAndDelete(req.params.id);
+  const { id } = req.params;
 
+  const course = await Course.findByIdAndDelete(id);
   if (!course) return next(new AppError("Course not found", 404));
+
+  const courseId = req.user._id;
+  await User.findByIdAndUpdate(courseId, {
+    $pull: { createdCourses: id }
+  });
 
   res.status(204).json({
     message: "Course deleted successfully",
