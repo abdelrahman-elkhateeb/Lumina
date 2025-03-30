@@ -114,11 +114,21 @@ export default {
           "0%": { opacity: "0", transform: "translateY(10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        loader: {
+          "0%": { boxShadow: "0px 0px 0 0px" },
+          "90%, 100%": { boxShadow: "20px 20px 0 -4px" },
+        },
+        layerTr: {
+          "0%": { transform: "translate(0, 0) scale(1)" },
+          "100%": { transform: "translate(-25px, -25px) scale(1)" },
+        },
       },
       animation: {
         falling: "falling 10s linear infinite",
         flicker: "flicker 0.2s ease-in-out 3",
         fadeIn: "fadeIn 0.4s ease-in-out 0s forwards",
+        loader: "loader 1s linear infinite alternate",
+        layerTr: "layerTr 1s linear infinite alternate",
       },
     },
   },

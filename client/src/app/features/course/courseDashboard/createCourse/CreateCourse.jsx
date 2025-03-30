@@ -9,7 +9,7 @@ import CourseCourseImage from "./CourseCourseImage";
 import CourseWhatYouWillLearn from "./CourseWhatYouWillLearn";
 import Heading from "../../../ui/Heading";
 import img from "../../../../../../public/assets/spaceMan(8).svg";
-import LightBulbLoader from "../../../ui/LightBulbLoader";
+import LoadingUpload from "../../../ui/LoadingUpload";
 
 function CreateCourse() {
   const [formData, setFormData] = useState({
@@ -63,12 +63,12 @@ function CreateCourse() {
   };
 
   return (
-    <section className="container mx-auto px-4 pb-8">
-      <Heading title="Create Course" img={img} />
+    isLoading ? (
+      <LoadingUpload />
+    ) : (
+      <section className="container mx-auto px-4 pb-8">
+        <Heading title="Create Course" img={img} />
 
-      {isLoading ? (
-        <LightBulbLoader />
-      ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 items-end">
           <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-5">
             <CourseTitle handleChange={handleChange} title={formData.title} />
@@ -87,8 +87,8 @@ function CreateCourse() {
             {isLoading ? "Submitting..." : "Submit"}
           </button>
         </form>
-      )}
-    </section>
+      </section>
+    )
   );
 }
 
