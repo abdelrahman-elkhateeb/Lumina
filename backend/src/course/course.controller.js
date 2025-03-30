@@ -73,15 +73,21 @@ exports.createCourse = [
       videoUrl = videoResult.secure_url;
     }
 
+    const { whatYouWillLearn } = req.body;
+
+    const parsedWhatYouWillLearn = Array.isArray(whatYouWillLearn)
+      ? whatYouWillLearn
+      : JSON.parse(whatYouWillLearn || "[]");
 
     // Create the course in the database
     const course = await Course.create({
       ...req.body,
       instructor: req.user._id,
+      whatYouWillLearn: parsedWhatYouWillLearn,
       courseImage: imageUrl,
       previewVideo: videoUrl,
     });
-    
+
     if (!course) return next(new AppError("Course creation failed", 400));
 
     await User.findByIdAndUpdate(req.user._id, {

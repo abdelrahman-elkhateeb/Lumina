@@ -22,6 +22,7 @@ function CreateCourse() {
     price: 0,
   });
 
+
   const [createCourse, { isLoading, error }] = useCreateCourseMutation();
 
   const handleChange = (e) => {
@@ -35,10 +36,11 @@ function CreateCourse() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
+
     Object.entries(formData).forEach(([key, value]) => {
       if (key === "whatYouWillLearn") {
-        data.append(key, JSON.stringify(value));
-      } else {
+        data.append(key, JSON.stringify(value)); // Ensure array is properly formatted
+      } else if (value !== null) {
         data.append(key, value);
       }
     });
