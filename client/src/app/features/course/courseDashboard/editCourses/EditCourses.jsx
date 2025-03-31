@@ -3,7 +3,7 @@ import CourseCard from "./CourseCard";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 
 function EditCourses() {
-  const { data, isLoading, error } = useInstructorCoursesQuery();
+  const { data, isLoading, error, refetch } = useInstructorCoursesQuery();
 
   if (isLoading) {
     return <LightBulbLoader />;
@@ -11,7 +11,7 @@ function EditCourses() {
 
   return (
     <section className="container mx-auto px-4">
-      <CourseCard courses={data?.courses} />
+      <CourseCard courses={data?.courses} refetch={refetch} />
     </section>
   )
 }

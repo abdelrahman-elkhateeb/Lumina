@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import { useDeleteCourseMutation } from "../../../redux/courses/coursesApi";
 
-function CourseCard({ courses }) {
-  const [deleteCourse] = useDeleteCourseMutation();
+function CourseCard({ courses, refetch }) {
+  const [deleteCourse, { isLoading }] = useDeleteCourseMutation();
 
   const handleDeleteCourse = async (courseId) => {
-    try {
-      await deleteCourse(courseId).unwrap();
-      console.log(`Course ${courseId} deleted successfully`);
-    } catch (error) {
-      console.error("Error deleting course:", error);
+    if (window.confirm("Are you sure you want to delete this course permanently?")) {
+      try {
+        await deleteCourse(courseId).unwrap();
+        console.log("Course deleted successfully");
+        if (refetch) refetch();
+      } catch (error) {
+        console.error("Delete error:", error);
+      }
     }
   }
 
@@ -40,8 +43,9 @@ function CourseCard({ courses }) {
             <button
               className="p-2 bg-red-500 text-white rounded-md"
               onClick={() => handleDeleteCourse(course._id)}
+              disabled={isLoading}
             >
-              Delete
+              delete
             </button>
           </div>
         </div>

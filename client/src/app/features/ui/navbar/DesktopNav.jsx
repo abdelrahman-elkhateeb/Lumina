@@ -24,6 +24,13 @@ function DesktopNav() {
           </Link>
         </li>
       }
+      {userType &&
+        <li>
+          <Link to="/courses/manage">
+            manage course
+          </Link>
+        </li>
+      }
     </ul>
   )
 }
