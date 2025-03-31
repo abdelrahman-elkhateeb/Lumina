@@ -35,7 +35,7 @@ function CourseCard({ courses, refetch }) {
           {/* Actions (Edit & Delete) */}
           <div className="flex justify-between items-center mt-2">
             {/* Edit Link (Only this navigates) */}
-            <Link to="/editCourse" className="text-accent-500 hover:underline">
+            <Link to="/courses/manage/edit" className="text-accent-500 hover:underline">
               Edit
             </Link>
 

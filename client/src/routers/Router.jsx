@@ -11,6 +11,7 @@ import ExploreCourses from "../app/features/course/exploreCourses/ExploreCourses
 import InstructorOnlyRouter from "./InstructorOnlyRouter";
 import CreateCourse from "../app/features/course/courseDashboard/createCourse/CreateCourse";
 import EditCourses from "../app/features/course/courseDashboard/editCourses/EditCourses";
+import EditCoursePage from "../app/features/course/courseDashboard/editCourses/EditCoursePage";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
         children: [
           { path: "/courses/create", element: <CreateCourse /> },
           { path: "/courses/manage", element: <EditCourses /> },
+          { path: "/courses/manage/edit", element: <EditCoursePage /> }
         ]
       }
     ],
