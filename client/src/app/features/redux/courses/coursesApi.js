@@ -21,11 +21,21 @@ export const courseSlice = createApi({
     }),
     createCourse: builder.mutation({
       query: (courseData) => ({
-        url: "/courses/createCourse",
+        url: "/courses/create",
         method: "POST",
         body: courseData
       }),
     }),
+    instructorCourses: builder.query({
+      query: () => `/courses/manage`,
+    }),
+    deleteCourse: builder.mutation({
+      query: (id) => ({
+        url: `/courses/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['course'],
+    })
   }),
 });
 
@@ -35,4 +45,6 @@ export const {
   useGetCourseQuery,
   useGetMyCoursesQuery,
   useCreateCourseMutation,
+  useInstructorCoursesQuery,
+  useDeleteCourseMutation
 } = courseSlice;

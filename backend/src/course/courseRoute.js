@@ -12,9 +12,9 @@ router.get("/preview", courseController.featuredCourses);
 router.use(authController.protect);
 router.get("/myCourses", courseController.getMyCourses);
 router.post("/pruchaseCourse", courseController.purchaseCourse);
-router.get("/instructorCourses", courseController.displayInstructorCourses);
+router.get("/manage", courseController.displayInstructorCourses);
 
-router.post("/createCourse", authController.restrictTo("instructor"), courseController.createCourse);
+router.post("/create", authController.restrictTo("instructor"), courseController.createCourse);
 
 router.route("/:id")
   .get(courseController.getCourse)

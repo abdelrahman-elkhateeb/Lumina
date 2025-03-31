@@ -10,8 +10,6 @@ function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const { data, isLoading, error } = useFetchUserDataQuery();
   const userType = data?.data.user.userType == "instructor";
-  console.log(userType);
-
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -70,7 +68,7 @@ function MobileMenu() {
             <Link to="/courses/explore-courses" className={menuButtonClassName} onClick={closeMenu}>
               explore courses
             </Link>
-            {userType ? <Link to="/createCourse" onClick={closeMenu} className={menuButtonClassName}>
+            {userType ? <Link to="/courses/create" onClick={closeMenu} className={menuButtonClassName}>
               create course
             </Link> : null}
           </nav>

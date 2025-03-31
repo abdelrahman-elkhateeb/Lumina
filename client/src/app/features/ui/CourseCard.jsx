@@ -30,10 +30,6 @@ function CourseCard({ courses = [] }) {
                 By {course.instructor?.name || "Unknown"}
               </h4>
 
-              <p className="text-sm text-gray-300 mb-4 line-clamp-3">
-                {course.description}
-              </p>
-
               {/* Price & Enrollment Type */}
               <div className="flex justify-end items-center text-sm">
                 <span

@@ -6,8 +6,6 @@ import ErrorPage from "../app/features/ui/ErrorPage";
 function InstructorOnlyRouter() {
   const { data, isLoading, error } = useFetchUserDataQuery();
 
-  console.log("User Data:", data?.data.user.userType);
-
   if (isLoading) return <LightBulbLoader />;
   if (error) return <ErrorPage />;
 

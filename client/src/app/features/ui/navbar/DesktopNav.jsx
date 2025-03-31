@@ -19,7 +19,7 @@ function DesktopNav() {
       </li>
       {userType &&
         <li>
-          <Link to="/createCourse">
+          <Link to="/courses/create">
             create course
           </Link>
         </li>
