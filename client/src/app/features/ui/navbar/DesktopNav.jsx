@@ -8,9 +8,9 @@ function DesktopNav() {
   return (
     <ul className="hidden md:flex items-center justify-between gap-6">
       <li>
-        <Link to="/courses/myCourses">
+        {!userType && <Link to="/courses/myCourses">
           my courses
-        </Link>
+        </Link>}
       </li>
       <li>
         <Link to="/courses/explore-courses">
