@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
-import { useUpdateUserMutation } from "../redux/user/userApi"; // Adjust the path as needed
+import { useUpdateUserMutation } from "../redux/user/userApi";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is a required field").min(2, "Name is too short 😒"),
