@@ -8,8 +8,9 @@ import CreateSectionTitle from "./CreateSectionTitle";
 
 function CreateSection() {
   const initialValues = { title: "", courseId: "" };
-  const { data, isLoading } = useInstructorCoursesQuery();
   const [formValues, setFormValues] = useState(initialValues);
+  
+  const { data, isLoading } = useInstructorCoursesQuery();
   const [createSection] = useCreateSectionMutation();
 
   const handleSubmit = () => {
@@ -23,10 +24,13 @@ function CreateSection() {
     <section className="container mx-auto px-4">
       <Heading title="create new section" img={spaceMan} />
       <form action="" className="grid gap-5" onSubmit={handleSubmit}>
+
         {/* choose course */}
         <ChooseCourse courses={courses} setFormValues={setFormValues} formValues={formValues} />
+
         {/* type title for the section */}
         <CreateSectionTitle formValues={formValues} setFormValues={setFormValues} />
+
         <button
           type="submit"
           disabled={isLoading}

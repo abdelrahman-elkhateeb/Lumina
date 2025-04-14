@@ -18,4 +18,4 @@ function CreateSectionTitle({ formValues, setFormValues }) {
   )
 }
 
-export default CreateSectionTitle
+export default CreateSectionTitle;

@@ -78,6 +78,9 @@ function MobileMenu() {
             {userType ? <Link to="/courses/section/create" onClick={closeMenu} className={menuButtonClassName}>
               create section
             </Link> : null}
+            {userType ? <Link to="/courses/lesson/create" onClick={closeMenu} className={menuButtonClassName}>
+              create lesson
+            </Link> : null}
             {userType ? <Link to="/courses/manage" onClick={closeMenu} className={menuButtonClassName}>
               manage course
             </Link> : null}

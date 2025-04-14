@@ -32,6 +32,6 @@ router
   .delete(authController.restrictTo("instructor"), courseController.deleteSection);
 
 // crud for lesson
-router.post("/createLesson", authController.restrictTo("instructor"), courseController.createLesson).patch("/:courseId/lessons/:lessonId", authController.restrictTo("instructor"), courseController.updateLesson);
+router.post("/lesson/create", authController.restrictTo("instructor"), courseController.createLesson).patch("/:courseId/lessons/:lessonId", authController.restrictTo("instructor"), courseController.updateLesson);
 
 module.exports = router;

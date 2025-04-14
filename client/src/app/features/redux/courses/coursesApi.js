@@ -42,7 +42,14 @@ export const courseSlice = createApi({
         method: "POST",
         body: sectionData
       }),
-    })
+    }),
+    createLesson: builder.mutation({
+      query: (lessonData) => ({
+        url: "/courses/lesson/create",
+        method: "POST",
+        body: lessonData
+      }),
+    }),
   }),
 });
 

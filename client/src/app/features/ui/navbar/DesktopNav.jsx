@@ -19,6 +19,13 @@ function DesktopNav() {
       </li>
       {userType &&
         <li>
+          <Link to="/courses/manage">
+            manage course
+          </Link>
+        </li>
+      }
+      {userType &&
+        <li>
           <Link to="/courses/create">
             create course
           </Link>
@@ -33,8 +40,8 @@ function DesktopNav() {
       }
       {userType &&
         <li>
-          <Link to="/courses/manage">
-            manage course
+          <Link to="/courses/lesson/create">
+            create lesson
           </Link>
         </li>
       }
