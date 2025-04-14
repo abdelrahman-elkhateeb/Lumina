@@ -24,7 +24,7 @@ router.route("/:id")
 
 // crud for section
 router.get("/getSections", authController.restrictTo("instructor"), courseController.getSections);
-router.post("/createSection", authController.restrictTo("instructor"), courseController.createSection);
+router.post("/section/create", authController.restrictTo("instructor"), courseController.createSection);
 router
   .route("/:courseId/sections/:sectionId")
   .get(authController.restrictTo("instructor"), courseController.getSection)

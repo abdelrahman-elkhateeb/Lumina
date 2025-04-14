@@ -26,6 +26,13 @@ function DesktopNav() {
       }
       {userType &&
         <li>
+          <Link to="/courses/section/create">
+            create section
+          </Link>
+        </li>
+      }
+      {userType &&
+        <li>
           <Link to="/courses/manage">
             manage course
           </Link>

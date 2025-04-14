@@ -35,6 +35,13 @@ export const courseSlice = createApi({
         method: 'DELETE',
       }),
       invalidatesTags: ['course'],
+    }),
+    createSection: builder.mutation({
+      query: (sectionData) => ({
+        url: "/courses/section/create",
+        method: "POST",
+        body: sectionData
+      }),
     })
   }),
 });
@@ -46,5 +53,6 @@ export const {
   useGetMyCoursesQuery,
   useCreateCourseMutation,
   useInstructorCoursesQuery,
-  useDeleteCourseMutation
+  useDeleteCourseMutation,
+  useCreateSectionMutation
 } = courseSlice;
