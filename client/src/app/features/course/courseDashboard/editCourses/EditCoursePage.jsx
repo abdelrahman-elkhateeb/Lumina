@@ -3,10 +3,10 @@ import spaceman from "../../../../../../public/assets/spaceMan(1).svg";
 
 function EditCoursePage() {
   return (
-    <div>
+    <section className="container mx-auto px-4">
       <Heading title="edit your content here" img={spaceman} />
-      
-    </div>
+
+    </section>
   )
 }
 
