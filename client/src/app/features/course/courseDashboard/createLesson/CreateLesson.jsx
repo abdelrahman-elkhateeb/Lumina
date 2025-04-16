@@ -1,7 +1,7 @@
 import Heading from "../../../ui/Heading";
 import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
 import SelectCourse from "./SelectCourse";
-import { useInstructorCoursesQuery } from "../../../redux/courses/coursesApi";
+import { useCreateLessonMutation, useInstructorCoursesQuery } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import SelectSection from "./SelectSection";
 import { useState } from "react";
@@ -12,12 +12,15 @@ import SetLessonVideo from "./SetLessonVideo";
 
 function CreateLesson() {
   const { data, isLoading, error } = useInstructorCoursesQuery();
+  const [createLesson, { loading, err }] = useCreateLessonMutation();
   const [selectCourseId, setSelectedCourseId] = useState("");
+  const [sectionId, setSectionId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     video: null,
-    section: "",
+    sectionId: "",
     course: ""
   });
 
@@ -26,15 +29,27 @@ function CreateLesson() {
   };
 
   const handleFileChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', this.state.title);
-    formData.append('description', this.state.description);
-    formData.append('video', this.state.video);
+    setIsSubmitting(true);
+    const lessonForm = new FormData();
+
+    lessonForm.append("title", formData.title);
+    lessonForm.append("description", formData.description);
+    lessonForm.append("video", formData.video); // File object
+    lessonForm.append("courseId", selectCourseId);
+    lessonForm.append("sectionId", sectionId);
+
+    try {
+      await createLesson(lessonForm).unwrap();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (isLoading) return <LightBulbLoader />;
@@ -51,12 +66,12 @@ function CreateLesson() {
         <div className="grid gap-5">
           <SetTitle handleChange={handleChange} />
           <SelectCourse courses={courses} setSelectedCourseId={setSelectedCourseId} />
-          {selectedCourse && <SelectSection course={selectedCourse} />}
+          {selectedCourse && <SelectSection course={selectedCourse} setSectionId={setSectionId} />}
           <SetDescription handleChange={handleChange} />
           <SetLessonVideo handleFileChange={handleFileChange} />
         </div>
         <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto" type="submit">
-          Create Lesson
+          {isSubmitting ? "Creating..." : "Create Lesson"}
         </button>
       </form>
     </section>

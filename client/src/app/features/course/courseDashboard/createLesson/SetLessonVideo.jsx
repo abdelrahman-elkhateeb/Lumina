@@ -11,7 +11,7 @@ function SetLessonVideo({ handleFileChange }) {
       <div className="flex items-center justify-center">
         <span className="font-normal text-text">Click to upload video</span>
       </div>
-      <input type="file" id="previewVideo" name="previewVideo" onChange={handleFileChange} className="hidden" />
+      <input type="file" id="previewVideo" name="video" onChange={handleFileChange} className="hidden" />
     </label>
   )
 }
