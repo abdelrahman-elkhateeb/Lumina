@@ -79,12 +79,8 @@ function CreateCourse() {
             <CourseCourseImage handleFileChange={handleFileChange} />
           </div>
           <CourseWhatYouWillLearn formData={formData} setFormData={setFormData} />
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="bg-green-500 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-400 transition-all duration-300"
-          >
-            {isLoading ? "Submitting..." : "Submit"}
+          <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto" type="submit">
+            {isLoading ? "Creating..." : "Create course"}
           </button>
         </form>
       </section>
