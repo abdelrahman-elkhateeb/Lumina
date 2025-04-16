@@ -1,5 +1,4 @@
-function SelectSection({ courses }) {
-  console.log(courses);
+function SelectSection({ course }) {
 
   return (
     <div className="w-full p-5 bg-secondary-500/40 rounded-lg font-mono">
@@ -14,7 +13,7 @@ function SelectSection({ courses }) {
         <option value="" disabled>
           -- Select a section --
         </option>
-        {courses.sections.map((section) => (
+        {course.sections.map((section) => (
           <option key={section._id} value={section._id}>
             {section.title}
           </option>
