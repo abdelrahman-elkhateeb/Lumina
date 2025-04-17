@@ -34,7 +34,7 @@ function Course() {
         <CourseOverview course={course} />
       </div>
 
-      <div className="bg-accent-500/90 rounded-lg shadow-md p-4 mt-10">
+      <div className="bg-background-500 rounded-lg shadow-md p-4 mt-10">
         <CodeEditor />
       </div>
     </section>
