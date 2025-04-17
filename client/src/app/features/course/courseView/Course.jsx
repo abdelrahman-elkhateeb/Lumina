@@ -27,16 +27,14 @@ function Course() {
             <VideoPlayer videoUrl={selectedVideoUrl} />
           </div>
 
-
           <aside className="bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
             <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
           </aside>
         </div>
-
         <CourseOverview course={course} />
       </div>
 
-      <div className="bg-black rounded-lg shadow-md p-4">
+      <div className="bg-accent-500/90 rounded-lg shadow-md p-4 mt-10">
         <CodeEditor />
       </div>
     </section>

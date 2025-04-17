@@ -26,15 +26,16 @@ const Output = ({ editorRef, language }) => {
   };
 
   return (
-    <div className="w-full  px-2">
-      <p className="mb-2 text-lg font-semibold text-gray-800 dark:text-gray-200">Output</p>
+    <div className="w-full px-2">
+      <p className="mb-2 text-lg font-semibold text-text">Output</p>
 
       <button
         onClick={runCode}
         disabled={isLoading}
-        className={`mb-4 px-4 py-2 border rounded-md transition duration-200 text-sm font-medium ${isLoading
-          ? "bg-green-600 cursor-not-allowed text-white"
-          : "border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+        className={`mb-4 px-4 py-2 border rounded-md transition duration-200 text-sm font-medium
+        ${isLoading
+            ? "bg-primary-700 cursor-not-allowed text-white"
+            : "border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-background-500"
           }`}
       >
         {isLoading ? "Running..." : "Run Code"}
@@ -47,8 +48,11 @@ const Output = ({ editorRef, language }) => {
       )}
 
       <div
-        className={`h-[75vh] p-3 overflow-auto text-sm rounded border ${isError ? "text-red-400 border-red-500" : "border-gray-700 text-gray-100"
-          } bg-[#1e1e1e]`}
+        className={`h-[75vh] p-3 overflow-auto text-sm rounded border
+        ${isError
+            ? "text-accent-500 border-accent-500"
+            : "border-background-500 text-text"
+          } bg-background-700/60`}
       >
         {output
           ? output.map((line, i) => <p key={i}>{line}</p>)
