@@ -2,7 +2,6 @@ import { useState } from "react";
 
 function Sections({ sections, setSelectedVideoUrl }) {
   const [activeSections, setActiveSections] = useState({});
-  console.log(activeSections);
 
   const toggleSection = (sectionId) => {
     setActiveSections((prev) => ({
@@ -10,8 +9,6 @@ function Sections({ sections, setSelectedVideoUrl }) {
       [sectionId]: !prev[sectionId],
     }));
   };
-  console.log(activeSections);
-
 
   return (
     <nav aria-label="Course Content">

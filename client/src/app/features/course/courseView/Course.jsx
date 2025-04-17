@@ -12,27 +12,33 @@ function Course() {
   const course = data?.course || {};
   const sections = data?.course.sections || [];
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(course.previewVideo || "");
-  console.log(selectedVideoUrl);
-
 
   return (
-    <section className="container mx-auto px-4">
+    <section className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-        {/* Left Content (Video & Overview) */}
-        <div className="lg:col-span-2 space-y-6">
+        {/* Left Side: Video, Overview, and IDE */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* Video Player */}
           <VideoPlayer videoUrl={selectedVideoUrl} />
+
+          {/* Course Overview */}
           <CourseOverview course={course} />
+
+          {/* Embedded CodePen IDE */}
+          <div className="bg-black rounded-lg shadow-md p-4">
+            <h2 className="text-xl font-semibold mb-4">Try It Yourself </h2>
+            
+          </div>
         </div>
 
-        {/* Right Sidebar (Sections) */}
-        <aside className=" bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
+        {/* Right Sidebar: Sections */}
+        <aside className="bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
           <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
         </aside>
-
       </div>
     </section>
-  )
+  );
 }
 
 export default Course;
