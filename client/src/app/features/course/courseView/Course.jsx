@@ -38,7 +38,7 @@ function Course() {
                 <img src={spaceMan2} alt="" />
               </div>
               <span className="mt-2 text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-500 via-primary-500 to-secondary-500 hover:from-secondary-500 hover:via-accent-500 hover:to-primary-500 transition-all duration-500 drop-shadow-md">
-                code it ?!
+                online compiler ?!
               </span>
             </Link>
           </div>
