@@ -5,6 +5,8 @@ import Sections from "./Sections";
 import CourseOverview from "./CourseOverview";
 import { useState } from "react";
 import CodeEditor from "../../ui/codeEditor/CodeEditor";
+import Heading from "../../ui/Heading";
+import spaceMan from "../../../../../public/assets/spaceMan(7).svg";
 
 function Course() {
   const { id } = useParams();
@@ -16,25 +18,25 @@ function Course() {
 
   return (
     <section className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="">
+        <Heading title={course.title} img={spaceMan} />
 
-        {/* Left Side: Video, Overview, and IDE */}
-        <div className="lg:col-span-2 space-y-8">
-          {/* Video Player */}
-          <VideoPlayer videoUrl={selectedVideoUrl} />
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5">
 
-          {/* Course Overview */}
-          <CourseOverview course={course} />
+          <div className="col-span-2">
+            <VideoPlayer videoUrl={selectedVideoUrl} />
+          </div>
+
+
+          <aside className="bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
+            <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
+          </aside>
         </div>
 
-        {/* Right Sidebar: Sections */}
-        <aside className="bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
-          <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
-        </aside>
+        <CourseOverview course={course} />
       </div>
-      {/* Embedded CodePen IDE */}
+
       <div className="bg-black rounded-lg shadow-md p-4">
-        <h2 className="text-xl font-semibold mb-4">Try It Yourself </h2>
         <CodeEditor />
       </div>
     </section>
