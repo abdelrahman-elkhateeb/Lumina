@@ -4,6 +4,7 @@ import VideoPlayer from "./VideoPlayer";
 import Sections from "./Sections";
 import CourseOverview from "./CourseOverview";
 import { useState } from "react";
+import CodeEditor from "../../ui/codeEditor/CodeEditor";
 
 function Course() {
   const { id } = useParams();
@@ -24,18 +25,17 @@ function Course() {
 
           {/* Course Overview */}
           <CourseOverview course={course} />
-
-          {/* Embedded CodePen IDE */}
-          <div className="bg-black rounded-lg shadow-md p-4">
-            <h2 className="text-xl font-semibold mb-4">Try It Yourself </h2>
-            
-          </div>
         </div>
 
         {/* Right Sidebar: Sections */}
         <aside className="bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
           <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
         </aside>
+      </div>
+      {/* Embedded CodePen IDE */}
+      <div className="bg-black rounded-lg shadow-md p-4">
+        <h2 className="text-xl font-semibold mb-4">Try It Yourself </h2>
+        <CodeEditor />
       </div>
     </section>
   );
