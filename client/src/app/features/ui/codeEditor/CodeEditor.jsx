@@ -19,22 +19,24 @@ function CodeEditor() {
   }
 
   return (
-    <div className='grid grid-cols-2 gap-4'>
-      <div>
-        <LanguageSelector language={language} onSelect={onSelect} />
-        <Editor
-          height="75vh"
-          theme='vs-dark'
-          language={language}
-          defaultLanguage='javascript'
-          defaultValue={CODE_SNIPPETS[language]}
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
-          onMount={onMount}
-        />
+    <section className='container mx-auto px-4'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div>
+          <LanguageSelector language={language} onSelect={onSelect} />
+          <Editor
+            height="75vh"
+            theme='vs-dark'
+            language={language}
+            defaultLanguage='javascript'
+            defaultValue={CODE_SNIPPETS[language]}
+            value={value}
+            onChange={(newValue) => setValue(newValue)}
+            onMount={onMount}
+          />
+        </div>
+        <Output editorRef={editorRef} language={language} />
       </div>
-      <Output editorRef={editorRef} language={language} />
-    </div>
+    </section>
   )
 }
 
