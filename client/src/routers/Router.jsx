@@ -34,13 +34,14 @@ const router = createBrowserRouter([
           { path: "/profile", element: <UserProfile /> },
           { path: "/courses/:id", element: <Course /> },
           { path: "/courses/myCourses", element: <MyCourses /> },
+          { path: "/codeEditor", element: <CodeEditor /> },
         ],
       },
       { path: "/courses/explore-courses", element: <ExploreCourses /> },
       { path: "/courses/preview/:id", element: <CoursePreview /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
-      { path: "/codeEditor", element: <CodeEditor /> },
+      
       {
         element: <InstructorOnlyRouter />,
         children: [
