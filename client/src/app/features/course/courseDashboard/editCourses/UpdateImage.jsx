@@ -1,4 +1,4 @@
-function UpdateImage() {
+function UpdateImage({ setSelectedImage }) {
   return (
     <label className="flex w-full flex-col items-center gap-5 cursor-pointer border-2 border-dashed border-gray-300 bg-primary-500 p-6 rounded-lg shadow-md h-96 justify-center relative z-50">
       <div className="flex items-center justify-center">
@@ -11,7 +11,7 @@ function UpdateImage() {
       <div className="flex items-center justify-center">
         <span className="font-normal text-text">click to update image</span>
       </div>
-      <input type="file" name="courseImage" className="hidden" />
+      <input type="file" name="courseImage" className="hidden" onChange={(e) => setSelectedImage(e.target.files[0])} />
     </label >
   )
 }

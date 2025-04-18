@@ -22,23 +22,44 @@ function EditCoursePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!courseId || Object.keys(updatedData).length === 0) {
-      return alert("Please select a course and update at least one field.");
+    if (!courseId) {
+      return alert("Please select a course.");
     }
-    const formData = new FormData();
 
-    if (selectedImage)
-      formData.append("image", selectedImage);
+    const hasFile = selectedImage || selectedVideo;
+    const hasUpdates = Object.keys(updatedData).length > 0;
 
-    if (selectedVideo)
-      formData.append("image", selectedVideo);
+    if (!hasFile && !hasUpdates) {
+      return alert("Please update at least one field.");
+    }
 
     try {
-      await updateCourse({ courseId, data: updatedData }).unwrap();
+      let payload;
+
+      if (hasFile) {
+        // Create FormData if file(s) are involved
+        const formData = new FormData();
+        if (selectedImage) formData.append("courseImage", selectedImage);
+        if (selectedVideo) formData.append("previewVideo", selectedVideo);
+
+        for (const key in updatedData) {
+          formData.append(key, updatedData[key]);
+        }
+
+        payload = formData;
+      } else {
+        // If no files, send JSON
+        payload = updatedData;
+      }
+
+      await updateCourse({ courseId, data: payload }).unwrap();
+      alert("Course updated successfully!");
     } catch (error) {
       console.error("Update failed", error);
+      alert("Something went wrong.");
     }
-  }
+  };
+
 
   if (isLoading) return <LightBulbLoader />
   const courses = data?.courses;
@@ -56,7 +77,7 @@ function EditCoursePage() {
           <UpdateVideo setSelectedVideo={setSelectedVideo} />
           <UpdateImage setSelectedImage={setSelectedImage} />
         </div>
-        <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto" type="submit">
+        <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto mb-10" type="submit">
           {isUpdateLoading ? "Creating..." : "update course"}
         </button>
       </form>

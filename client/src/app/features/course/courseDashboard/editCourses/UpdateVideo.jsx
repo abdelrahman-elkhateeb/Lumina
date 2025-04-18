@@ -1,4 +1,5 @@
-function UpdateVideo() {
+function UpdateVideo({ setSelectedVideo }) {
+
   return (
     <label className="flex flex-col items-center gap-5 cursor-pointer border-2 border-dashed border-gray-300 bg-primary-500 w-full p-6 rounded-lg shadow-md h-96 justify-center relative z-50" htmlFor="previewVideo">
       <div className="flex items-center justify-center">
@@ -11,7 +12,7 @@ function UpdateVideo() {
       <div className="flex items-center justify-center">
         <span className="font-normal text-text">Click to update preview video</span>
       </div>
-      <input type="file" id="previewVideo" name="video" className="hidden" />
+      <input type="file" id="previewVideo" name="video" className="hidden" onChange={(e) => setSelectedVideo(e.target.files[0])} />
     </label>
   )
 }
