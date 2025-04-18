@@ -56,7 +56,14 @@ export const courseSlice = createApi({
         method: "PATCH",
         body: courseData.data
       })
-    })
+    }),
+    updateSection: builder.mutation({
+      query: (sectionData) => ({
+        url: `/courses/section/${sectionData.sectionId}`,
+        method: "PATCH",
+        body: sectionData.data
+      })
+    }),
   }),
 });
 
@@ -70,5 +77,6 @@ export const {
   useDeleteCourseMutation,
   useCreateSectionMutation,
   useCreateLessonMutation,
-  useUpdateCourseMutation
+  useUpdateCourseMutation,
+  useUpdateSectionMutation,
 } = courseSlice;
