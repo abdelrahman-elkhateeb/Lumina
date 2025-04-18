@@ -4,9 +4,12 @@ import { useState } from "react";
 import UpdateSectionTitle from "./UpdateSectionTitle";
 import { useInstructorCoursesQuery, useUpdateSectionMutation } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
+import SelectCourse from "../editSection/SelectCourse";
 
 function EditSection() {
   const [updateData, setUpdatedData] = useState("");
+  const [courseId, setCourseId] = useState("");
+  const [sectionId, setSectionId] = useState("");
   const { data, isLoading, error } = useInstructorCoursesQuery();
   const [updateSection, { isLoading: isUpdateLoading, error: updateError }] = useUpdateSectionMutation();
 
@@ -23,6 +26,7 @@ function EditSection() {
     <section className="container mx-auto px-4">
       <Heading title="edit your content here" img={spaceman} />
       <form onSubmit={handleSubmit}>
+        <SelectCourse setCourseId={setCourseId} />
         <UpdateSectionTitle setUpdatedData={setUpdatedData} />
 
       </form>
