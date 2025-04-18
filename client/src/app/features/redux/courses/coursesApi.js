@@ -52,9 +52,9 @@ export const courseSlice = createApi({
     }),
     updateCourse: builder.mutation({
       query: (courseData) => ({
-        url: `/courses/${courseData.id}`,
+        url: `/courses/${courseData.courseId}`,
         method: "PATCH",
-        body: courseData
+        body: courseData.data
       })
     })
   }),
