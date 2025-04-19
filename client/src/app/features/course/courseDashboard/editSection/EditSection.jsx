@@ -7,6 +7,7 @@ import LightBulbLoader from "../../../ui/LightBulbLoader";
 import SelectCourse from "../../../ui/SelectCourse";
 import SelectSection from "../../../ui/SelectSection";
 import ErrorPage from "../../../ui/ErrorPage";
+import { Link } from "react-router-dom";
 
 function EditSection() {
   const [updateData, setUpdatedData] = useState("");
@@ -32,7 +33,26 @@ function EditSection() {
   return (
     <section className="container mx-auto px-4">
       <Heading title="edit your content here" img={spaceman} />
-      
+      <div className="flex justify-between items-center">
+        <Link
+          to="/courses/manage/edit"
+          className="w-fit mb-4  rounded-full px-6 py-2 text-sm font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 flex items-center gap-2 justify-center"
+        >
+          <span className="material-symbols-outlined">
+            arrow_back
+          </span>
+          Update course
+        </Link>
+        <Link
+          to="/lesson/manage/edit"
+          className="w-fit mb-4 rounded-full px-6 py-2 text-sm font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 flex items-center gap-2 justify-center"
+        >
+          Update lesson
+          <span className="material-symbols-outlined">
+            arrow_forward
+          </span>
+        </Link>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <SelectCourse setCourseId={setCourseId} courses={courses} />
         {selectedCourse && <SelectSection setSectionId={setSectionId} course={selectedCourse} />}

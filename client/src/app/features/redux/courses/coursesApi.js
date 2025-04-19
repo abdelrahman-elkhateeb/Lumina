@@ -64,6 +64,13 @@ export const courseSlice = createApi({
         body: sectionData.data
       })
     }),
+    updateLesson: builder.mutation({
+      query: (lessonData) => ({
+        url: `/courses/${lessonData.courseId}/lessons/${lessonData.lessonId}`,
+        method: "PATCH",
+        body: lessonData.data
+      })
+    }),
   }),
 });
 
