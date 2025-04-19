@@ -59,7 +59,7 @@ export const courseSlice = createApi({
     }),
     updateSection: builder.mutation({
       query: (sectionData) => ({
-        url: `/courses/section/${sectionData.sectionId}`,
+        url: `/courses/${sectionData.courseId}/sections/${sectionData.sectionId}`,
         method: "PATCH",
         body: sectionData.data
       })

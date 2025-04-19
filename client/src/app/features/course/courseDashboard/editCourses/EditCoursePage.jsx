@@ -5,7 +5,7 @@ import LightBulbLoader from "../../../ui/LightBulbLoader";
 import UpdateTitle from "./UpdateTitle";
 import UpdateDescription from "./UpdateDescription";
 import { useState } from "react";
-import SelectCourse from "./SelectCourse";
+import SelectCourse from "../../../ui/SelectCourse";
 import UpdateVideo from "./UpdateVideo";
 import UpdateImage from "./UpdateImage";
 import UpdatePrice from "./UpdatePrice";

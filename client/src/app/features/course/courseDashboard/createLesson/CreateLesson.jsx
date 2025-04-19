@@ -3,7 +3,7 @@ import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
 import SelectCourse from "./SelectCourse";
 import { useCreateLessonMutation, useInstructorCoursesQuery } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
-import SelectSection from "./SelectSection";
+import SelectSection from "../../../ui/SelectSection";
 import { useState } from "react";
 import ErrorPage from "../../../ui/ErrorPage";
 import SetTitle from "./SetTitle";
