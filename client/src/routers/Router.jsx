@@ -11,7 +11,7 @@ import ExploreCourses from "../app/features/course/exploreCourses/ExploreCourses
 import InstructorOnlyRouter from "./InstructorOnlyRouter";
 import CreateCourse from "../app/features/course/courseDashboard/createCourse/CreateCourse";
 import EditCourses from "../app/features/course/courseDashboard/editCourses/EditCourses";
-import EditCoursePage from "../app/features/course/courseDashboard/editCourses/EditCoursePage";
+import EditCourse from "../app/features/course/courseDashboard/editCourses/EditCourse";
 import CreateSection from "../app/features/course/courseDashboard/createSection/CreateSection";
 import CreateLesson from "../app/features/course/courseDashboard/createLesson/CreateLesson";
 import CodeEditor from "../app/features/ui/codeEditor/CodeEditor";
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         children: [
           { path: "/courses/create", element: <CreateCourse /> },
           { path: "/courses/manage", element: <EditCourses /> },
-          { path: "/courses/manage/edit", element: <EditCoursePage /> },
+          { path: "/courses/manage/edit", element: <EditCourse/> },
           { path: "/section/manage/edit", element: <EditSection /> },
           { path: "/lesson/manage/edit", element: <EditLesson /> },
           { path: "/courses/section/create", element: <CreateSection /> },

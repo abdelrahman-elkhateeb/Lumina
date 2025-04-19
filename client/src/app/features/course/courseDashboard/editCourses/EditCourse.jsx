@@ -11,7 +11,7 @@ import UpdateImage from "./UpdateImage";
 import UpdatePrice from "./UpdatePrice";
 import { Link } from "react-router-dom";
 
-function EditCoursePage() {
+function EditCourse() {
   const { data, isLoading, error } = useInstructorCoursesQuery();
   const [updateCourse, { isLoading: isUpdateLoading }] = useUpdateCourseMutation();
 
@@ -97,4 +97,4 @@ function EditCoursePage() {
   )
 }
 
-export default EditCoursePage;
+export default EditCourse;
