@@ -425,17 +425,17 @@ exports.createLesson = [
 
 exports.updateLesson = [
   upload.fields([
-    { name: "courseVideo", maxCount: 1 },
+    { name: "videoUrl", maxCount: 1 },
   ]),
   catchAsync(async (req, res, next) => {
     const { courseId, lessonId } = req.params;
     const updatedData = { ...req.body };
-    if (req.files?.courseVideo) {
+    if (req.files?.videoUrl) {
       const updateVideo = await uploadToCloudinary(
-        req.files.courseVideo[0].buffer,
-        req.files.courseVideo[0].mimetype,
+        req.files.videoUrl[0].buffer,
+        req.files.videoUrl[0].mimetype,
       );
-      updatedData.courseVideo = updateVideo.secure_url;
+      updatedData.videoUrl = updateVideo.secure_url;
     }
     const course = await Course.findOneAndUpdate(
       { _id: courseId, "sections.lessons._id": lessonId },

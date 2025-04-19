@@ -2,7 +2,7 @@ import Heading from "../../../ui/Heading";
 import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
 import { useState } from "react";
 import UpdateSectionTitle from "./UpdateSectionTitle";
-import { useInstructorCoursesQuery, useUpdateSectionMutation } from "../../../redux/courses/coursesApi";
+import { useDeleteSectionMutation, useInstructorCoursesQuery, useUpdateSectionMutation } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import SelectCourse from "../../../ui/SelectCourse";
 import SelectSection from "../../../ui/SelectSection";
@@ -14,7 +14,8 @@ function EditSection() {
   const [courseId, setCourseId] = useState("");
   const [sectionId, setSectionId] = useState("");
   const { data, isLoading, error } = useInstructorCoursesQuery();
-  const [updateSection, { isLoading: isUpdateLoading, error: updateError }] = useUpdateSectionMutation()
+  const [updateSection, { isLoading: isUpdateLoading, error: updateError }] = useUpdateSectionMutation();
+    const [deleteSection, { isLoading: loadingDelete }] = useDeleteSectionMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
