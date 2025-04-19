@@ -2,7 +2,7 @@ import Heading from "../../../ui/Heading";
 import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
 import { useInstructorCoursesQuery, useUpdateCourseMutation } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
-import UpdateTitle from "./UpdateTitle";
+import UpdateTitle from "../../../ui/UpdateTitle";
 import UpdateDescription from "./UpdateDescription";
 import { useState } from "react";
 import SelectCourse from "../../../ui/SelectCourse";
@@ -79,13 +79,16 @@ function EditCoursePage() {
 
       <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit}>
         <SelectCourse setCourseId={setCourseId} courses={courses} />
-        <UpdateTitle setUpdatedData={setUpdatedData} />
-        <UpdateDescription setUpdatedData={setUpdatedData} />
-        <UpdatePrice setUpdatedData={setUpdatedData} />
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
-          <UpdateVideo setSelectedVideo={setSelectedVideo} />
-          <UpdateImage setSelectedImage={setSelectedImage} />
-        </div>
+        {courseId &&
+          <>
+            <UpdateTitle setUpdatedData={setUpdatedData} />
+            <UpdateDescription setUpdatedData={setUpdatedData} />
+            <UpdatePrice setUpdatedData={setUpdatedData} />
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
+              <UpdateVideo setSelectedVideo={setSelectedVideo} />
+              <UpdateImage setSelectedImage={setSelectedImage} />
+            </div>
+          </>}
         <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto mb-10" type="submit">
           {isUpdateLoading ? "Creating..." : "update course"}
         </button>

@@ -56,7 +56,7 @@ function EditSection() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <SelectCourse setCourseId={setCourseId} courses={courses} />
         {selectedCourse && <SelectSection setSectionId={setSectionId} course={selectedCourse} />}
-        <UpdateSectionTitle setUpdatedData={setUpdatedData} />
+        {sectionId && <UpdateSectionTitle setUpdatedData={setUpdatedData} />}
         <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto" type="submit">
           {isUpdateLoading ? "Creating..." : "Create Lesson"}
         </button>

@@ -5,6 +5,7 @@ function UpdateTitle({ setUpdatedData }) {
 
   const handleChange = (e) => {
     const newTitle = e.target.value;
+    
     setTitle(newTitle);
     setUpdatedData((prev) => ({ ...prev, title: newTitle }));
   };

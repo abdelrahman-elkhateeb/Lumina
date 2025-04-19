@@ -86,4 +86,5 @@ export const {
   useCreateLessonMutation,
   useUpdateCourseMutation,
   useUpdateSectionMutation,
+  useUpdateLessonMutation
 } = courseSlice;
