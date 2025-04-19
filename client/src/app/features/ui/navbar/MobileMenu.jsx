@@ -65,7 +65,7 @@ function MobileMenu() {
             <Link to="/profile" className={menuButtonClassName} onClick={closeMenu}>
               profile
             </Link>
-            {userType ? <Link to="/courses/myCourses" className={menuButtonClassName} onClick={closeMenu}>
+            {!userType ? <Link to="/courses/myCourses" className={menuButtonClassName} onClick={closeMenu}>
               my courses
             </Link> : null}
             <Link to="/courses/explore-courses" className={menuButtonClassName} onClick={closeMenu}>
@@ -75,12 +75,6 @@ function MobileMenu() {
               create course
             </Link> : null}
 
-            {userType ? <Link to="/courses/section/create" onClick={closeMenu} className={menuButtonClassName}>
-              create section
-            </Link> : null}
-            {userType ? <Link to="/courses/lesson/create" onClick={closeMenu} className={menuButtonClassName}>
-              create lesson
-            </Link> : null}
             {userType ? <Link to="/courses/manage" onClick={closeMenu} className={menuButtonClassName}>
               manage course
             </Link> : null}

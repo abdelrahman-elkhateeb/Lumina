@@ -31,20 +31,6 @@ function DesktopNav() {
           </Link>
         </li>
       }
-      {userType &&
-        <li>
-          <Link to="/courses/section/create">
-            create section
-          </Link>
-        </li>
-      }
-      {userType &&
-        <li>
-          <Link to="/courses/lesson/create">
-            create lesson
-          </Link>
-        </li>
-      }
     </ul>
   )
 }

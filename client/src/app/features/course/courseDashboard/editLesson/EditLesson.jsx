@@ -8,6 +8,7 @@ import LightBulbLoader from "../../../ui/LightBulbLoader";
 import { useState } from "react";
 import SelectLesson from "./SelectLesson";
 import UpdateTitle from "../../../ui/UpdateTitle";
+import UpdateDescription from "../../../ui/UpdateDescription";
 
 function EditLesson() {
 
@@ -50,7 +51,10 @@ function EditLesson() {
         <SelectCourse courses={courses} setCourseId={setCourseId} />
         {selectedCourse && <SelectSection setSectionId={setSectionId} course={selectedCourse} />}
         {selectedSection && <SelectLesson section={selectedSection} setLessonId={setLessonId} />}
-        {lessonId && <UpdateTitle setUpdatedData={setUpdatedData} />}
+        {lessonId && <>
+          <UpdateTitle setUpdatedData={setUpdatedData} />
+          
+        </>}
 
         <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto mb-10" type="submit">
           {loadingUpdateLesson ? "updating..." : "update lesson"}

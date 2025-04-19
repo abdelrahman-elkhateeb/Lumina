@@ -9,6 +9,7 @@ import ErrorPage from "../../../ui/ErrorPage";
 import SetTitle from "./SetTitle";
 import SetDescription from "./SetDescription";
 import SetLessonVideo from "./SetLessonVideo";
+import { Link } from "react-router-dom";
 
 function CreateLesson() {
   const { data, isLoading, error } = useInstructorCoursesQuery();
@@ -18,7 +19,7 @@ function CreateLesson() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
-    description: "",
+    // description: "",
     video: null,
     sectionId: "",
     course: ""
@@ -38,7 +39,7 @@ function CreateLesson() {
     const lessonForm = new FormData();
 
     lessonForm.append("title", formData.title);
-    lessonForm.append("description", formData.description);
+    // lessonForm.append("description", formData.description);
     lessonForm.append("video", formData.video); // File object
     lessonForm.append("courseId", selectCourseId);
     lessonForm.append("sectionId", sectionId);
@@ -62,12 +63,22 @@ function CreateLesson() {
     <section className="container mx-auto px-4">
       <Heading title="create lesson" img={spaceman} />
 
+      <Link
+        to="/courses/section/create"
+        className="w-fit mb-4 rounded-full px-6 py-2 text-sm font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 flex items-center gap-2 justify-center"
+      >
+        <span className="material-symbols-outlined">
+          arrow_back
+        </span>
+        create section
+      </Link>
+
       <form action="" className="grid gap-5" onSubmit={handleSubmit}>
         <div className="grid gap-5">
           <SetTitle handleChange={handleChange} />
           <SelectCourse courses={courses} setSelectedCourseId={setSelectedCourseId} />
           {selectedCourse && <SelectSection course={selectedCourse} setSectionId={setSectionId} />}
-          <SetDescription handleChange={handleChange} />
+          {/* <SetDescription handleChange={handleChange} /> */}
           <SetLessonVideo handleFileChange={handleFileChange} />
         </div>
         <button className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto" type="submit">
