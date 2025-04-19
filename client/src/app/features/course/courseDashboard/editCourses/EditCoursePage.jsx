@@ -6,7 +6,7 @@ import UpdateTitle from "../../../ui/UpdateTitle";
 import UpdateDescription from "../../../ui/UpdateDescription";
 import { useState } from "react";
 import SelectCourse from "../../../ui/SelectCourse";
-import UpdateVideo from "./UpdateVideo";
+import UpdateVideo from "../../../ui/UpdateVideo";
 import UpdateImage from "./UpdateImage";
 import UpdatePrice from "./UpdatePrice";
 import { Link } from "react-router-dom";
