@@ -43,7 +43,9 @@ function EditLesson() {
         console.log(updatedData);
 
         Object.entries(updatedData).forEach(([key, value]) => {
-          formData.append(key, value);
+          if (value !== undefined && value !== null && value !== "") {
+            formData.append(key, value);
+          }
         });
 
         payload = formData;
@@ -51,6 +53,8 @@ function EditLesson() {
         payload = updatedData;
       }
       await updateLesson({ courseId, lessonId, data: payload });
+      setUpdatedData({});
+      setSelectedVideo(null);
       alert("lesson updated successfully");
     } catch (error) {
       console.error(error)

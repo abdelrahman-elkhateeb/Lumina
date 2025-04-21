@@ -42,9 +42,12 @@ function EditCourse() {
         if (selectedImage) formData.append("courseImage", selectedImage);
         if (selectedVideo) formData.append("previewVideo", selectedVideo);
 
-        for (const key in updatedData) {
-          formData.append(key, updatedData[key]);
-        }
+        Object.entries(updatedData).forEach(([key, value]) => {
+          if (value !== undefined && value !== null && value !== "") {
+            formData.append(key, value);
+          }
+        });
+
 
         payload = formData;
       } else {
