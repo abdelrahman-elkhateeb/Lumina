@@ -28,35 +28,33 @@ function EditLesson() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!lessonId) {
-      alert("Please select a lesson to update.");
-      return;
-    }
-
-    const formData = new FormData();
-
-    if (selectedVideo) {
-      formData.append("videoUrl", selectedVideo);
-    }
-
-    Object.entries(updatedData).forEach(([key, value]) => {
-      if (value) formData.append(key, value);
-    });
-
-    if (!selectedVideo && Object.keys(updatedData).length === 0) {
-      alert("No updated data provided.");
-      return;
-    }
+    let payload;
 
     try {
-      await updateLesson({ courseId, lessonId, data: formData }).unwrap();
-      alert("Lesson updated successfully!");
-      setUpdatedData({});
-      setSelectedVideo(null);
+      if (!lessonId) {
+        alert("Please select a lesson to update.");
+        return;
+      }
+
+      if (selectedVideo) {
+        const formData = new FormData();
+        formData.append("videoUrl", selectedVideo);
+
+        console.log(updatedData);
+
+        Object.entries(updatedData).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+
+        payload = formData;
+      } else {
+        payload = updatedData;
+      }
+      console.log(payload);
+      await updateLesson({ courseId, lessonId, data: payload });
+      alert("lesson updated successfully");
     } catch (error) {
-      alert("Failed to update lesson.");
-      console.error(error);
+      console.error(error)
     }
   };
 

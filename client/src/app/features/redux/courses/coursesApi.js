@@ -51,17 +51,17 @@ export const courseSlice = createApi({
       }),
     }),
     updateCourse: builder.mutation({
-      query: (courseData) => ({
-        url: `/courses/${courseData.courseId}`,
+      query: ({ courseId, data }) => ({
+        url: `/courses/${courseId}`,
         method: "PATCH",
-        body: courseData.data
+        body: data
       })
     }),
     updateSection: builder.mutation({
-      query: (sectionData) => ({
-        url: `/courses/${sectionData.courseId}/sections/${sectionData.sectionId}`,
+      query: ({ courseId, sectionId, data }) => ({
+        url: `/courses/${courseId}/sections/${sectionId}`,
         method: "PATCH",
-        body: sectionData.data
+        body: data
       })
     }),
     deleteSection: builder.mutation({

@@ -14,7 +14,7 @@ function Course() {
 
   const course = data?.course || {};
   const sections = data?.course.sections || [];
-  const [selectedVideoUrl, setSelectedVideoUrl] = useState(course.previewVideo || "");
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState(course.videoUrl || "");
 
   return (
     <section className="container mx-auto px-4 py-8">
