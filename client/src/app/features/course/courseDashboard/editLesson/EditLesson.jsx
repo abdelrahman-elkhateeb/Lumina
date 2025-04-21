@@ -50,7 +50,6 @@ function EditLesson() {
       } else {
         payload = updatedData;
       }
-      console.log(payload);
       await updateLesson({ courseId, lessonId, data: payload });
       alert("lesson updated successfully");
     } catch (error) {
