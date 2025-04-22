@@ -7,6 +7,7 @@ import { useState } from "react";
 import Heading from "../../ui/Heading";
 import spaceMan from "../../../../../public/assets/spaceMan(7).svg";
 import spaceMan2 from "../../../../../public/assets/spaceMan.svg";
+import ChatBot from "../../chatbot/ChatBot";
 
 function Course() {
   const { id } = useParams();
@@ -16,10 +17,8 @@ function Course() {
   const sections = data?.course.sections || [];
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(course.videoUrl || "");
 
-  const [showBot, setShowBot] = useState(false);
-
   return (
-    <section className="container mx-auto px-4 py-8">
+    <section className="container mx-auto px-4 py-8 relative">
 
       <div className="">
         <Heading title={course.title} img={spaceMan} />
@@ -50,6 +49,7 @@ function Course() {
           <button></button>
         </div>
       </div>
+      <ChatBot />
     </section>
   );
 }
