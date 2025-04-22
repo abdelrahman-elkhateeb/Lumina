@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
@@ -6,6 +6,13 @@ import ChatFooter from "./ChatFooter";
 function ChatBot() {
   const [showBot, setShowBot] = useState(true);
   const [chatHistory, setChatHistory] = useState([]);
+  const chatBodyRef = useRef();
+
+  useEffect(() => {
+    chatBodyRef.current.scrollTo({
+      top: chatBodyRef.current.scrollHeight, behavior: "smooth"
+    })
+  }, [chatHistory]);
 
   const generateBotResponse = async (history) => {
     const updateHistory = (text) => {
@@ -50,7 +57,7 @@ function ChatBot() {
       {!showBot && (
         <button
           onClick={() => setShowBot(true)}
-          className="material-symbols-outlined absolute right-0 bottom-5 bg-accent-500 w-16 h-16 rounded-full"
+          className="material-symbols-outlined fixed right-40 bottom-10 bg-accent-500 w-16 h-16 rounded-full"
         >
           chat
         </button>
@@ -59,7 +66,7 @@ function ChatBot() {
         {showBot && (
           <div className="bg-background-500 text-white rounded-lg overflow-hidden flex flex-col">
             <ChatHeader setShowBot={setShowBot} />
-            <ChatBody chatHistory={chatHistory} />
+            <ChatBody chatBodyRef={chatBodyRef} chatHistory={chatHistory} />
             <ChatFooter
               chatHistory={chatHistory}
               setChatHistory={setChatHistory}
