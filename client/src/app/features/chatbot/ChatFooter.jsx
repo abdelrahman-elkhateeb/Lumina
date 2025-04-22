@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function ChatFooter({ chatHistory, setChatHistory, gereateBotResponse }) {
+function ChatFooter({ chatHistory, setChatHistory, generateBotResponse }) {
   const inputRef = useRef();
 
   const handleSubmit = (e) => {
@@ -8,15 +8,15 @@ function ChatFooter({ chatHistory, setChatHistory, gereateBotResponse }) {
     const userMessage = inputRef.current.value.trim();
     if (!userMessage) return;
 
-    // Update chat with user message
+    // Add user message
     setChatHistory(history => [...history, { role: "user", text: userMessage }]);
 
-    // Add thinking message and generate bot response
+    // Add thinking message, then trigger bot response
     setTimeout(() => {
       setChatHistory(history => {
         const updatedHistory = [...history, { role: "model", text: "thinking..." }];
-        gereateBotResponse([...updatedHistory]); // Use updated history
-        return updatedHistory; // Return updated history to reflect "thinking..."
+        generateBotResponse(updatedHistory); // trigger response with full context
+        return updatedHistory;
       });
     }, 600);
 
