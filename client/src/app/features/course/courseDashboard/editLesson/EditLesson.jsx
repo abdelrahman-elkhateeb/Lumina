@@ -7,7 +7,7 @@ import SelectSection from "../../../ui/SelectSection";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import { useState } from "react";
 import SelectLesson from "./SelectLesson";
-import UpdateTitle from "../../../ui/UpdateTitle";
+import UpdateTitle from "./UpdateTitle";
 import UpdateVideo from "../../../ui/UpdateVideo";
 
 function EditLesson() {
@@ -21,26 +21,28 @@ function EditLesson() {
   const [updatedData, setUpdatedData] = useState({});
 
   if (isLoading) return <LightBulbLoader />;
+  if (error) return <p className="text-red-500">Error loading courses. Please try again later.</p>;
 
   const courses = data?.courses;
   const selectedCourse = courses?.find(c => c._id === courseId);
   const selectedSection = selectedCourse?.sections?.find(s => s._id === sectionId);
+  const selectedLesson = selectedSection?.lessons?.find(l => l._id === lessonId);
+  const selectedLessonTitle = selectedLesson?.title; // 🛠️ safe optional chaining
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!lessonId) {
+      alert("Please select a lesson to update.");
+      return;
+    }
+
     let payload;
 
     try {
-      if (!lessonId) {
-        alert("Please select a lesson to update.");
-        return;
-      }
-
       if (selectedVideo) {
         const formData = new FormData();
         formData.append("videoUrl", selectedVideo);
-
-        console.log(updatedData);
 
         Object.entries(updatedData).forEach(([key, value]) => {
           if (value !== undefined && value !== null && value !== "") {
@@ -52,12 +54,15 @@ function EditLesson() {
       } else {
         payload = updatedData;
       }
+
       await updateLesson({ courseId, lessonId, data: payload });
+
       setUpdatedData({});
       setSelectedVideo(null);
-      alert("lesson updated successfully");
+      alert("Lesson updated successfully!");
     } catch (error) {
-      console.error(error)
+      console.error("Update failed:", error);
+      alert("Something went wrong while updating the lesson.");
     }
   };
 
@@ -80,13 +85,14 @@ function EditLesson() {
 
         {lessonId && (
           <>
-            <UpdateTitle setUpdatedData={setUpdatedData} />
+            <UpdateTitle setUpdatedData={setUpdatedData} selectedLessonTitle={selectedLessonTitle} />
             <UpdateVideo setSelectedVideo={setSelectedVideo} />
           </>
         )}
 
         <button
           type="submit"
+          disabled={loadingUpdateLesson}
           className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto mb-10"
         >
           {loadingUpdateLesson ? "Updating..." : "Update lesson"}

@@ -16,6 +16,8 @@ function Course() {
   const sections = data?.course.sections || [];
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(course.videoUrl || "");
 
+  const [showBot, setShowBot] = useState(false);
+
   return (
     <section className="container mx-auto px-4 py-8">
 
@@ -44,7 +46,9 @@ function Course() {
           </div>
 
         </div>
-
+        <div>
+          <button></button>
+        </div>
       </div>
     </section>
   );
