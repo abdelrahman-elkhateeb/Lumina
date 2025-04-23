@@ -5,6 +5,7 @@ const cartSlice = createSlice({
   initialState: {
     courses: [],
     totalPrice: 0,
+    totalItems: 0,
   },
   reducers: {
     addToCart: (state, action) => {
@@ -12,7 +13,8 @@ const cartSlice = createSlice({
       const alreadyInCart = state.courses.find((item) => item._id === course._id);
       if (!alreadyInCart) {
         state.courses.push(course);
-        state.total += +course.price;
+        state.totalPrice += +course.price;
+        state.totalItems += 1;
       }
     },
     removeFromCart: (state, action) => {
@@ -21,6 +23,7 @@ const cartSlice = createSlice({
       if (course) {
         state.courses = state.courses.filter((item) => item._id !== courseId);
         state.totalPrice -= +course.price;
+        state.totalItems -= 1;
       }
     },
     clearCart: (state) => {
