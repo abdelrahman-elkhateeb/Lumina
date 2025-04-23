@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import StarBackground from "../ui/starBackground";
-import logo from "../../../../public/assets/logo-no-background.svg";
+import logo from "../../../../public/assets/logo.svg";
 
 import img1 from "../../../../public/assets/spaceMan(1).svg";
 import img2 from "../../../../public/assets/spaceMan(2).svg";
