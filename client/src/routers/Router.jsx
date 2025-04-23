@@ -17,6 +17,7 @@ import CreateLesson from "../app/features/course/courseDashboard/createLesson/Cr
 import CodeEditor from "../app/features/ui/codeEditor/CodeEditor";
 import EditSection from "../app/features/course/courseDashboard/editSection/EditSection";
 import EditLesson from "../app/features/course/courseDashboard/editLesson/EditLesson";
+import Payment from "../app/features/payment/Payment";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -37,19 +38,20 @@ const router = createBrowserRouter([
           { path: "/courses/:id", element: <Course /> },
           { path: "/courses/myCourses", element: <MyCourses /> },
           { path: "/codeEditor", element: <CodeEditor /> },
+          { path: "/payment", element: <Payment /> }
         ],
       },
       { path: "/courses/explore-courses", element: <ExploreCourses /> },
       { path: "/courses/preview/:id", element: <CoursePreview /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
-      
+
       {
         element: <InstructorOnlyRouter />,
         children: [
           { path: "/courses/create", element: <CreateCourse /> },
           { path: "/courses/manage", element: <EditCourses /> },
-          { path: "/courses/manage/edit", element: <EditCourse/> },
+          { path: "/courses/manage/edit", element: <EditCourse /> },
           { path: "/section/manage/edit", element: <EditSection /> },
           { path: "/lesson/manage/edit", element: <EditLesson /> },
           { path: "/courses/section/create", element: <CreateSection /> },

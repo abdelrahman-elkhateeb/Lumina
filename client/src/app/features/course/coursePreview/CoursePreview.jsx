@@ -39,8 +39,8 @@ function CoursePreview() {
 
         <WhatYouWillLearn whatYouWillLearn={course.whatYouWillLearn} />
 
-        <Button type="small">
-          Start Course
+        <Button type="small" to="/payment">
+          buy now
         </Button>
       </div>
     </section>
