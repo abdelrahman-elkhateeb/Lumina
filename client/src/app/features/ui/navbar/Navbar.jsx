@@ -16,7 +16,7 @@ function Navbar() {
 
   return (
     <header className="sticky top-0 z-[1000] p-2 md:p-4">
-      <nav className="flex items-center justify-between px-6 py-4 bg-secondary-500/60 rounded-lg outline outline-2 outline-accent-700">
+      <nav className="flex items-center justify-between px-6 py-4 bg-secondary-500/60 rounded-lg outline outline-2 outline-accent-700 relative">
         {/* Logo */}
         <Logo />
 

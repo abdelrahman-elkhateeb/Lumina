@@ -12,7 +12,7 @@ function Cart() {
   }
 
   return (
-    <div className="relative">
+    <div className="">
       <button
         onClick={() => setIsCartOpen(!isCartOpen)}
         className="relative text-white hover:text-accent-500 transition"
@@ -27,7 +27,7 @@ function Cart() {
       </button>
 
       {isCartOpen && (
-        <div className="absolute right-0 mt-2 w-96 bg-background-500 border border-primary-500 rounded-xl shadow-lg z-50">
+        <div className="absolute right-4 mt-2 w-96 bg-background-500 border border-primary-500 rounded-xl shadow-lg z-50">
           <div className="p-4 text-white">
             <h3 className="text-lg font-semibold mb-2">Your Cart</h3>
             {cart.courses.length === 0 ? (
