@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import DesktopNav from "./DesktopNav";
 import Profile from "./Profile";
 import MobileMenu from "./MobileMenu";
+import Cart from "./Cart";
 
 function Navbar() {
   const { data: userData, isLoading, error } = useFetchUserDataQuery();
@@ -23,9 +24,13 @@ function Navbar() {
         <DesktopNav />
 
         {/* Profile */}
-        <Profile user={user} />
+        <div className="flex items-center gap-4">
+          <Cart />
 
-        <MobileMenu />
+          <Profile user={user} />
+
+          <MobileMenu />
+        </div>
       </nav>
     </header>
   );

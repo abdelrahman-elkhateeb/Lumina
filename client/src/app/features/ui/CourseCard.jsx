@@ -1,15 +1,20 @@
 import { BookOpen } from "lucide-react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart } from "../redux/cart/cartSlice";
 
 function CourseCard({ courses = [] }) {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (course) => {
+    dispatch(addToCart(course));
+  }
+
   return (
     <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
       {courses.map((course) => (
-        <Link key={course._id} to={`/courses/preview/${course._id}`}>
-          <div
-
-            className="relative bg-background-700/20 shadow-xl rounded-xl transition-all duration-300"
-          >
+        <div key={course._id} className="relative bg-background-700/20 shadow-xl rounded-xl transition-all duration-300 p-4">
+          <Link to={`/courses/preview/${course._id}`}>
             {/* Course Image */}
             <div className="w-full">
               <img
@@ -31,20 +36,32 @@ function CourseCard({ courses = [] }) {
               </h4>
 
               {/* Price & Enrollment Type */}
-              <div className="flex justify-end items-center text-sm">
-                <span
-                  className={`font-semibold px-3 py-1 rounded-full 
+
+            </div>
+          </Link>
+          <div className="flex justify-between mt-4 mb-2">
+            <button
+              className="flex items-center text-sm bg-accent-500 hover:bg-accent-700 text-[#0A0A24] font-medium px-3 py-1 rounded-full transition duration-200"
+              onClick={() => handleAddToCart(course)}>
+              <span className="material-symbols-outlined">
+                shopping_cart
+              </span>
+              add to cart
+            </button>
+
+            <div className="flex justify-end items-center text-sm">
+              <span
+                className={`font-semibold px-3 py-1 rounded-full 
                   ${course.price === 0
-                      ? "bg-green-500/20 text-green-400"
-                      : "bg-primary-500/20 text-primary-500"
-                    }`}
-                >
-                  {course.price === 0 ? "Free" : `${course.price} $`}
-                </span>
-              </div>
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-primary-500/20 text-primary-500"
+                  }`}
+              >
+                {course.price === 0 ? "Free" : `${course.price} $`}
+              </span>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );
