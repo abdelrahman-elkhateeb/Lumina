@@ -5,7 +5,6 @@ function PaymentSummery() {
   const { cartItems, totalPrice } = cartDetails;
   console.log(cartDetails);
 
-
   return (
     <div className="bg-background-500 p-6 rounded-2xl shadow-md">
       <h3 className="text-xl font-semibold text-secondary-500 mb-4">Order Summary</h3>
