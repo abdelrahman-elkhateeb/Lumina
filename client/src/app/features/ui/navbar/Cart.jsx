@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../../redux/cart/cartSlice";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -39,7 +40,10 @@ function Cart() {
                     <span className="text-sm">{course.title}</span>
                     <div className="flex justify-center items-center gap-3">
                       <span className="text-sm text-accent-500">${course.price}</span>
-                      <button onClick={() => handleRemoveFromCart(course._id)} className="material-symbols-outlined hover:text-red-500">
+                      <button onClick={() => {
+                        handleRemoveFromCart(course._id);
+                        setIsCartOpen(!isCartOpen);
+                      }} className="material-symbols-outlined hover:text-red-500">
                         delete
                       </button>
                     </div>
@@ -48,10 +52,21 @@ function Cart() {
               </ul>
             )}
             {cart.courses.length > 0 && (
-              <div className="mt-4 flex justify-between items-center">
-                <span className="font-semibold">Total:</span>
-                <span className="text-accent-500 font-semibold">${cart.totalPrice.toFixed(2)}</span>
-              </div>
+              <>
+                <div className="mt-4 flex justify-between items-center">
+                  <span className="font-semibold">Total:</span>
+                  <span className="text-accent-500 font-semibold">
+                    ${cart.totalPrice.toFixed(2)}
+                  </span>
+                </div>
+                <Link
+                  onClick={() => setIsCartOpen(!isCartOpen)}
+                  to="/payment"
+                  className="mt-4 block text-center w-full bg-accent-500 text-[#0A0A24] py-2 rounded-lg font-semibold hover:bg-accent-400 transition"
+                >
+                  Proceed to Payment
+                </Link>
+              </>
             )}
           </div>
         </div>

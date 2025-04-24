@@ -1,5 +1,9 @@
+import { useDispatch } from "react-redux"
+
 function PaymentForm() {
+  const dispatch = useDispatch();
   
+
   return (
     <div>
       <h2 className="text-2xl font-bold text-primary-500 mb-6">Payment Details</h2>
