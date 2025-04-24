@@ -3,34 +3,50 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    courses: [],
+    cartItems: [],
     totalPrice: 0,
     totalItems: 0,
   },
   reducers: {
     addToCart: (state, action) => {
       const course = action.payload;
-      const alreadyInCart = state.courses.find((item) => item._id === course._id);
-      if (!alreadyInCart) {
-        state.courses.push(course);
+      const alreadyInCart = state.cartItems.find((item) => item._id === course._id);
+
+      if (alreadyInCart) {
+        alreadyInCart.quantity += 1;
+        state.totalPrice += +course.price;
+        state.totalItems += 1;
+      } else {
+        state.cartItems.push({
+          ...course,
+          quantity: 1,
+        });
         state.totalPrice += +course.price;
         state.totalItems += 1;
       }
     },
     removeFromCart: (state, action) => {
       const courseId = action.payload;
-      const course = state.courses.find((item) => item._id === courseId);
+      const course = state.cartItems.find((item) => item._id === courseId);
+
       if (course) {
-        state.courses = state.courses.filter((item) => item._id !== courseId);
-        state.totalPrice -= +course.price;
-        state.totalItems -= 1;
+        if (course.quantity === 1) {
+          state.cartItems = state.cartItems.filter((item) => item._id !== courseId);
+          state.totalPrice -= +course.price;
+          state.totalItems -= 1;
+        } else {
+          course.quantity -= 1;
+          state.totalPrice -= +course.price;
+          state.totalItems -= 1;
+        }
       }
     },
     clearCart: (state) => {
-      state.courses = [];
+      state.cartItems = [];
       state.totalPrice = 0;
-    }
-  }
+      state.totalItems = 0;
+    },
+  },
 });
 
 export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;

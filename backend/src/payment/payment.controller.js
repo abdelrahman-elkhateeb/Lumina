@@ -20,7 +20,7 @@ exports.createCheckoutSession = catchAsync(async (req, res, next) => {
       },
       unit_amount: course.price * 100,
     },
-    quantity: 1,
+    quantity: course.quantity,
   }));
 
   // Create checkout session

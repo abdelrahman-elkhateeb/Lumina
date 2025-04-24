@@ -31,11 +31,11 @@ function Cart() {
         <div className="absolute right-4 mt-2 w-96 bg-background-500 border border-primary-500 rounded-xl shadow-lg z-50">
           <div className="p-4 text-white">
             <h3 className="text-lg font-semibold mb-2">Your Cart</h3>
-            {cart.courses.length === 0 ? (
+            {cart.cartItems.length === 0 ? (
               <p className="text-sm text-gray-300">Cart is empty</p>
             ) : (
               <ul className="space-y-2 max-h-60 ">
-                {cart.courses.map((course) => (
+                  {cart.cartItems.map((course) => (
                   <li key={course._id} className="flex justify-between items-center">
                     <span className="text-sm">{course.title}</span>
                     <div className="flex justify-center items-center gap-3">
@@ -51,7 +51,7 @@ function Cart() {
                 ))}
               </ul>
             )}
-            {cart.courses.length > 0 && (
+            {cart.cartItems.length > 0 && (
               <>
                 <div className="mt-4 flex justify-between items-center">
                   <span className="font-semibold">Total:</span>
