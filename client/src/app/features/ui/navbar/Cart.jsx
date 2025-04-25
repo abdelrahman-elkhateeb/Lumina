@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 function Cart() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
 
   const dispatch = useDispatch();
   const handleRemoveFromCart = (courseId) => {
@@ -35,7 +37,7 @@ function Cart() {
               <p className="text-sm text-gray-300">Cart is empty</p>
             ) : (
               <ul className="space-y-2 max-h-60 ">
-                  {cart.cartItems.map((course) => (
+                {cart.cartItems.map((course) => (
                   <li key={course._id} className="flex justify-between items-center">
                     <span className="text-sm">{course.title}</span>
                     <div className="flex justify-center items-center gap-3">

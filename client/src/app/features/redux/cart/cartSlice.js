@@ -12,15 +12,8 @@ const cartSlice = createSlice({
       const course = action.payload;
       const alreadyInCart = state.cartItems.find((item) => item._id === course._id);
 
-      if (alreadyInCart) {
-        alreadyInCart.quantity += 1;
-        state.totalPrice += +course.price;
-        state.totalItems += 1;
-      } else {
-        state.cartItems.push({
-          ...course,
-          quantity: 1,
-        });
+      if (!alreadyInCart) {
+        state.cartItems.push({ ...course, quantity: 1 });
         state.totalPrice += +course.price;
         state.totalItems += 1;
       }
@@ -30,15 +23,9 @@ const cartSlice = createSlice({
       const course = state.cartItems.find((item) => item._id === courseId);
 
       if (course) {
-        if (course.quantity === 1) {
-          state.cartItems = state.cartItems.filter((item) => item._id !== courseId);
-          state.totalPrice -= +course.price;
-          state.totalItems -= 1;
-        } else {
-          course.quantity -= 1;
-          state.totalPrice -= +course.price;
-          state.totalItems -= 1;
-        }
+        state.cartItems = state.cartItems.filter((item) => item._id !== courseId);
+        state.totalPrice -= +course.price;
+        state.totalItems -= 1;
       }
     },
     clearCart: (state) => {
