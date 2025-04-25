@@ -2,6 +2,7 @@ require('dotenv').config();
 const Stripe = require('stripe');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const catchAsync = require("../../utils/catchAsync");
+const User = require("../users/userModel");
 
 exports.createCheckoutSession = catchAsync(async (req, res, next) => {
   const { cartItems, userId } = req.body;
@@ -35,6 +36,6 @@ exports.createCheckoutSession = catchAsync(async (req, res, next) => {
       courseIds: cartItems.map((item) => item._id).join(','),
     },
   });
-
+  const user = await User.findById()
   res.status(200).json({ url: session.url });
 });

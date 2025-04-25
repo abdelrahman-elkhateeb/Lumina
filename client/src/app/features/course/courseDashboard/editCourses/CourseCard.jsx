@@ -32,22 +32,9 @@ function CourseCard({ courses, refetch }) {
             </h3>
           </div>
 
-          {/* Actions (Edit & Delete) */}
-          <div className="flex justify-between items-center mt-2">
-            {/* Edit Link (Only this navigates) */}
-            <Link to="/courses/manage/edit" className="text-accent-500 hover:underline">
-              Edit
-            </Link>
-
-            {/* Delete Button (This won't trigger navigation) */}
-            <button
-              className="p-2 bg-red-500 text-white rounded-md"
-              onClick={() => handleDeleteCourse(course._id)}
-              disabled={isLoading}
-            >
-              delete
-            </button>
-          </div>
+          <Link to="/courses/manage/edit" className="text-accent-500 hover:underline">
+            Edit
+          </Link>
         </div>
       ))}
     </div>
