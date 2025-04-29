@@ -10,25 +10,18 @@ const QuestionSchema = new mongoose.Schema({
     required: true,
     validate: [arr => arr.length >= 2, "At least two options are required"]
   },
-  correctAnswer: {
+  correctOption: {
     type: String,
     required: true,
-    validate: {
-      validator: function (value) {
-        // Ensure correctAnswer is one of the options
-        return this.options.includes(value);
-      },
-      message: "Correct answer must be one of the options"
-    }
   }
 });
 
 const PlacementTestSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true
-    },
+    // title: {
+    //   type: String,
+    //   required: true
+    // },
     questions: [QuestionSchema]
   },
   { timestamps: true }

@@ -15,7 +15,11 @@ router.post("/pruchaseCourse", courseController.purchaseCourse);
 router.get("/manage", courseController.displayInstructorCourses);
 
 router.post("/create", authController.restrictTo("instructor"), courseController.createCourse);
-router.post("/placementTest/create", authController.restrictTo("instructor", courseController.createCoursePlacementTest))
+router.post(
+  "/create-placementTest",
+  authController.restrictTo("instructor"),
+  courseController.createCoursePlacementTest
+);
 
 router.route("/:id")
   .get(courseController.getCourse)

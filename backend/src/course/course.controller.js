@@ -301,13 +301,35 @@ exports.createCoursePlacementTest = catchAsync(async (req, res, next) => {
 
   if (courseId) {
     await Course.findByIdAndUpdate(courseId, {
-      placementTest: savedQuiz._id
+      placementTest: newQuiz._id
     });
   }
 
   res.status(201).json({
     status: "success",
-    data: savedQuiz,
+    data: newQuiz,
+  });
+});
+
+exports.getPlacementTest = catchAsync(async (req, res, next) => {
+  const { courseId, quizId } = req.body;
+
+  let quiz;
+
+  if (courseId) {
+    // Find course and populate its placement test
+    const course = await Course.findById(courseId).populate('placementTest');
+    if (!course || !course.placementTest) {
+      return next(new AppError('No placement test found for this course', 404));
+    }
+    quiz = course.placementTest;
+  } else {
+    return next(new AppError('Please provide either courseId or quizId', 400));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: quiz
   });
 });
 
