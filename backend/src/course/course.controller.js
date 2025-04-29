@@ -7,6 +7,7 @@ const cloudinary = require("../../utils/cloudinaryConfig");
 const streamifier = require("streamifier");
 const multer = require("multer");
 const User = require('../users/userModel');
+const PlacementTest = require('./PlacementTestModel');
 // Store files in memory (useful for Cloudinary, AWS S3, etc.)
 const storage = multer.memoryStorage();
 // Allow all file types
@@ -291,8 +292,25 @@ exports.displayInstructorCourses = catchAsync(async (req, res, next) => {
 });
 
 exports.createCoursePlacementTest = catchAsync(async (req, res, next) => {
+  const { questions, courseId } = req.body;
+  const newQuiz = new PlacementTest({
+    questions
+  });
 
-})
+  await newQuiz.save();
+
+  if (courseId) {
+    await Course.findByIdAndUpdate(courseId, {
+      placementTest: savedQuiz._id
+    });
+  }
+
+  res.status(201).json({
+    status: "success",
+    data: savedQuiz,
+  });
+});
+
 // crud for section
 exports.createSection = catchAsync(async (req, res, next) => {
   const { courseId, title } = req.body;

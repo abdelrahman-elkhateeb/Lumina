@@ -15,12 +15,12 @@ router.post("/pruchaseCourse", courseController.purchaseCourse);
 router.get("/manage", courseController.displayInstructorCourses);
 
 router.post("/create", authController.restrictTo("instructor"), courseController.createCourse);
+router.post("/placementTest/create", authController.restrictTo("instructor", courseController.createCoursePlacementTest))
 
 router.route("/:id")
   .get(courseController.getCourse)
   .patch(authController.restrictTo("instructor"), courseController.updateCourse)
   .delete(authController.restrictTo("instructor"), courseController.deleteCourse);
-
 
 // crud for section
 router.get("/getSections", authController.restrictTo("instructor"), courseController.getSections);
