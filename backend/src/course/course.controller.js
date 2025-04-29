@@ -312,24 +312,20 @@ exports.createCoursePlacementTest = catchAsync(async (req, res, next) => {
 });
 
 exports.getPlacementTest = catchAsync(async (req, res, next) => {
-  const { courseId, quizId } = req.body;
+  const { courseId } = req.body;
 
-  let quiz;
+  if (!courseId) {
+    return next(new AppError('Please provide a courseId', 400));
+  }
 
-  if (courseId) {
-    // Find course and populate its placement test
-    const course = await Course.findById(courseId).populate('placementTest');
-    if (!course || !course.placementTest) {
-      return next(new AppError('No placement test found for this course', 404));
-    }
-    quiz = course.placementTest;
-  } else {
-    return next(new AppError('Please provide either courseId or quizId', 400));
+  const course = await Course.findById(courseId).populate('placementTest');
+  if (!course || !course.placementTest) {
+    return next(new AppError('No placement test found for this course', 404));
   }
 
   res.status(200).json({
     status: 'success',
-    data: quiz
+    data: course.placementTest,
   });
 });
 
