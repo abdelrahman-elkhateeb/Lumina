@@ -4,6 +4,7 @@ import { courseSlice } from './courses/coursesApi';
 import { userSlice } from './user/userApi';
 import cartReducer from './cart/cartSlice';
 import { paymentApi } from './cart/paymentApi';
+import placementTestReducer from "./courses/placementTestSlice"
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     [courseSlice.reducerPath]: courseSlice.reducer,
     [userSlice.reducerPath]: userSlice.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
-    cart: cartReducer
+    cart: cartReducer,
+    placementTest: placementTestReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

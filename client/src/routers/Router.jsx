@@ -18,6 +18,7 @@ import CodeEditor from "../app/features/ui/codeEditor/CodeEditor";
 import EditSection from "../app/features/course/courseDashboard/editSection/EditSection";
 import EditLesson from "../app/features/course/courseDashboard/editLesson/EditLesson";
 import Payment from "../app/features/payment/Payment";
+import PlacementTest from "../app/features/course/courseDashboard/placement test/PlacementTest";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -55,7 +56,8 @@ const router = createBrowserRouter([
           { path: "/section/manage/edit", element: <EditSection /> },
           { path: "/lesson/manage/edit", element: <EditLesson /> },
           { path: "/courses/section/create", element: <CreateSection /> },
-          { path: "/courses/lesson/create", element: <CreateLesson /> }
+          { path: "/courses/lesson/create", element: <CreateLesson /> },
+          { path: "/create/placement-test", element: <PlacementTest /> }
         ]
       }
     ],

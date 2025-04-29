@@ -290,6 +290,9 @@ exports.displayInstructorCourses = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.createCoursePlacementTest = catchAsync(async (req, res, next) => {
+
+})
 // crud for section
 exports.createSection = catchAsync(async (req, res, next) => {
   const { courseId, title } = req.body;

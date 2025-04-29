@@ -89,6 +89,10 @@ const CourseSchema = new mongoose.Schema(
         }
       }
     ],
+    placementTest: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"PlacementTest"
+    },
     createdAt: {
       type: Date,
       default: Date.now
