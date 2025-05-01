@@ -292,22 +292,61 @@ exports.displayInstructorCourses = catchAsync(async (req, res, next) => {
 });
 
 exports.createCoursePlacementTest = catchAsync(async (req, res, next) => {
-  const { questions, courseId } = req.body;
-  const newQuiz = new PlacementTest({
-    questions
-  });
+  const { question, options, correctOption, courseId } = req.body;
 
-  await newQuiz.save();
-
-  if (courseId) {
-    await Course.findByIdAndUpdate(courseId, {
-      placementTest: newQuiz._id
+  // Validate inputs
+  if (
+    !question ||
+    !correctOption ||
+    !options ||
+    !Array.isArray(options) ||
+    options.length === 0
+  ) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Question, options, and correctOption are required.",
     });
+  }
+
+  // Check if course exists and populate placementTest
+  const course = await Course.findById(courseId).populate("placementTest");
+
+  if (!course) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Course not found.",
+    });
+  }
+
+  const newQuestion = {
+    question,
+    options,
+    correctOption,
+  };
+
+  let placementTest;
+
+  if (!course.placementTest) {
+    // Create a new placement test with the first question
+    placementTest = new PlacementTest({
+      questions: [newQuestion],
+    });
+
+    await placementTest.save();
+
+    // Link the placement test to the course
+    course.placementTest = placementTest._id;
+    await course.save();
+  } else {
+    // Add a new question to existing placement test
+    placementTest = course.placementTest;
+    placementTest.questions.push(newQuestion);
+    await placementTest.save();
   }
 
   res.status(201).json({
     status: "success",
-    data: newQuiz,
+    data: placementTest,
   });
 });
 

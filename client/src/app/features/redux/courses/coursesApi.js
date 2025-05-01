@@ -77,6 +77,13 @@ export const courseSlice = createApi({
         body: data
       })
     }),
+    createPlacementTest: builder.mutation({
+      query: ({ questions, courseId }) => ({
+        url: "/courses/create-placementTest",
+        method: "POST",
+        body: { questions, courseId },
+      }),
+    })
   }),
 });
 
@@ -93,5 +100,6 @@ export const {
   useUpdateCourseMutation,
   useUpdateSectionMutation,
   useDeleteSectionMutation,
-  useUpdateLessonMutation
+  useUpdateLessonMutation,
+  useCreatePlacementTestMutation
 } = courseSlice;

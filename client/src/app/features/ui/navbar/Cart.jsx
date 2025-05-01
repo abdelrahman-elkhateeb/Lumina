@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 function Cart() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
-
 
   const dispatch = useDispatch();
   const handleRemoveFromCart = (courseId) => {
