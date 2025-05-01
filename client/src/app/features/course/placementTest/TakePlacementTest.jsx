@@ -7,8 +7,8 @@ function PlacementTest() {
   const { courseId } = useParams();
   const { data } = useGetPlacementTestQuery(courseId);
 
-  console.log(data);
-
+  const questions = data?.data?.questions;
+  console.log(questions);
 
   return (
     <section className="container mx-auto px-4">
