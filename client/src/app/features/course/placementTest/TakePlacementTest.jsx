@@ -8,7 +8,6 @@ function PlacementTest() {
   const { data } = useGetPlacementTestQuery(courseId);
 
   const questions = data?.data?.questions;
-  console.log(questions);
 
   return (
     <section className="container mx-auto px-4">
