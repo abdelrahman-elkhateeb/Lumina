@@ -351,7 +351,7 @@ exports.createCoursePlacementTest = catchAsync(async (req, res, next) => {
 });
 
 exports.getPlacementTest = catchAsync(async (req, res, next) => {
-  const { courseId } = req.body;
+  const { courseId } = req.params;
 
   if (!courseId) {
     return next(new AppError('Please provide a courseId', 400));

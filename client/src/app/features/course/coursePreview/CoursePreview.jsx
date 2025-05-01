@@ -13,8 +13,8 @@ import Category from "./Category";
 
 
 function CoursePreview() {
-  const { id } = useParams();
-  const { data, error, isLoading } = useGetCoursePreviewQuery(id);
+  const { courseId } = useParams();
+  const { data, error, isLoading } = useGetCoursePreviewQuery(courseId);
 
   const course = data?.course;
 
@@ -39,9 +39,14 @@ function CoursePreview() {
 
         <WhatYouWillLearn whatYouWillLearn={course.whatYouWillLearn} />
 
-        <Button type="small" to="/payment">
-          buy now
-        </Button>
+        <div className="flex gap-5">
+          <Button type="small" to="/payment">
+            buy now
+          </Button>
+          <Button type="small" to={`/placement-test/${courseId}`}>
+            placement test
+          </Button>
+        </div>
       </div>
     </section>
   )

@@ -11,7 +11,7 @@ export const courseSlice = createApi({
       query: () => `/courses/preview`,
     }),
     getCoursePreview: builder.query({
-      query: (id) => `/courses/preview/${id}`,
+      query: (courseId) => `/courses/preview/${courseId}`,
     }),
     getCourse: builder.query({
       query: (id) => `/courses/${id}`,
@@ -85,10 +85,9 @@ export const courseSlice = createApi({
       }),
     }),
     getPlacementTest: builder.query({
-      query: ({ courseId }) => ({
-        url: "/courses/getPlacementTest",
+      query: ( courseId ) => ({
+        url: `/courses/get-placementTest/${courseId}`,
         method: "GET",
-        body: { courseId }
       })
     })
   }),
@@ -108,5 +107,6 @@ export const {
   useUpdateSectionMutation,
   useDeleteSectionMutation,
   useUpdateLessonMutation,
-  useCreatePlacementTestMutation
+  useCreatePlacementTestMutation,
+  useGetPlacementTestQuery
 } = courseSlice;

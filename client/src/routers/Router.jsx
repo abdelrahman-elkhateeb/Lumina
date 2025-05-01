@@ -19,6 +19,7 @@ import EditSection from "../app/features/course/courseDashboard/editSection/Edit
 import EditLesson from "../app/features/course/courseDashboard/editLesson/EditLesson";
 import Payment from "../app/features/payment/Payment";
 import PlacementTest from "../app/features/course/courseDashboard/placement test/PlacementTest";
+import TakePlacementTest from "../app/features/course/placementTest/TakePlacementTest";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: "/courses/explore-courses", element: <ExploreCourses /> },
-      { path: "/courses/preview/:id", element: <CoursePreview /> },
+      { path: "/courses/preview/:courseId", element: <CoursePreview /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
 
@@ -57,7 +58,8 @@ const router = createBrowserRouter([
           { path: "/lesson/manage/edit/:courseId", element: <EditLesson /> },
           { path: "/courses/section/create", element: <CreateSection /> },
           { path: "/courses/lesson/create", element: <CreateLesson /> },
-          { path: "/create/placement-test/:courseId", element: <PlacementTest /> }
+          { path: "/create/placement-test/:courseId", element: <PlacementTest /> },
+          { path: "placement-test/:courseId", element: <TakePlacementTest /> }
         ]
       }
     ],
