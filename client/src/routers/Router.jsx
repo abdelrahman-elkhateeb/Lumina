@@ -57,7 +57,7 @@ const router = createBrowserRouter([
           { path: "/lesson/manage/edit/:courseId", element: <EditLesson /> },
           { path: "/courses/section/create", element: <CreateSection /> },
           { path: "/courses/lesson/create", element: <CreateLesson /> },
-          { path: "/create/placement-test", element: <PlacementTest /> }
+          { path: "/create/placement-test/:courseId", element: <PlacementTest /> }
         ]
       }
     ],
