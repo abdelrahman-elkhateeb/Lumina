@@ -11,11 +11,10 @@ function Options({ options, onOptionsChange, correctOption, onCorrectOptionChang
     setNewOption("");
   };
 
-  const handleDelete = (optionIndex) => {
-    const updatedOptions = options.filter((_, index) => index !== optionIndex);
+  const handleDelete = (option) => {
+    const updatedOptions = options.filter((opt) => opt !== option);
     onOptionsChange(updatedOptions);
-    // If we're deleting the correct option, reset correctOption
-    if (correctOption === optionIndex) {
+    if (correctOption === option) {
       onCorrectOptionChange(null);
     }
   };
@@ -46,12 +45,12 @@ function Options({ options, onOptionsChange, correctOption, onCorrectOptionChang
             <div className="flex gap-2">
               <Button
                 type="round"
-                onClick={() => onCorrectOptionChange(index)}
-                active={correctOption === index}
+                onClick={() => onCorrectOptionChange(option)}
+                active={correctOption === option} 
               >
-                {correctOption === index ? "Correct" : "Set Correct"}
+                {correctOption === option ? "Correct" : "Set Correct"}
               </Button>
-              <Button type="round" onClick={() => handleDelete(index)}>
+              <Button type="round" onClick={() => handleDelete(option)}>
                 Remove
               </Button>
             </div>
