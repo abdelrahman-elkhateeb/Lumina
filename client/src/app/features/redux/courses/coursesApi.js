@@ -83,6 +83,13 @@ export const courseSlice = createApi({
         method: "PATCH",
         body: { question, correctOption, options, courseId },
       }),
+    }),
+    getPlacementTest: builder.query({
+      query: ({ courseId }) => ({
+        url: "/courses/getPlacementTest",
+        method: "GET",
+        body: { courseId }
+      })
     })
   }),
 });

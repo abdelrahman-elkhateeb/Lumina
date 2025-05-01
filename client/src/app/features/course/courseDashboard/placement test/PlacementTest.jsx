@@ -49,19 +49,23 @@ function PlacementTest() {
           value={question}
           onChange={(e) => dispatch(setQuestion(e.target.value))}
         />
-        <Options
-          options={options}
-          onOptionsChange={(newOptions) => dispatch(setOptions(newOptions))}
-          correctOption={correctOption}
-          onCorrectOptionChange={(option) => dispatch(setCorrectOption(option))}
-        />
-        <button
-          onClick={handleSubmitTest}
-          disabled={isLoading}
-          className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-        >
-          {isLoading ? "Submitting..." : "Submit Question"}
-        </button>
+        {question &&
+          <>
+            <Options
+              options={options}
+              onOptionsChange={(newOptions) => dispatch(setOptions(newOptions))}
+              correctOption={correctOption}
+              onCorrectOptionChange={(option) => dispatch(setCorrectOption(option))}
+            />
+            <button
+              onClick={handleSubmitTest}
+              disabled={isLoading}
+            className="inline-block text-sm rounded-full bg-primary-500 font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 disabled:cursor-not-allowed p-4 w-fit ml-auto"
+            >
+              {isLoading ? "Submitting..." : "Submit Question"}
+            </button>
+            </>
+        }
       </div>
     </section>
   );

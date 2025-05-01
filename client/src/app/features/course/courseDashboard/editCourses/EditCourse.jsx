@@ -16,6 +16,9 @@ function EditCourse() {
   const { isLoading } = useInstructorCoursesQuery();
   const [updateCourse, { isLoading: isUpdateLoading }] = useUpdateCourseMutation();
 
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
   const [updatedData, setUpdatedData] = useState({});
 
   const handleSubmit = async (e) => {
