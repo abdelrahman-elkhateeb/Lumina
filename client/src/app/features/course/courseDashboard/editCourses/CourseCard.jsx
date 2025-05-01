@@ -19,7 +19,7 @@ function CourseCard({ courses, refetch }) {
   return (
     <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
       {courses.map((course) => (
-        <div key={course._id} className="bg-background-700/20 shadow-xl rounded-xl transition-all duration-300 p-3">
+        <div key={course._id} className="bg-background-700/20 shadow-xl rounded-xl transition-all duration-300 p-3 flex justify-between">
           {/* Course Image */}
           <div className="w-full">
             <img src={course.courseImage} alt={`${course.title} Cover`} className="rounded-lg" />
@@ -32,7 +32,7 @@ function CourseCard({ courses, refetch }) {
             </h3>
           </div>
 
-          <Link to="/courses/manage/edit" className="text-accent-500 hover:underline">
+          <Link to={`/courses/manage/edit/${course._id}`} className="text-accent-500 hover:underline">
             Edit
           </Link>
         </div>

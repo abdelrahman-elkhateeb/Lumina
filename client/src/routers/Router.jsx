@@ -52,9 +52,9 @@ const router = createBrowserRouter([
         children: [
           { path: "/courses/create", element: <CreateCourse /> },
           { path: "/courses/manage", element: <EditCourses /> },
-          { path: "/courses/manage/edit", element: <EditCourse /> },
-          { path: "/section/manage/edit", element: <EditSection /> },
-          { path: "/lesson/manage/edit", element: <EditLesson /> },
+          { path: "/courses/manage/edit/:courseId", element: <EditCourse /> },
+          { path: "/section/manage/edit/:courseId", element: <EditSection /> },
+          { path: "/lesson/manage/edit/:courseId", element: <EditLesson /> },
           { path: "/courses/section/create", element: <CreateSection /> },
           { path: "/courses/lesson/create", element: <CreateLesson /> },
           { path: "/create/placement-test", element: <PlacementTest /> }
