@@ -2,23 +2,42 @@ import Heading from "../../../ui/Heading";
 import spaceMan from "../../../../../../public/assets/spaceMan(7).svg";
 import Question from "./Question";
 import Options from "./Options";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useCreatePlacementTestMutation } from "../../../redux/courses/coursesApi";
+import { useParams } from "react-router-dom";
+import { resetQuestion, setCorrectOption, setLoading, setOptions, setQuestion } from "../../../redux/courses/placementTestSlice";
 
 function PlacementTest() {
-  const questions = useSelector((state) => state.placementTest.questions);
-  const currentQuestionIndex = questions.length - 1;
-  const [createPlacementTest, { isLoading }] = useCreatePlacementTestMutation();
+  const { courseId } = useParams();
+  const dispatch = useDispatch();
+  const [createPlacementTest] = useCreatePlacementTestMutation();
+
+  // Direct access to current question fields
+  const { question, options, correctOption, isLoading } = useSelector(
+    (state) => state.placementTest
+  );
+
+  console.log(question, options, correctOption);
+
 
   const handleSubmitTest = async () => {
-    const courseId = "YOUR_COURSE_ID_HERE";
-
     try {
-      await createPlacementTest({ questions, courseId }).unwrap();
-      alert("Placement test created successfully!");
-      
+      dispatch(setLoading(true));
+      await createPlacementTest({
+        question,
+        options,
+        correctOption,
+        courseId
+      }).unwrap();
+
+      // Reset form after successful submission
+      dispatch(resetQuestion());
+      alert("Question submitted successfully!");
     } catch (error) {
-      console.error("Error submitting placement test", error);
+      console.error("Error submitting question", error);
+      alert("Failed to submit question");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -26,19 +45,23 @@ function PlacementTest() {
     <section className="container mx-auto px-4">
       <Heading title="Create Placement Test" img={spaceMan} />
       <div className="flex flex-col gap-4">
-        <Question />
-        {questions.length > 0 && (
-          <>
-            <Options questionIndex={currentQuestionIndex} />
-            <button
-              onClick={handleSubmitTest}
-              disabled={isLoading}
-              className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-            >
-              {isLoading ? "Submitting..." : "Submit Placement Test"}
-            </button>
-          </>
-        )}
+        <Question
+          value={question}
+          onChange={(e) => dispatch(setQuestion(e.target.value))}
+        />
+        <Options
+          options={options}
+          onOptionsChange={(newOptions) => dispatch(setOptions(newOptions))}
+          correctOption={correctOption}
+          onCorrectOptionChange={(option) => dispatch(setCorrectOption(option))}
+        />
+        <button
+          onClick={handleSubmitTest}
+          disabled={isLoading}
+          className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+        >
+          {isLoading ? "Submitting..." : "Submit Question"}
+        </button>
       </div>
     </section>
   );

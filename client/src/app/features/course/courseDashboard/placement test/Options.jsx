@@ -1,27 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../ui/Button";
 import { useState } from "react";
-import { addOption, removeOption, setCorrectOption } from "../../../redux/courses/placementTestSlice";
 
-function Options({ questionIndex }) {
+function Options({ options, onOptionsChange, correctOption, onCorrectOptionChange }) {
   const [newOption, setNewOption] = useState("");
-  const dispatch = useDispatch();
-
-  const options = useSelector((state) => state.placementTest.questions[questionIndex]?.options || []);
-  const correctOption = useSelector((state) => state.placementTest.questions[questionIndex]?.correctOption);
 
   const handleAdd = () => {
     if (!newOption.trim()) return;
-    dispatch(addOption({ questionIndex, optionText: newOption.trim() }));
+    const updatedOptions = [...options, newOption.trim()];
+    onOptionsChange(updatedOptions);
     setNewOption("");
   };
 
   const handleDelete = (optionIndex) => {
-    dispatch(removeOption({ questionIndex, optionIndex }));
-  };
-
-  const handleSetCorrect = (optionIndex) => {
-    dispatch(setCorrectOption({ questionIndex, correctOptionIndex: optionIndex }));
+    const updatedOptions = options.filter((_, index) => index !== optionIndex);
+    onOptionsChange(updatedOptions);
+    // If we're deleting the correct option, reset correctOption
+    if (correctOption === optionIndex) {
+      onCorrectOptionChange(null);
+    }
   };
 
   return (
@@ -48,7 +44,11 @@ function Options({ questionIndex }) {
           <li key={index} className="flex justify-between items-center gap-2 mt-5">
             <span>{option}</span>
             <div className="flex gap-2">
-              <Button type="round" onClick={() => handleSetCorrect(index)}>
+              <Button
+                type="round"
+                onClick={() => onCorrectOptionChange(index)}
+                active={correctOption === index}
+              >
                 {correctOption === index ? "Correct" : "Set Correct"}
               </Button>
               <Button type="round" onClick={() => handleDelete(index)}>

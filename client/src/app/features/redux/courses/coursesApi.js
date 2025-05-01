@@ -78,10 +78,10 @@ export const courseSlice = createApi({
       })
     }),
     createPlacementTest: builder.mutation({
-      query: ({ questions, courseId }) => ({
+      query: ({ question, correctOption, options, courseId }) => ({
         url: "/courses/create-placementTest",
         method: "PATCH",
-        body: { questions, courseId },
+        body: { question, correctOption, options, courseId },
       }),
     })
   }),
