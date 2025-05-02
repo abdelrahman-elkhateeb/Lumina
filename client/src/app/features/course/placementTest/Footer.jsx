@@ -16,7 +16,8 @@ function Footer({ points, secondsRemaining, answer, questionsLength, index }) {
       </div>
       {answer !== null && questionsLength - 1 > index ?
         <Button type="small" onClick={() => dispatch(nextQuestion())}>Next</Button>
-        : <Button type="small" onClick={() => dispatch(finishQuiz())}>finish</Button>}
+        : null}
+      {questionsLength - 1 == index ? <Button type="small" onClick={() => dispatch(finishQuiz())}>finish</Button> : null}
     </div>
   )
 }
