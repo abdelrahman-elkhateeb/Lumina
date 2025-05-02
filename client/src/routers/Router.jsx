@@ -41,7 +41,8 @@ const router = createBrowserRouter([
           { path: "/courses/:id", element: <Course /> },
           { path: "/courses/myCourses", element: <MyCourses /> },
           { path: "/codeEditor", element: <CodeEditor /> },
-          { path: "/payment", element: <Payment /> }
+          { path: "/payment", element: <Payment /> },
+          { path: "/placement-test/:courseId", element: <TakePlacementTest /> },
         ],
       },
       { path: "/courses/explore-courses", element: <ExploreCourses /> },
@@ -60,7 +61,6 @@ const router = createBrowserRouter([
           { path: "/courses/section/create", element: <CreateSection /> },
           { path: "/courses/lesson/create", element: <CreateLesson /> },
           { path: "/create/placement-test/:courseId", element: <PlacementTest /> },
-          { path: "placement-test/:courseId", element: <TakePlacementTest /> },
         ]
       }
     ],

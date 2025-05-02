@@ -21,7 +21,7 @@ router.patch(
   courseController.createCoursePlacementTest
 );
 
-router.get("/get-placementTest/:courseId", authController.restrictTo("instructor"), courseController.getPlacementTest);
+router.get("/get-placementTest/:courseId", courseController.getPlacementTest);
 
 router.route("/:id")
   .get(courseController.getCourse)

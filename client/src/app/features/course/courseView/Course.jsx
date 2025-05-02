@@ -43,10 +43,6 @@ function Course() {
               </span>
             </Link>
           </div>
-
-        </div>
-        <div>
-          <button></button>
         </div>
       </div>
       <ChatBot />
