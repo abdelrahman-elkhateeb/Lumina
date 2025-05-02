@@ -1,17 +1,16 @@
 import Heading from "../../ui/Heading";
-import image from "../../../../../public/assets/spaceMan(7).svg";
 import { useGetPlacementTestQuery } from "../../redux/courses/coursesApi";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LightBulbLoader from "../../ui/LightBulbLoader";
 import ErrorPage from "../../ui/ErrorPage";
-import { newAnswer, nextQuestion, tick } from "./takePlacementTestSlice";
+import { tick } from "./takePlacementTestSlice";
 import { useEffect } from "react";
 import StartScreen from "./StartScreen";
 import Question from "./Question";
 import Options from "./Options";
-import Button from "../../ui/Button";
 import Footer from "./Footer";
+import FinishScreen from "./FinishScreen";
 
 function PlacementTest() {
   const { courseId } = useParams();
@@ -20,42 +19,46 @@ function PlacementTest() {
 
   const dispatch = useDispatch();
   const {
+    status,
     index,
     answer,
     points,
     secondsRemaining
   } = useSelector(state => state.takePlacementTest);
 
-  const { status } = useSelector(state => state.takePlacementTest ?? { status: null });
+  useEffect(() => {
+    if (status === 'active') {
+      const timer = setInterval(() => dispatch(tick()), 1000);
+      return () => clearInterval(timer);
+    }
+  }, [status, dispatch]);
 
-
-  // useEffect(() => {
-  //   if (status === 'active') {
-  //     const timer = setInterval(() => dispatch(tick()), 1000);
-  //     return () => clearInterval(timer);
-  //   }
-  // }, [status, dispatch]);
-
-  if (isLoading) return <LightBulbLoader />
+  if (isLoading) return <LightBulbLoader />;
   if (error) return <ErrorPage />;
   if (!questions) return null;
 
+  const questionsLength = questions.length;
+
   return (
     <section className="container mx-auto px-4">
-      <Heading img={image} title="quiz time" />
-      {status == "loading" && <StartScreen totalQuestions={questions.length} />}
-      {status == "active" && (
-
-        <div className="flex flex-col  gap-5 w-full">
+      <Heading img="/assets/spaceMan(7).svg" title="quiz time" />
+      {status === "loading" && <StartScreen totalQuestions={questionsLength} />}
+      {status === "active" && index < questionsLength && (
+        <div className="flex flex-col gap-5 w-full">
           <Question questions={questions} index={index} />
           <Options questions={questions} index={index} answer={answer} />
-
-          <Footer points={points} secondsRemaining={secondsRemaining} answer={answer} />
+          <Footer
+            points={points}
+            questionsLength={questionsLength}
+            secondsRemaining={secondsRemaining}
+            answer={answer}
+            index={index}
+          />
         </div>
-
       )}
+      {status === "finished" && <FinishScreen />}
     </section>
-  )
+  );
 }
 
 export default PlacementTest;

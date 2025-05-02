@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
 import Button from "../../ui/Button"
-import { nextQuestion } from "./takePlacementTestSlice"
+import { finishQuiz, nextQuestion } from "./takePlacementTestSlice"
 
-function Footer({ points, secondsRemaining, answer }) {
+function Footer({ points, secondsRemaining, answer, questionsLength, index }) {
   const dispatch = useDispatch();
   return (
     <div className="flex justify-between items-center w-full px-4 mt-4">
@@ -14,9 +14,9 @@ function Footer({ points, secondsRemaining, answer }) {
           🏆 {points} pts
         </span>
       </div>
-      {answer !== null && (
+      {answer !== null && questionsLength - 1 > index ?
         <Button type="small" onClick={() => dispatch(nextQuestion())}>Next</Button>
-      )}
+        : <Button type="small" onClick={() => dispatch(finishQuiz())}>finish</Button>}
     </div>
   )
 }

@@ -29,11 +29,14 @@ const takePlacementTestSlice = createSlice({
       state.answer = null;
     },
     resetQuiz: (state) => {
-      state.status = 'ready';
+      state.status = 'loading';
       state.index = 0;
       state.answer = null;
       state.points = 0;
       state.secondsRemaining = null;
+    },
+    finishQuiz: (state) => {
+      state.status = "finished";
     },
     tick: (state) => {
       if (state.secondsRemaining > 0) {
