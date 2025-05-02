@@ -13,9 +13,10 @@ function DesktopNav() {
         </Link>}
       </li>
       <li>
-        <Link to="/courses/explore-courses">
-          explore our courses
-        </Link>
+        {!userType &&
+          <Link to="/courses/explore-courses">
+            explore our courses
+          </Link>}
       </li>
       {userType &&
         <li>

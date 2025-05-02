@@ -68,9 +68,11 @@ function MobileMenu() {
             {!userType ? <Link to="/courses/myCourses" className={menuButtonClassName} onClick={closeMenu}>
               my courses
             </Link> : null}
-            <Link to="/courses/explore-courses" className={menuButtonClassName} onClick={closeMenu}>
-              explore courses
-            </Link>
+            {
+              !userType ? <Link to="/courses/explore-courses" className={menuButtonClassName} onClick={closeMenu}>
+                explore courses
+              </Link> : null
+            }
             {userType ? <Link to="/courses/create" onClick={closeMenu} className={menuButtonClassName}>
               create course
             </Link> : null}
