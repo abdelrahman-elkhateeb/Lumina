@@ -20,6 +20,7 @@ import EditLesson from "../app/features/course/courseDashboard/editLesson/EditLe
 import Payment from "../app/features/payment/Payment";
 import PlacementTest from "../app/features/course/courseDashboard/placement test/PlacementTest";
 import TakePlacementTest from "../app/features/course/placementTest/TakePlacementTest";
+import StartScreen from "../app/features/course/placementTest/StartScreen";
 
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
           { path: "/courses/section/create", element: <CreateSection /> },
           { path: "/courses/lesson/create", element: <CreateLesson /> },
           { path: "/create/placement-test/:courseId", element: <PlacementTest /> },
-          { path: "placement-test/:courseId", element: <TakePlacementTest /> }
+          { path: "placement-test/:courseId", element: <TakePlacementTest /> },
         ]
       }
     ],
