@@ -50,31 +50,24 @@ function LoginForm() {
   };
 
   // Google login
-  // const googleLogin = async () => {
-  //   try {
-  //     const user = await signInWithGoogle();
-  //     console.log("Signed in user:", user);
+  const googleLogin = async () => {
+    try {
+      const user = await signInWithGoogle();
+      console.log("Signed in user:", user);
 
-  //     // Save the token to localStorage (if your Google auth returns a token)
-  //     if (user.token) {
-  //       localStorage.setItem("token", user.token); // Save token to localStorage
-  //     }
-
-  //     // Redirect or update UI after successful sign-in
-  //     navigate("/"); // Redirect to the home page or dashboard
-  //   } catch (error) {
-  //     console.error("Google Sign-In failed:", error);
-  //     // Show error message using Swal
-  //     Swal.fire({
-  //       title: "Error!",
-  //       background: "#e7fdfd",
-  //       text: error.message || "Google Sign-In failed. Please try again.",
-  //       icon: "error",
-  //       confirmButtonText: "Try again 😊",
-  //       confirmButtonColor: "#0a2629",
-  //     });
-  //   }
-  // };
+      navigate("/");
+    } catch (error) {
+      console.error("Google Sign-In failed:", error);
+      Swal.fire({
+        title: "Error!",
+        background: "#e7fdfd",
+        text: error.message || "Google Sign-In failed. Please try again.",
+        icon: "error",
+        confirmButtonText: "Try again 😊",
+        confirmButtonColor: "#0a2629",
+      });
+    }
+  };
   if (isLoading) return <LightBulbLoader />
   return (
     <form
@@ -124,6 +117,28 @@ function LoginForm() {
         ) : (
           < LoadingSpinner />
         )}
+
+        {/* OR Divider */}
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-t border-gray-300" />
+          <span className="mx-2 text-sm text-gray-500">OR</span>
+          <hr className="flex-grow border-t border-gray-300" />
+        </div>
+
+        {/* Google Login Button */}
+        <button
+          type="button"
+          onClick={googleLogin}
+          className="w-full flex items-center justify-center gap-3 p-3 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 transition text-gray-700"
+        >
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google logo"
+            className="w-5 h-5"
+          />
+          Continue with Google
+        </button>
+
 
         {/* Sign Up Section */}
         <div className="text-center mt-4">
