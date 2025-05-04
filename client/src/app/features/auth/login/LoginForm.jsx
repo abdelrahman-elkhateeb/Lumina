@@ -54,13 +54,14 @@ function LoginForm() {
   const googleLogin = async () => {
     try {
       const user = await signInWithGoogle();
-      
+
       const idToken = await user.user.getIdToken();
       console.log("Google ID Token:", idToken);
 
       const response = await googleLoginBackend({ token: idToken }).unwrap();
       console.log("Backend response:", response);
 
+      await refetch();
       navigate("/");
     } catch (error) {
       console.error("Google Sign-In failed:", error);

@@ -5,7 +5,14 @@ const AppError = require('../../utils/appError');
 const { promisify } = require('util');
 const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
-import admin from "../services/firebaseAdmin";
+const admin = require("firebase-admin");
+const serviceAccount = require("../services/serviceAccountKey.json");
+
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -33,6 +40,7 @@ const createSendToken = (user, statusCode, res) => {
     }
   })
 };
+
 exports.googleLogin = catchAsync(async (req, res, next) => {
   const { token } = req.body;
 
@@ -40,7 +48,6 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);
-    console.log("Decoded Firebase token:", decodedToken);
 
     const { email, name } = decodedToken;
 
@@ -50,11 +57,16 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
 
     let user = await User.findOne({ email });
 
+    const randomPassword = crypto.randomBytes(20).toString("hex");
+
     if (!user) {
       user = await User.create({
         name,
         email,
-        password: crypto.randomBytes(20).toString("hex"),
+        password: randomPassword,
+        passwordConfirm: randomPassword,
+        userType: "student",
+        gender: "male",
       });
     }
 
