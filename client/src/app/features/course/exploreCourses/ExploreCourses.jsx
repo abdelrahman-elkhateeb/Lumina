@@ -4,7 +4,7 @@ import { useGetcoursesPreviewQuery } from "../../redux/courses/coursesApi";
 import CourseCard from "../../ui/CourseCard";
 
 function exploreCourses() {
-  const { data, error, isLoading } = useGetcoursesPreviewQuery();
+  const { data } = useGetcoursesPreviewQuery();
   const courses = data?.courses;
 
   return (

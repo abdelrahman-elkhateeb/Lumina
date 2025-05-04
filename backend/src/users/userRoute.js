@@ -6,12 +6,14 @@ const router = express.Router();
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.post("/logout", authController.logout);
+router.post("/googleLogin", authController.googleLogin);
 
 //protected routes (authentication)
-router.get('/', authController.protect, userController.getAllUsers);
+router.use(authController.protect);
+router.get('/', userController.getAllUsers);
 
-router.get('/user', authController.protect, userController.getUser);
+router.get('/user', userController.getUser);
 
-router.patch('/updateUser', authController.protect, userController.updateUserProfile);
+router.patch('/updateUser', userController.updateUserProfile);
 
 module.exports = router;

@@ -31,6 +31,13 @@ export const registrationSlice = createApi({
         method: "POST",
       }),
     }),
+    googleLogin: builder.mutation({
+      query: (credentials) => ({
+        url: "/googleLogin",
+        method: "POST",
+        body: credentials
+      })
+    })
   }),
 });
 
@@ -39,4 +46,5 @@ export const {
   useSignupUserMutation,
   useFetchUserDataQuery,
   useLogoutUserMutation,
+  useGoogleLoginMutation
 } = registrationSlice;

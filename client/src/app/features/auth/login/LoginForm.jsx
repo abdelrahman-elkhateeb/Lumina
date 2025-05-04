@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useFetchUserDataQuery, useLoginUserMutation } from "../../redux/auth/registrationApi";
+import { useFetchUserDataQuery, useGoogleLoginMutation, useLoginUserMutation } from "../../redux/auth/registrationApi";
 import Swal from "sweetalert2";
 
 // Google function
@@ -22,6 +22,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
+  const [googleLoginBackend] = useGoogleLoginMutation();
   const { refetch } = useFetchUserDataQuery();
 
   const handleSubmit = async (e) => {
@@ -53,7 +54,12 @@ function LoginForm() {
   const googleLogin = async () => {
     try {
       const user = await signInWithGoogle();
-      console.log("Signed in user:", user);
+      
+      const idToken = await user.user.getIdToken();
+      console.log("Google ID Token:", idToken);
+
+      const response = await googleLoginBackend({ token: idToken }).unwrap();
+      console.log("Backend response:", response);
 
       navigate("/");
     } catch (error) {
@@ -68,7 +74,9 @@ function LoginForm() {
       });
     }
   };
+
   if (isLoading) return <LightBulbLoader />
+
   return (
     <form
       className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] relative z-10"

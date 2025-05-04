@@ -1,9 +1,11 @@
+require('dotenv').config();
 const User = require('../users/userModel');
 const catchAsync = require('../../utils/catchAsync');
 const AppError = require('../../utils/appError');
 const { promisify } = require('util');
 const crypto = require("crypto");
 const jwt = require('jsonwebtoken');
+import admin from "../services/firebaseAdmin";
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -31,6 +33,37 @@ const createSendToken = (user, statusCode, res) => {
     }
   })
 };
+exports.googleLogin = catchAsync(async (req, res, next) => {
+  const { token } = req.body;
+
+  if (!token) return next(new AppError("No Google token provided", 400));
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    console.log("Decoded Firebase token:", decodedToken);
+
+    const { email, name } = decodedToken;
+
+    if (!email || !name) {
+      return next(new AppError("Token missing required user information", 400));
+    }
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      user = await User.create({
+        name,
+        email,
+        password: crypto.randomBytes(20).toString("hex"),
+      });
+    }
+
+    createSendToken(user, 200, res);
+  } catch (error) {
+    console.error("Google/Firebase authentication error:", error);
+    return next(new AppError("Google authentication failed", 401));
+  }
+});
 
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
