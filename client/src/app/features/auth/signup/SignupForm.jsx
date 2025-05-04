@@ -190,6 +190,13 @@ function SignupForm() {
           <p className="text-text">Loading...</p>
         )}
 
+        {/* OR Divider */}
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-t border-gray-300" />
+          <span className="mx-2 text-sm text-gray-500">OR</span>
+          <hr className="flex-grow border-t border-gray-300" />
+        </div>
+
         {/* Google Login Button */}
         <button
           type="button"
