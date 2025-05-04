@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 // sweetAlert
 import Swal from 'sweetalert2'
-import { useSignupUserMutation } from "../../redux/auth/registrationApi";
+import { useGoogleLoginMutation, useSignupUserMutation } from "../../redux/auth/registrationApi";
 
 //google function
 import { signInWithGoogle } from "../auth";
@@ -15,6 +15,7 @@ function SignupForm() {
   const navigate = useNavigate();
 
   const [isVisible, setIsVisible] = useState(false);
+    const [googleLoginBackend] = useGoogleLoginMutation();
   const toggleVisibility = () => {
     setIsVisible((prev) => !prev);
   };
@@ -83,37 +84,30 @@ function SignupForm() {
   };
 
   // google SignUp
-  // const googleSignUp = async () => {
-  //   try {
-  //     const user = await signInWithGoogle();
-  //     console.log(user);
+  const googleLogin = async () => {
+    try {
+      const user = await signInWithGoogle();
 
-  //     await signupUser({
-  //       name: user.displayName,
-  //       email: user.email,
-  //       userType: roleForm,
-  //       gender: genderForm
-  //     }).unwrap();
+      const idToken = await user.user.getIdToken();
+      console.log("Google ID Token:", idToken);
 
-  //     // Save the token to localStorage (if your Google auth returns a token)
-  //     if (user.token) {
-  //       localStorage.setItem("token", user.token); // Save token to localStorage
-  //     }
+      const response = await googleLoginBackend({ token: idToken }).unwrap();
+      console.log("Backend response:", response);
 
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.error("Google Sign-In failed:", error);
-  //     // Show error message using Swal
-  //     Swal.fire({
-  //       title: 'Error!',
-  //       background: "#e7fdfd",
-  //       text: error.message || 'Google Sign-In failed. Please try again.',
-  //       icon: 'error',
-  //       confirmButtonText: 'Try again 😊',
-  //       confirmButtonColor: "#0a2629",
-  //     });
-  //   }
-  // }
+      await refetch();
+      navigate("/");
+    } catch (error) {
+      console.error("Google Sign-In failed:", error);
+      Swal.fire({
+        title: "Error!",
+        background: "#e7fdfd",
+        text: error.message || "Google Sign-In failed. Please try again.",
+        icon: "error",
+        confirmButtonText: "Try again 😊",
+        confirmButtonColor: "#0a2629",
+      });
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center p-8 rounded-2xl md:w-[500px] relative z-10">
@@ -195,6 +189,20 @@ function SignupForm() {
         ) : (
           <p className="text-text">Loading...</p>
         )}
+
+        {/* Google Login Button */}
+        <button
+          type="button"
+          onClick={googleLogin}
+          className="w-full flex items-center justify-center gap-3 p-3 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 transition text-gray-700"
+        >
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google logo"
+            className="w-5 h-5"
+          />
+          Continue with Google
+        </button>
 
         {/* Sign Up Section */}
         <div className="text-center">
