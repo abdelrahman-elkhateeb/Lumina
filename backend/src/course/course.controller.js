@@ -242,39 +242,47 @@ exports.getMyCourses = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.purchaseCourse = catchAsync(async (req, res, next) => {
-  const { id: courseId } = req.body;
+exports.purchaseCourses = catchAsync(async (req, res, next) => {
+  const { courseIds } = req.body;
 
-  // Validate Course ID
-  if (!mongoose.Types.ObjectId.isValid(courseId)) {
-    return next(new AppError("Invalid Course ID", 400));
+  // Validate input
+  if (!Array.isArray(courseIds) || courseIds.length === 0) {
+    return next(new AppError("courseIds must be a non-empty array", 400));
   }
 
-  // Check if the course exists
-  const course = await Course.findById(courseId);
-  if (!course) {
-    return next(new AppError("Course not found", 404));
+  // Validate each ID format
+  const invalidIds = courseIds.filter(id => !mongoose.Types.ObjectId.isValid(id));
+  if (invalidIds.length > 0) {
+    return next(new AppError(`Invalid Course IDs: ${invalidIds.join(", ")}`, 400));
   }
 
-  // Check if the user exists (assuming req.user is set by auth middleware)
+  // Fetch user
   const user = await User.findById(req.user.id);
   if (!user) {
     return next(new AppError("User not found", 404));
   }
 
-  // Check if the user already purchased the course
-  if (user.purchasedCourses.includes(courseId)) {
-    return next(new AppError("Course already purchased", 400));
+  // Fetch valid courses from the database
+  const validCourses = await Course.find({ _id: { $in: courseIds } });
+
+  if (validCourses.length === 0) {
+    return next(new AppError("No valid courses found", 404));
   }
 
-  // Add the course to the user's purchased list
-  user.purchasedCourses.push(courseId);
-  (await user.save({ validateBeforeSave: false }));
+  // Add valid courses to the user's purchasedCourses using $addToSet to avoid duplicates
+  const addedCourses = validCourses.map(course => course._id);
+
+  // Update user and add the courses to purchasedCourses array
+  await User.findByIdAndUpdate(
+    req.user.id,
+    { $addToSet: { purchasedCourses: { $each: addedCourses } } },
+    { new: true }  // Return the updated user document
+  );
 
   res.status(200).json({
     status: "success",
-    message: "Course purchased successfully",
-    purchasedCourses: user.purchasedCourses,
+    message: `${addedCourses.length} course(s) purchased successfully`,
+    purchasedCourses: addedCourses,
   });
 });
 

@@ -63,7 +63,7 @@ function CreateLesson() {
     <section className="container mx-auto px-4">
       <Heading title="create lesson" img={spaceman} />
 
-      <div className="flex jus">
+      <div className="flex justify-between">
         <Link
           to="/courses/section/create"
           className="w-fit mb-4 rounded-full px-6 py-2 text-sm font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 flex items-center gap-2 justify-center"
@@ -79,9 +79,9 @@ function CreateLesson() {
 
       <form action="" className="grid gap-5" onSubmit={handleSubmit}>
         <div className="grid gap-5">
-          <SetTitle handleChange={handleChange} />
           <SelectCourse courses={courses} setSelectedCourseId={setSelectedCourseId} />
           {selectedCourse && <SelectSection course={selectedCourse} setSectionId={setSectionId} />}
+          <SetTitle handleChange={handleChange} />
           {/* <SetDescription handleChange={handleChange} /> */}
           <SetLessonVideo handleFileChange={handleFileChange} />
         </div>
