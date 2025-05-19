@@ -10,8 +10,6 @@ function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const { data, isLoading, error } = useFetchUserDataQuery();
   const userType = data?.data.user.userType;
-  console.log(userType);
-
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);

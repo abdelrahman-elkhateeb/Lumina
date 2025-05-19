@@ -14,19 +14,27 @@ function UserProfile() {
   console.log(photoURL);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      setPhotoURL(parsedUser?.photoURL);
-    }
+    const interval = setInterval(() => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser?.photoURL) {
+          setPhotoURL(parsedUser.photoURL);
+          clearInterval(interval);
+        }
+      }
+    }, 500);
+
+    // Cleanup
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="min-h-dvh bg-background-500 px-4 py-10 text-text">
+    <section className="bg-background-500 px-4 py-10 text-text">
       <div className="max-w-4xl mx-auto bg-background-700 rounded-2xl p-8">
         <Heading img={spaceMan} title="Edit Profile" />
 
-        <div className="flex items-center gap-6 mt-10">
+        <div className="flex items-center flex-wrap gap-6 mt-10">
 
           {photoURL ? <img src={photoURL} className="w-28 h-28 rounded-full border-4 border-accent-500 object-cover shadow-lg" alt="" />
             :
