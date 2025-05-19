@@ -1,39 +1,45 @@
-import { Link } from "react-router-dom"
-import { useFetchUserDataQuery } from "../../redux/auth/registrationApi"
+import { Link } from "react-router-dom";
+import { useFetchUserDataQuery } from "../../redux/auth/registrationApi";
 
 function DesktopNav() {
   const { data, isLoading, error } = useFetchUserDataQuery();
-  const userType = data?.data.user.userType == "instructor";
+
+  const userType = data?.data?.user?.userType;
+
+  // Show nothing until we know the user
+  if (isLoading || error) return null;
 
   return (
     <ul className="hidden md:flex items-center justify-between gap-6">
-      <li>
-        {!userType && <Link to="/courses/myCourses">
-          my courses
-        </Link>}
-      </li>
-      <li>
-        {!userType &&
-          <Link to="/courses/explore-courses">
-            explore our courses
-          </Link>}
-      </li>
-      {userType &&
+      {userType === "admin" && (
         <li>
-          <Link to="/courses/manage">
-            manage course
-          </Link>
+          <Link to="/admin/dashboard">Dashboard</Link>
         </li>
-      }
-      {userType &&
-        <li>
-          <Link to="/courses/create">
-            create course
-          </Link>
-        </li>
-      }
+      )}
+
+      {userType === "instructor" && (
+        <>
+          <li>
+            <Link to="/courses/manage">Manage Course</Link>
+          </li>
+          <li>
+            <Link to="/courses/create">Create Course</Link>
+          </li>
+        </>
+      )}
+
+      {(!userType || userType === "user") && (
+        <>
+          <li>
+            <Link to="/courses/myCourses">My Courses</Link>
+          </li>
+          <li>
+            <Link to="/courses/explore-courses">Explore Our Courses</Link>
+          </li>
+        </>
+      )}
     </ul>
-  )
+  );
 }
 
-export default DesktopNav
+export default DesktopNav;

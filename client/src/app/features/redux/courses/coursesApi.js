@@ -16,6 +16,9 @@ export const courseSlice = createApi({
     getCourse: builder.query({
       query: (id) => `/courses/${id}`,
     }),
+    getCourses: builder.query({
+      query: () => `/courses`
+    }),
     getMyCourses: builder.query({
       query: () => `/courses/mycourses`,
     }),
@@ -103,6 +106,7 @@ export const courseSlice = createApi({
 export const {
   useGetCoursePreviewQuery,
   useGetcoursesPreviewQuery,
+  useGetCoursesQuery,
   useGetCourseQuery,
   useGetMyCoursesQuery,
   useCreateCourseMutation,

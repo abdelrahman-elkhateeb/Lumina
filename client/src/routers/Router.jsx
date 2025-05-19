@@ -21,7 +21,8 @@ import Payment from "../app/features/payment/Payment";
 import PlacementTest from "../app/features/course/courseDashboard/placement test/PlacementTest";
 import TakePlacementTest from "../app/features/course/placementTest/TakePlacementTest";
 import PaymentSuccess from "../app/features/payment/PaymentSuccess";
-
+import AdminOnlyRouter from "./AdminOnlyRouter";
+import AdminDashboard from "../app/features/adminDashboard/AdminDashboard";
 // Lazy-loaded components
 const Signup = lazy(() => import("../app/features/auth/signup/Signup"));
 const Login = lazy(() => import("../app/features/auth/login/Login"));
@@ -62,6 +63,12 @@ const router = createBrowserRouter([
           { path: "/courses/section/create", element: <CreateSection /> },
           { path: "/courses/lesson/create", element: <CreateLesson /> },
           { path: "/create/placement-test/:courseId", element: <PlacementTest /> },
+        ]
+      },
+      {
+        element: <AdminOnlyRouter />,
+        children: [
+          { path: "/admin/dashboard", element: <AdminDashboard /> }
         ]
       }
     ],

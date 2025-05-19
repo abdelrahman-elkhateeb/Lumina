@@ -1,22 +1,21 @@
 import { Navigate, Outlet } from "react-router-dom";
-import LightBulbLoader from "../app/features/ui/LightBulbLoader";
 import { useFetchUserDataQuery } from "../app/features/redux/auth/registrationApi";
+import LightBulbLoader from "../app/features/ui/LightBulbLoader";
 import ErrorPage from "../app/features/ui/ErrorPage";
 
-function InstructorOnlyRouter() {
+function AdminOnlyRoute() {
   const { data, isLoading, error } = useFetchUserDataQuery();
 
   if (isLoading) return <LightBulbLoader />;
   if (error) return <ErrorPage />;
 
-  // Adjust based on the actual API response
-  const userType = data?.data.user.userType;
+  const userType = data?.data?.user?.userType;
 
-  if (userType == "instructor" || userType == "admin") {
+  if (userType === "admin") {
     return <Outlet />;
   }
 
   return <Navigate to="/" replace />;
 }
 
-export default InstructorOnlyRouter;
+export default AdminOnlyRoute;
