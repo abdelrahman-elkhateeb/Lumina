@@ -4,37 +4,61 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import UpdateSectionTitle from "./UpdateSectionTitle";
 import {
-  useDeleteSectionMutation,
+  useGetCoursesQuery,
   useInstructorCoursesQuery,
   useUpdateSectionMutation
 } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import SelectSection from "../../../ui/SelectSection";
 import ErrorPage from "../../../ui/ErrorPage";
+import { useFetchUserDataQuery } from "../../../redux/auth/registrationApi";
 
 function EditSection() {
-  const { courseId } = useParams(); // ✅ get courseId from the URL
+  const { courseId } = useParams();
   const [updateData, setUpdatedData] = useState("");
   const [sectionId, setSectionId] = useState("");
 
-  const { data, isLoading, error } = useInstructorCoursesQuery();
-  const [updateSection, { isLoading: isUpdateLoading, error: updateError }] = useUpdateSectionMutation();
-  const [deleteSection, { isLoading: loadingDelete }] = useDeleteSectionMutation();
+  // Fetch user data
+  const { data: userData, isLoading: userLoading } = useFetchUserDataQuery();
+  const isAdmin = userData?.data?.user?.userType === "admin";
+
+  // Fetch courses conditionally based on user type
+  const {
+    data: instructorData,
+    isLoading: instructorLoading,
+    error: instructorError,
+  } = useInstructorCoursesQuery(undefined, { skip: isAdmin });
+
+console.log(instructorData);
+
+
+  const {
+    data: allCoursesData,
+    isLoading: allCoursesLoading,
+    error: allCoursesError,
+  } = useGetCoursesQuery(undefined, { skip: !isAdmin });
+
+console.log(allCoursesData);
+
+
+  const [updateSection, { isLoading: isUpdateLoading }] = useUpdateSectionMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await updateSection({ courseId, sectionId, data: updateData }).unwrap();
+      alert("Section updated successfully");
     } catch (err) {
-      console.log(err);
+      console.log("Update failed", err);
+      alert("Failed to update section");
     }
   };
 
-  if (isLoading) return <LightBulbLoader />;
-  if (error) return <ErrorPage />;
+  if (userLoading || instructorLoading || allCoursesLoading) return <LightBulbLoader />;
+  if (instructorError || allCoursesError) return <ErrorPage />;
 
-  const courses = data?.courses;
-  const selectedCourse = courses?.find(c => c._id === courseId);
+  const courses = isAdmin ? allCoursesData?.courses : instructorData?.courses;
+  const selectedCourse = courses?.find((c) => c._id === courseId);
 
   return (
     <section className="container mx-auto px-4">

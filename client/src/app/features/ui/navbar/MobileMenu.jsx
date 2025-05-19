@@ -9,7 +9,9 @@ function MobileMenu() {
 
   const [isOpen, setIsOpen] = useState(false);
   const { data, isLoading, error } = useFetchUserDataQuery();
-  const userType = data?.data.user.userType == "instructor";
+  const userType = data?.data.user.userType;
+  console.log(userType);
+
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -65,20 +67,23 @@ function MobileMenu() {
             <Link to="/profile" className={menuButtonClassName} onClick={closeMenu}>
               profile
             </Link>
-            {!userType ? <Link to="/courses/myCourses" className={menuButtonClassName} onClick={closeMenu}>
+            {userType == "student" ? <Link to="/courses/myCourses" className={menuButtonClassName} onClick={closeMenu}>
               my courses
             </Link> : null}
             {
-              !userType ? <Link to="/courses/explore-courses" className={menuButtonClassName} onClick={closeMenu}>
+              userType == "student" ? <Link to="/courses/explore-courses" className={menuButtonClassName} onClick={closeMenu}>
                 explore courses
               </Link> : null
             }
-            {userType ? <Link to="/courses/create" onClick={closeMenu} className={menuButtonClassName}>
+            {userType == "instructor" ? <Link to="/courses/create" onClick={closeMenu} className={menuButtonClassName}>
               create course
             </Link> : null}
 
-            {userType ? <Link to="/courses/manage" onClick={closeMenu} className={menuButtonClassName}>
+            {userType == "instructor" ? <Link to="/courses/manage" onClick={closeMenu} className={menuButtonClassName}>
               manage course
+            </Link> : null}
+            {userType == "admin" ? <Link to="/admin/dashboard" onClick={closeMenu} className={menuButtonClassName}>
+              dashboard
             </Link> : null}
           </nav>
 

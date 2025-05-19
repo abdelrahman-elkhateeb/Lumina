@@ -28,7 +28,7 @@ function DesktopNav() {
         </>
       )}
 
-      {(!userType || userType === "user") && (
+      {(!userType || userType === "student") && (
         <>
           <li>
             <Link to="/courses/myCourses">My Courses</Link>

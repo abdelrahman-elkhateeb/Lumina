@@ -1,26 +1,40 @@
 import Heading from "../../../ui/Heading";
 import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
 import { Link, useParams } from "react-router-dom";
-import { useInstructorCoursesQuery, useUpdateLessonMutation } from "../../../redux/courses/coursesApi";
+import {
+  useGetCoursesQuery,
+  useInstructorCoursesQuery,
+  useUpdateLessonMutation
+} from "../../../redux/courses/coursesApi";
+import { useFetchUserDataQuery } from "../../../redux/auth/registrationApi";
 import SelectSection from "../../../ui/SelectSection";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import { useState } from "react";
 import SelectLesson from "./SelectLesson";
 import UpdateTitle from "./UpdateTitle";
 import UpdateVideo from "../../../ui/UpdateVideo";
+import ErrorPage from "../../../ui/ErrorPage";
 
 function EditLesson() {
   const { courseId } = useParams();
-  const { data, isLoading, error } = useInstructorCoursesQuery();
-  const [updateLesson, { isLoading: loadingUpdateLesson }] = useUpdateLessonMutation();
-
   const [sectionId, setSectionId] = useState(null);
   const [lessonId, setLessonId] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [updatedData, setUpdatedData] = useState({});
 
-  if (isLoading) return <LightBulbLoader />;
-  if (error) return <p className="text-red-500">Error loading courses. Please try again later.</p>;
+  const { data: userData, isLoading: userLoading, error: userError } = useFetchUserDataQuery();
+  const isAdmin = userData?.data?.user.userType === "admin";
+
+  const {
+    data,
+    isLoading,
+    error,
+  } = isAdmin ? useGetCoursesQuery() : useInstructorCoursesQuery();
+
+  const [updateLesson, { isLoading: loadingUpdateLesson }] = useUpdateLessonMutation();
+
+  if (isLoading || userLoading) return <LightBulbLoader />;
+  if (error || userError) return <ErrorPage />;
 
   const courses = data?.courses;
   const selectedCourse = courses?.find(c => c._id === courseId);
@@ -64,7 +78,7 @@ function EditLesson() {
 
   return (
     <section className="container mx-auto px-4">
-      <Heading title="edit your content here" img={spaceman} />
+      <Heading title="Edit your content here" img={spaceman} />
 
       <div className="flex justify-between">
         <Link
@@ -78,7 +92,7 @@ function EditLesson() {
           to={`/create/placement-test/${courseId}`}
           className="w-fit mb-4 rounded-full px-6 py-2 text-sm font-semibold uppercase tracking-wide text-text transition-colors duration-300 hover:bg-accent-500 focus:bg-accent-500 focus:outline-none focus:ring focus:ring-accent-500 focus:ring-offset-2 flex items-center gap-2 justify-center"
         >
-          create placement test
+          Create placement test
         </Link>
       </div>
 
