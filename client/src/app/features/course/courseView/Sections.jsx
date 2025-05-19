@@ -5,7 +5,6 @@ import { useDeleteSectionMutation } from "../../redux/courses/coursesApi";
 import { Trash2 } from "lucide-react";
 
 function Sections({ sections, setSelectedVideoUrl, courseId }) {
-  console.log(courseId);
 
   const [activeSections, setActiveSections] = useState({});
   const { data, isLoading, error } = useFetchUserDataQuery();
@@ -37,24 +36,24 @@ function Sections({ sections, setSelectedVideoUrl, courseId }) {
                 Section {i + 1}: {section.title}
               </h3>
               <span>{isActive ? "−" : "+"}</span>
+              {userType && (<button
+                onClick={() => deleteSection({ courseId, sectionId: section._id })}
+                className="flex items-center gap-1 text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-full transition duration-200"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>)}
             </button>
 
             {isActive && (
               <ul className="ml-4 mt-2 space-y-2">
                 {section.lessons.map((lesson, j) => (
-                  <li key={lesson._id} className="flex justify-between">
+                  <li key={lesson._id}>
                     <button
                       onClick={() => setSelectedVideoUrl(lesson.videoUrl)}
                       className="text-sm font-medium text-left hover:underline w-full"
                     >
                       Lesson {j + 1}: {lesson.title}
                     </button>
-                    {userType && (<button
-                      onClick={() => deleteSection({ courseId, sectionId: section._id })}
-                      className="flex items-center gap-1 text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-full transition duration-200"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>)}
                   </li>
                 ))}
               </ul>
