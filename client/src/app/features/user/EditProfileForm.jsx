@@ -44,10 +44,10 @@ function EditProfileForm({ user }) {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex ">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md space-y-4 p-6 shadow-md rounded-lg"
+        className="w-full max-w-md space-y-4 p-6 rounded-lg"
       >
         <div>
           <label htmlFor="name" className="block text-sm">

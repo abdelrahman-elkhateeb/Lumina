@@ -55,8 +55,14 @@ function LoginForm() {
     try {
       const user = await signInWithGoogle();
 
+      const userInfo = {
+        name: user.user.displayName,
+        photoURL: user.user.photoURL,
+      };
+
+      localStorage.setItem("user", JSON.stringify(userInfo));
+
       const idToken = await user.user.getIdToken();
-      console.log("Google ID Token:", idToken);
 
       const response = await googleLoginBackend({ token: idToken }).unwrap();
       console.log("Backend response:", response);
