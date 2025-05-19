@@ -8,10 +8,7 @@ import AdminCourseCard from "./AdminCourseCard";
 function AdminDashboard() {
   const { data, isLoading, error } = useGetCoursesQuery();
 
-
   if (isLoading) return <LightBulbLoader />;
-  console.log(data.courses);
-
   return (
     <section className="container mx-auto px-4">
       <Heading title={"dashboard"} img={spaceman} />
