@@ -14,6 +14,7 @@ function Course() {
   const { data, error, isLoading } = useGetCourseQuery(id);
 
   const course = data?.course || {};
+  const courseId = course._id;
   const sections = data?.course.sections || [];
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(course.videoUrl || "");
 
@@ -32,7 +33,7 @@ function Course() {
 
           <div>
             <aside className="bg-primary-500 p-6 rounded-xl h-96 overflow-y-auto">
-              <Sections sections={sections} setSelectedVideoUrl={setSelectedVideoUrl} />
+              <Sections sections={sections} courseId={courseId} setSelectedVideoUrl={setSelectedVideoUrl} />
             </aside>
             <Link to="/codeEditor" className="flex flex-col items-center">
               <div className="w-56">

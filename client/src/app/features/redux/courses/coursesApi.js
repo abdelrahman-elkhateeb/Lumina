@@ -68,8 +68,8 @@ export const courseSlice = createApi({
       })
     }),
     deleteSection: builder.mutation({
-      query: (sectionId) => ({
-        url: `/courses/sections/${sectionId}`,
+      query: ({ sectionId, courseId }) => ({
+        url: `/courses/${courseId}/sections/${sectionId}`,
         method: 'DELETE',
       }),
     }),
