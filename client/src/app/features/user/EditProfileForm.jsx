@@ -62,19 +62,6 @@ function EditProfileForm({ user }) {
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
         </div>
 
-        <div>
-          <label htmlFor="email" className="block text-sm">
-            Email
-          </label>
-          <input
-            id="email"
-            {...register("email")}
-            className="text-primary-500 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-site-accent w-full"
-            placeholder="Enter your email"
-          />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-        </div>
-
         {isError && <p className="text-red-500 text-sm">Update failed. {error?.data?.message}</p>}
         {isSuccess && <p className="text-green-500 text-sm">Profile updated successfully!</p>}
 
