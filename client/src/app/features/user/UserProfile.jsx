@@ -43,7 +43,7 @@ function UserProfile() {
           </div>
         </div>
 
-        <div className="mt-10">
+        <div>
           <EditProfileForm user={user} />
         </div>
       </div>
