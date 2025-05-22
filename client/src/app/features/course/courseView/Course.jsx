@@ -8,11 +8,11 @@ import Heading from "../../ui/Heading";
 import spaceMan from "../../../../../public/assets/spaceMan(7).svg";
 import spaceMan2 from "../../../../../public/assets/spaceMan.svg";
 import ChatBot from "../../chatbot/ChatBot";
+import { useFetchUserDataQuery } from "../../redux/auth/registrationApi";
 
 function Course() {
   const { id } = useParams();
   const { data, error, isLoading } = useGetCourseQuery(id);
-
   const course = data?.course || {};
   const courseId = course._id;
   const sections = data?.course.sections || [];

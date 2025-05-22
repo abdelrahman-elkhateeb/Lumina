@@ -10,6 +10,7 @@ function Sections({ sections, setSelectedVideoUrl, courseId }) {
   const { data, isLoading, error } = useFetchUserDataQuery();
   const [deleteSection] = useDeleteSectionMutation();
 
+
   const toggleSection = (sectionId) => {
     setActiveSections((prev) => ({
       ...prev,
@@ -18,7 +19,7 @@ function Sections({ sections, setSelectedVideoUrl, courseId }) {
   };
 
   if (isLoading) return <LightBulbLoader />
-  const userType = data.data?.user?.userType;
+  const userType = data.data?.user?.userType ==="admin";
 
   return (
     <nav aria-label="Course Content">
