@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import StarBackground from "../ui/starBackground";
 import logo from "../../../../public/assets/logo.svg";
+import StarBackground from "../ui/StarBackground.jsx";
 
 const images = ["/public/assets/spaceMan(1).svg", "/public/assets/spaceMan(2).svg", "/public/assets/spaceMan(3).svg", "/public/assets/spaceMan(4).svg", "/public/assets/spaceMan(5).svg", "/public/assets/spaceMan(6).svg", "/public/assets/spaceMan(7).svg", "/public/assets/spaceMan(8).svg"];
 

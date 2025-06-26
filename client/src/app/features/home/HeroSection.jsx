@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import StarBackground from "../ui/StarBackground";
+import StarBackground from "../ui/StarBackground.jsx";
 import Button from "../ui/Button"
 
 function heroSection() {

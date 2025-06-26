@@ -3,7 +3,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import StarBackground from "../ui/StarBackground";
+import StarBackground from "../ui/StarBackground.jsx";
 import { useGetcoursesPreviewQuery } from "../redux/courses/coursesApi";
 import CourseCard from "../ui/CourseCard";
 import { Link } from "react-router-dom";

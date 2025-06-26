@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
-import StarBackground from "./starBackground";
 
 function AppLayout() {
   const location = useLocation(); // Get the current route

@@ -1,5 +1,6 @@
+import StarBackground from "../../ui/StarBackground.jsx";
 import SignupForm from "./SignupForm";
-import StarBackground from "../../ui/starBackground";
+
 
 function Signup() {
   return (
