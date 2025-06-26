@@ -1,4 +1,4 @@
-import StarBackground from "../../ui/StarBackground.jsx";
+import StarBackground from "../../../../app/features/ui/StarBackground";
 import LoginForm from "./LoginForm";
 
 function Login() {
