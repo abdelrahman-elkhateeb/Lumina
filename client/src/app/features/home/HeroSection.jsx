@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import SpaceBackground from "../../ui/SpaceBackground";
+import SpaceBackground from "../ui/SpaceBackground";
 import Button from "../ui/Button"
 
 function heroSection() {
