@@ -11,7 +11,7 @@ const app = express();
 // Enable CORS
 app.use(cors(
   {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://lumina-psi-eight.vercel.app/"],
     credentials: true,
   },
 ));

@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const registrationSlice = createApi({
   reducerPath: 'registration',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/users',
+    // baseUrl: 'http://localhost:5000/api/users',
+    baseUrl: 'https://lumina-psi-eight.vercel.app/api/users',
     credentials: "include",
   }),
   endpoints: (builder) => ({
