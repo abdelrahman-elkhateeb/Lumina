@@ -1,5 +1,4 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
-import spaceMan from "/public/assets/spaceMan.svg";
 import { usePurchaseCoursesMutation } from "../redux/courses/coursesApi";
 import { useState } from "react";
 
@@ -37,7 +36,7 @@ function PaymentSuccess() {
     <section className="container mx-auto px-4">
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="w-52">
-          <img src={spaceMan} alt="Spaceman" className="w-full" />
+          <img src="/public/assets/spaceMan.svg" alt="Spaceman" className="w-full" />
         </div>
 
         {status === "idle" && (

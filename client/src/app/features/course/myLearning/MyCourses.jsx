@@ -1,6 +1,5 @@
 import { useGetMyCoursesQuery } from "../../redux/courses/coursesApi";
 import LightBulbLoader from "../../ui/LightBulbLoader";
-import spaceMan from "/public/assets/spaceMan(3).svg";
 import Heading from "../../ui/Heading";
 import { Link } from "react-router-dom";
 
@@ -13,7 +12,7 @@ function MyCourses() {
 
   return (
     <section className="container mx-auto px-4 py-8">
-      <Heading img={spaceMan} title="your learnings" />
+      <Heading img="/public/assets/spaceMan(3).svg" title="your learnings" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
         {courses.map((course) => (

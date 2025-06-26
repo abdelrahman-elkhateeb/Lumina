@@ -1,10 +1,7 @@
 import EditProfileForm from "./EditProfileForm";
-import spaceMan from "/public/assets/spaceMan(7).svg";
 import { useFetchUserDataQuery } from "../redux/auth/registrationApi";
 import Heading from "../ui/Heading";
 import { useEffect, useState } from "react";
-import maleSvg from "/public/assets/male.svg";
-import femaleSvg from "/public/assets/female.svg";
 
 function UserProfile() {
   const { data, isLoading } = useFetchUserDataQuery();
@@ -32,14 +29,14 @@ function UserProfile() {
   return (
     <section className="bg-background-500 px-4 py-10 text-text">
       <div className="max-w-4xl mx-auto bg-background-700 rounded-2xl p-8">
-        <Heading img={spaceMan} title="Edit Profile" />
+        <Heading img="/public/assets/spaceMan(7).svg" title="Edit Profile" />
 
         <div className="flex items-center flex-wrap gap-6 mt-10">
 
           {photoURL ? <img src={photoURL} className="w-28 h-28 rounded-full border-4 border-accent-500 object-cover shadow-lg" alt="" />
             :
             <img
-              src={user.gender === "male" ? maleSvg : femaleSvg}
+              src={user.gender === "male" ? "/public/assets/male.svg" : "/public/assets/female.svg"}
               alt="profile"
               className="w-28 h-28 rounded-full border-4 border-accent-500 object-cover shadow-lg"
             />}

@@ -8,7 +8,6 @@ import CoursePreviewVideo from "./CoursePreviewVideo";
 import CourseCourseImage from "./CourseCourseImage";
 import CourseWhatYouWillLearn from "./CourseWhatYouWillLearn";
 import Heading from "../../../ui/Heading";
-import img from "/public/assets/spaceMan(8).svg";
 import LoadingUpload from "../../../ui/LoadingUpload";
 import { Link } from "react-router-dom";
 
@@ -68,7 +67,7 @@ function CreateCourse() {
       <LoadingUpload />
     ) : (
       <section className="container mx-auto px-4 pb-8">
-        <Heading title="Create Course" img={img} />
+        <Heading title="Create Course" img="/public/assets/spaceMan(8).svg" />
         <div className="flex justify-between">
           <Link
             to="/courses/section/create"

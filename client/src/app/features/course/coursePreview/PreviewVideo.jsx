@@ -1,11 +1,10 @@
 import Heading from "../../ui/Heading";
-import spaceMan from "/public/assets/spaceMan(1).svg";
 
 function PreviewVideo({ previewVideo }) {
 
   return (
     <section className="">
-      <Heading img={spaceMan} title={"video preview :"} />
+      <Heading img="/public/assets/spaceMan(1).svg" title={"video preview :"} />
       <div className="flex-1 w-full shadow-lg rounded-2xl overflow-hidden">
         {/* <ReactPlayer url={previewVideo} className="w-full rounded-2xl" /> */}
         <video

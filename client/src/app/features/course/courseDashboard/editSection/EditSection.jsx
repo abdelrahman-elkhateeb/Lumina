@@ -62,7 +62,7 @@ console.log(allCoursesData);
 
   return (
     <section className="container mx-auto px-4">
-      <Heading title="Edit your content here" img={spaceman} />
+      <Heading title="Edit your content here" img="/public/assets/spaceMan(7).svg" />
 
       <div className="flex justify-between items-center">
         <Link

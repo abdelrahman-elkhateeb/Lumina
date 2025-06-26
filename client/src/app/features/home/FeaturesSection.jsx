@@ -4,16 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import StarBackground from "../ui/starBackground";
 import logo from "../../../../public/assets/logo.svg";
 
-import img1 from "/public/assets/spaceMan(1).svg";
-import img2 from "/public/assets/spaceMan(2).svg";
-import img3 from "/public/assets/spaceMan(3).svg";
-import img4 from "/public/assets/spaceMan(4).svg";
-import img5 from "/public/assets/spaceMan(5).svg";
-import img6 from "/public/assets/spaceMan(6).svg";
-import img7 from "/public/assets/spaceMan(7).svg";
-import img8 from "/public/assets/spaceMan(8).svg";
-
-const images = [img1, img2, img3, img4, img5, img6, img7, img8];
+const images = ["/public/assets/spaceMan(1).svg", "/public/assets/spaceMan(2).svg", "/public/assets/spaceMan(3).svg", "/public/assets/spaceMan(4).svg", "/public/assets/spaceMan(5).svg", "/public/assets/spaceMan(6).svg", "/public/assets/spaceMan(7).svg", "/public/assets/spaceMan(8).svg"];
 
 gsap.registerPlugin(ScrollTrigger);
 

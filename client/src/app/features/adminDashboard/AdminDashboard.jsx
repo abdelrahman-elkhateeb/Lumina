@@ -1,4 +1,3 @@
-import spaceman from "/public/assets/spaceMan(7).svg";
 import { useGetCoursesQuery } from "../redux/courses/coursesApi";
 
 import Heading from "../ui/Heading";
@@ -11,7 +10,7 @@ function AdminDashboard() {
   if (isLoading) return <LightBulbLoader />;
   return (
     <section className="container mx-auto px-4">
-      <Heading title={"dashboard"} img={spaceman} />
+      <Heading title={"dashboard"} img='/public/assets/spaceMan(7).svg' />
       <AdminCourseCard courses={data.courses} />
     </section>
   )

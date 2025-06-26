@@ -1,5 +1,4 @@
 import Heading from "../../../ui/Heading";
-import spaceMan from "/public/assets/spaceMan(7).svg";
 import { useCreateSectionMutation, useInstructorCoursesQuery } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import { useState } from "react";
@@ -23,7 +22,7 @@ function CreateSection() {
   const courses = data.courses;
   return (
     <section className="container mx-auto px-4">
-      <Heading title="create new section" img={spaceMan} />
+      <Heading title="create new section" img="/public/assets/spaceMan(7).svg" />
 
       <div className="flex justify-between items-center">
         <Link

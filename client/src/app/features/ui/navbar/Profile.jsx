@@ -1,6 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import maleSvg from "/public/assets/male.svg";
-import femaleSvg from "/public/assets/female.svg";
 import { useLogoutUserMutation } from "../../redux/auth/registrationApi";
 
 function Profile({ user }) {
@@ -24,7 +22,7 @@ function Profile({ user }) {
       <div className="cursor-pointer w-10 h-10 border-2 border-accent-700 rounded-full overflow-hidden">
         {photoURL ? <img src={photoURL} alt="" /> :
           <img
-            src={user.gender === "male" ? maleSvg : femaleSvg}
+            src={user.gender === "male" ? "/public/assets/male.svg" : "/public/assets/female.svg"}
             alt="profile"
             className="w-full h-full object-cover"
           />}

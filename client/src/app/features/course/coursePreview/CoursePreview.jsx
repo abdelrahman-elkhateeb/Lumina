@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useGetCoursePreviewQuery } from "../../redux/courses/coursesApi";
 import LightBulbLoader from "../../ui/LightBulbLoader";
 import ErrorPage from "../../ui/ErrorPage";
-import spaceMan from "/public/assets/spaceMan.svg";
 import PreviewVideo from "./PreviewVideo";
 import WhatYouWillLearn from "./WhatYouWillLearn";
 import Button from "../../ui/Button";
@@ -35,7 +34,7 @@ function CoursePreview() {
       </div>
 
       <div className="space-y-5">
-        <Heading img={spaceMan} title={course.title} />
+        <Heading img="/public/assets/spaceMan.svg" title={course.title} />
 
         <WhatYouWillLearn whatYouWillLearn={course.whatYouWillLearn} />
 

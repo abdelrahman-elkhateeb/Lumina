@@ -1,5 +1,4 @@
 import Heading from "../../../ui/Heading";
-import spaceman from "/public/assets/spaceMan(7).svg";
 import { useInstructorCoursesQuery, useUpdateCourseMutation } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import UpdateTitle from "../../../ui/UpdateTitle";
@@ -66,7 +65,7 @@ function EditCourse() {
 
   return (
     <section className="container mx-auto px-4">
-      <Heading title="Edit your content here" img={spaceman} />
+      <Heading title="Edit your content here" img="/public/assets/spaceMan(7).svg" />
       <div className="flex items-center justify-between">
         <Link
           to={`/create/placement-test/${courseId}`}

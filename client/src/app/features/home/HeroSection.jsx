@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import spaceMan from "/public/assets/spaceman(5).svg";
 import StarBackground from "../ui/StarBackground";
 import Button from "../ui/Button"
 
@@ -16,7 +15,7 @@ function heroSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.img
-            src={spaceMan}
+            src="/public/assets/spaceman(5).svg"
             alt="Spaceman"
             className="w-full"
             animate={{

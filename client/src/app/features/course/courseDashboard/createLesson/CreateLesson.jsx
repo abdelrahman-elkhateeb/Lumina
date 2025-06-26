@@ -1,5 +1,4 @@
 import Heading from "../../../ui/Heading";
-import spaceman from "/public/assets/spaceMan(7).svg";
 import SelectCourse from "./SelectCourse";
 import { useCreateLessonMutation, useInstructorCoursesQuery } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
@@ -7,7 +6,6 @@ import SelectSection from "../../../ui/SelectSection";
 import { useState } from "react";
 import ErrorPage from "../../../ui/ErrorPage";
 import SetTitle from "./SetTitle";
-import SetDescription from "./SetDescription";
 import SetLessonVideo from "./SetLessonVideo";
 import { Link } from "react-router-dom";
 
@@ -61,7 +59,7 @@ function CreateLesson() {
 
   return (
     <section className="container mx-auto px-4">
-      <Heading title="create lesson" img={spaceman} />
+      <Heading title="create lesson" img="/public/assets/spaceMan(8).svg" />
 
       <div className="flex justify-between">
         <Link

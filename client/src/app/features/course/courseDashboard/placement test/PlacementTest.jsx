@@ -1,5 +1,4 @@
 import Heading from "../../../ui/Heading";
-import spaceMan from "/public/assets/spaceMan(7).svg";
 import Question from "./Question";
 import Options from "./Options";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,7 +42,7 @@ function PlacementTest() {
 
   return (
     <section className="container mx-auto px-4">
-      <Heading title="Create Placement Test" img={spaceMan} />
+      <Heading title="Create Placement Test" img="/public/assets/spaceMan(7).svg" />
       <div className="flex flex-col gap-4">
         <Question
           value={question}
