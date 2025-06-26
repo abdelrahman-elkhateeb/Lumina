@@ -1,10 +1,10 @@
-import StarBackground from "../../../../app/features/ui/StarBackground";
+import SpaceBackground from "../../ui/SpaceBackground";
 import LoginForm from "./LoginForm";
 
 function Login() {
   return (
     <div className="grid place-content-center h-dvh w-dvw relative bg-auth-background overflow-hidden">
-      <StarBackground />
+      <SpaceBackground />
       <LoginForm />
     </div>
   );

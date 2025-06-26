@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import logo from "../../../../public/assets/logo.svg";
-import StarBackground from "../ui/StarBackground.jsx";
+import SpaceBackground from "../../ui/SpaceBackground";
 
 const images = ["/public/assets/spaceMan(1).svg", "/public/assets/spaceMan(2).svg", "/public/assets/spaceMan(3).svg", "/public/assets/spaceMan(4).svg", "/public/assets/spaceMan(5).svg", "/public/assets/spaceMan(6).svg", "/public/assets/spaceMan(7).svg", "/public/assets/spaceMan(8).svg"];
 
@@ -91,7 +91,7 @@ function FeaturesSection() {
 
   return (
     <div ref={sectionRef} className="h-screen flex justify-center items-center bg-galaxy-black relative overflow-hidden">
-      <StarBackground />
+      <SpaceBackground />
 
       {/* Main Content */}
       <div className="text-center z-10 relative">

@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import StarBackground from "../ui/StarBackground.jsx";
+import SpaceBackground from "../../ui/SpaceBackground";
 import Button from "../ui/Button"
 
 function heroSection() {
   return (
     <section className="grid grid-cols-1 place-content-center md:grid-cols-2 h-[calc(100vh-78px)] relative">
-      <StarBackground />
+      <SpaceBackground />
 
       <div>
         <motion.div

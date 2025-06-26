@@ -3,7 +3,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import StarBackground from "../ui/StarBackground.jsx";
+import SpaceBackground from "../../ui/SpaceBackground";
 import { useGetcoursesPreviewQuery } from "../redux/courses/coursesApi";
 import CourseCard from "../ui/CourseCard";
 import { Link } from "react-router-dom";
@@ -13,9 +13,9 @@ function Recommended() {
 
   return (
     <section className="relative mt-20">
-      <StarBackground />
+      <SpaceBackground />
       <div className="overflow-hidden w-full p-6 relative">
-        <StarBackground />
+        <SpaceBackground />
         <h2 className="text-3xl font-bold text-center mb-6">Recommended for You</h2>
 
         <Swiper

@@ -1,4 +1,4 @@
-const StarBackground = () => {
+function SpaceBackground() {
   const stars = Array.from({ length: 100 }, (_, i) => ({
     id: i,
     top: `${Math.random() * 100}vh`,
@@ -21,6 +21,6 @@ const StarBackground = () => {
       ))}
     </div>
   );
-};
+}
 
-export default StarBackground;
+export default SpaceBackground;
