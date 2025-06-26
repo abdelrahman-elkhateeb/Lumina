@@ -4,7 +4,7 @@ export const registrationSlice = createApi({
   reducerPath: 'registration',
   baseQuery: fetchBaseQuery({
     // baseUrl: 'http://localhost:5000/api/users',
-    baseUrl: 'https://lumina-psi-eight.vercel.app/api/users',
+    baseUrl: 'https://lumina-php0zcgi0-abdelrahman-elkhateebs-projects.vercel.app/api/users',
     credentials: "include",
   }),
   endpoints: (builder) => ({
