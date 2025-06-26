@@ -1,5 +1,5 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
-import spaceMan from "../../../../public/assets/spaceMan.svg";
+import spaceMan from "/public/assets/spaceMan.svg";
 import { usePurchaseCoursesMutation } from "../redux/courses/coursesApi";
 import { useState } from "react";
 

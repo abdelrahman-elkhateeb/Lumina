@@ -5,10 +5,9 @@ import Sections from "./Sections";
 import CourseOverview from "./CourseOverview";
 import { useState } from "react";
 import Heading from "../../ui/Heading";
-import spaceMan from "../../../../../public/assets/spaceMan(7).svg";
-import spaceMan2 from "../../../../../public/assets/spaceMan.svg";
+import spaceMan from "/public/assets/spaceMan(7).svg";
+import spaceMan2 from "/public/assets/spaceMan.svg";
 import ChatBot from "../../chatbot/ChatBot";
-import { useFetchUserDataQuery } from "../../redux/auth/registrationApi";
 
 function Course() {
   const { id } = useParams();

@@ -8,7 +8,7 @@ import CoursePreviewVideo from "./CoursePreviewVideo";
 import CourseCourseImage from "./CourseCourseImage";
 import CourseWhatYouWillLearn from "./CourseWhatYouWillLearn";
 import Heading from "../../../ui/Heading";
-import img from "../../../../../../public/assets/spaceMan(8).svg";
+import img from "/public/assets/spaceMan(8).svg";
 import LoadingUpload from "../../../ui/LoadingUpload";
 import { Link } from "react-router-dom";
 

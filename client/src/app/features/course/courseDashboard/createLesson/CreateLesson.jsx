@@ -1,5 +1,5 @@
 import Heading from "../../../ui/Heading";
-import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
+import spaceman from "/public/assets/spaceMan(7).svg";
 import SelectCourse from "./SelectCourse";
 import { useCreateLessonMutation, useInstructorCoursesQuery } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";

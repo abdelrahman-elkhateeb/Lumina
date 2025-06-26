@@ -1,5 +1,5 @@
 import Heading from "../../../ui/Heading";
-import spaceMan from "../../../../../../public/assets/spaceMan(7).svg";
+import spaceMan from "/public/assets/spaceMan(7).svg";
 import Question from "./Question";
 import Options from "./Options";
 import { useDispatch, useSelector } from "react-redux";

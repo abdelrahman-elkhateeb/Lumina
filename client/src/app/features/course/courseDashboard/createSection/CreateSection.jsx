@@ -1,5 +1,5 @@
 import Heading from "../../../ui/Heading";
-import spaceMan from "../../../../../../public/assets/spaceMan(7).svg";
+import spaceMan from "/public/assets/spaceMan(7).svg";
 import { useCreateSectionMutation, useInstructorCoursesQuery } from "../../../redux/courses/coursesApi";
 import LightBulbLoader from "../../../ui/LightBulbLoader";
 import { useState } from "react";

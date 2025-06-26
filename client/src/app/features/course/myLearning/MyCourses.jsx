@@ -1,6 +1,6 @@
 import { useGetMyCoursesQuery } from "../../redux/courses/coursesApi";
 import LightBulbLoader from "../../ui/LightBulbLoader";
-import spaceMan from "../../../../../public/assets/spaceMan(3).svg";
+import spaceMan from "/public/assets/spaceMan(3).svg";
 import Heading from "../../ui/Heading";
 import { Link } from "react-router-dom";
 

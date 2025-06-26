@@ -1,4 +1,4 @@
-import spaceman from "../../../../public/assets/spaceMan(7).svg";
+import spaceman from "/public/assets/spaceMan(7).svg";
 import { useGetCoursesQuery } from "../redux/courses/coursesApi";
 
 import Heading from "../ui/Heading";

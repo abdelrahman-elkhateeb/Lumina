@@ -1,5 +1,5 @@
 import Heading from "../../../ui/Heading";
-import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
+import spaceman from "/public/assets/spaceMan(7).svg";
 import { Link, useParams } from "react-router-dom";
 import {
   useGetCoursesQuery,

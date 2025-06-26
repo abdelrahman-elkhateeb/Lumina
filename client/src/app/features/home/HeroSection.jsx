@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import spaceMan from "../../../../public/assets/spaceman(5).svg";
+import spaceMan from "/public/assets/spaceman(5).svg";
 import StarBackground from "../ui/StarBackground";
 import Button from "../ui/Button"
 

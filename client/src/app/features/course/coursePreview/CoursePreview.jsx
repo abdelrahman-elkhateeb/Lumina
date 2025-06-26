@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useGetCoursePreviewQuery } from "../../redux/courses/coursesApi";
 import LightBulbLoader from "../../ui/LightBulbLoader";
 import ErrorPage from "../../ui/ErrorPage";
-import spaceMan from "../../../../../public/assets/spaceMan.svg";
+import spaceMan from "/public/assets/spaceMan.svg";
 import PreviewVideo from "./PreviewVideo";
 import WhatYouWillLearn from "./WhatYouWillLearn";
 import Button from "../../ui/Button";

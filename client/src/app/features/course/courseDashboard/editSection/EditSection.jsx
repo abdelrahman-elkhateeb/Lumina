@@ -1,5 +1,5 @@
 import Heading from "../../../ui/Heading";
-import spaceman from "../../../../../../public/assets/spaceMan(7).svg";
+import spaceman from "/public/assets/spaceMan(7).svg";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import UpdateSectionTitle from "./UpdateSectionTitle";

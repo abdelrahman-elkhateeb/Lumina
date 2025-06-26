@@ -1,5 +1,5 @@
 import Heading from "../../ui/Heading";
-import spaceMan from "../../../../../public/assets/spaceMan(5).svg";
+import spaceMan from "/public/assets/spaceMan(5).svg";
 import { useGetcoursesPreviewQuery } from "../../redux/courses/coursesApi";
 import CourseCard from "../../ui/CourseCard";
 

@@ -1,5 +1,5 @@
 import Heading from "../../ui/Heading";
-import spaceMan from "../../../../../public/assets/spaceMan(1).svg";
+import spaceMan from "/public/assets/spaceMan(1).svg";
 
 function PreviewVideo({ previewVideo }) {
 

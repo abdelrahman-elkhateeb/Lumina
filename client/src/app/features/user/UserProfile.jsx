@@ -1,10 +1,10 @@
 import EditProfileForm from "./EditProfileForm";
-import spaceMan from "../../../../public/assets/spaceMan(7).svg";
+import spaceMan from "/public/assets/spaceMan(7).svg";
 import { useFetchUserDataQuery } from "../redux/auth/registrationApi";
 import Heading from "../ui/Heading";
 import { useEffect, useState } from "react";
-import maleSvg from "../../../../public/assets/male.svg";
-import femaleSvg from "../../../../public/assets/female.svg";
+import maleSvg from "/public/assets/male.svg";
+import femaleSvg from "/public/assets/female.svg";
 
 function UserProfile() {
   const { data, isLoading } = useFetchUserDataQuery();
